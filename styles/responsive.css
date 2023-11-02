@@ -108,6 +108,22 @@
     top: auto;
     bottom: 32px;
   }
+  .scene-content::before {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    height: 136px;
+    content: "";
+    position: absolute;
+    left: -18px;
+    bottom: -32px;
+    right: -18px;
+  }
+  .scene-content > * {
+    position: relative;
+  }
   .scene-content > img {
     display: none !important;
   }
