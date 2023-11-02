@@ -1,8 +1,3 @@
-:root {
-  --turquoiseblue: #00fff6;
-  --fuchsiapink: #ff7cf9;
-}
-
 /* Menu */
 .hamburger {
   display: none;
@@ -76,6 +71,25 @@
 }
 /* X. Menu */
 
+/* Global Style for Buttons */
+@media (max-width: 767.98px) {
+  .button {
+    font-size: 26px;
+    height: 42px;
+    margin-top: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    min-width: 178px;
+  }
+  .windows .button {
+    padding-bottom: 2px; /* font-fix */
+  }
+  .macos .button {
+    padding-top: 5px; /* font-fix */
+  }
+}
+/* X. Global Style for Buttons */
+
 /* Home Screen */
 .scene-content-title {
   display: none;
@@ -97,18 +111,8 @@
   .arrow-right {
     right: 20px;
   }
-  .scene-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    width: calc(100% - 36px);
-    max-width: none;
-    left: 18px;
-    top: auto;
-    bottom: 32px;
-  }
-  .scene-content::before {
+
+  .section-1 > .canvas-container::before {
     background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.34) 0%,
@@ -121,6 +125,16 @@
     bottom: -32px;
     right: -18px;
   }
+  .scene-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 36px);
+    max-width: none;
+    left: 18px;
+    top: auto;
+    bottom: 32px;
+  }
   .scene-content > * {
     position: relative;
   }
@@ -129,18 +143,17 @@
   }
   .scene > .scene-content > a {
     flex: 0 1 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 52px;
-    position: relative;
-    top: auto;
-    padding: 0 34px;
-    float: none;
     font-size: 23px;
-    line-height: 0.88;
-    text-align: center;
+    height: 52px;
+    margin-left: 0;
+    margin-top: 0;
+    padding-left: 34px;
+    padding-right: 34px;
+    min-width: 100px;
     max-width: 160px;
+  }
+  .macos .scene > .scene-content > a {
+    padding-top: 4px; /* font-fix */
   }
   .scene-content-title {
     color: white;
@@ -148,10 +161,15 @@
     display: block;
     font-family: "ST Kooperativ";
     font-size: 32px;
-    line-height: 0.87;
+    line-height: 0.88;
     margin-right: 17px;
     text-align: right;
-    margin-bottom: -4px; /* font-fix */
+  }
+  .windows .scene-content-title {
+    margin-top: -4px; /* font-fix */
+  }
+  .macos .scene-content-title {
+    margin-bottom: -5px; /* font-fix */
   }
 }
 /* X. Home Screen */
@@ -255,17 +273,6 @@
     margin-bottom: 300px;
     width: 100%;
     max-width: 480px;
-  }
-  .section-2 .more-button {
-    box-sizing: border-box;
-    height: 42px;
-    padding: 0 14px;
-    width: 178px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    margin: 36px auto 0;
   }
   .section-2 .mint {
     display: block;

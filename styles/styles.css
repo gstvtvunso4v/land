@@ -1,3 +1,15 @@
+:root {
+  --antiflashwhite: #f0f0f0;
+  --gunmetal: #263340;
+  --turquoiseblue: #00fff6;
+  --magicmint: #a3f7d7;
+  --aeroblue: #c2fce6;
+  --fuchsiapink: #ff7cf9;
+  --lightfuchsiapink: #ff8bff;
+  --brilliantlavender: #eac1f9;
+  --richbrilliantlavender: #f3abff;
+}
+
 @font-face {
   font-family: "ST Kooperativ";
   src: url("../assets/fonts/ST-Kooperativ.otf");
@@ -20,7 +32,7 @@
 
 body {
   margin: 0;
-  background: #f0f0f0;
+  background: var(--antiflashwhite);
   overflow: hidden;
   overscroll-behavior-x: none;
 }
@@ -40,7 +52,7 @@ body {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
+  background-color: black;
   opacity: 1;
   z-index: 2;
   pointer-events: none;
@@ -56,7 +68,7 @@ body {
   position: fixed;
   left: 10%;
   bottom: calc(12% + 24pt);
-  color: #a3f7d7;
+  color: var(--magicmint);
   font-size: 24pt;
   font-family: "ST Kooperativ", sans-serif;
 }
@@ -71,11 +83,11 @@ body {
 }
 
 .loading-bar {
-  background-color: #263340;
+  background-color: var(--gunmetal);
 }
 
 .loading-bar-percent {
-  background-color: #a3f7d7;
+  background-color: var(--magicmint);
   width: 0%;
   transition: width 150ms ease;
 }
@@ -118,17 +130,17 @@ body {
 }
 
 .menu-item a {
-  color: #00fff6;
+  color: var(--turquoiseblue);
   text-decoration: none;
   transition: color 100ms ease-out;
 }
 
 .menu-item a:hover {
-  color: #eac1f9;
+  color: var(--brilliantlavender);
 }
 
 .menu.white .menu-item a {
-  color: #fff;
+  color: white;
 }
 
 .scene {
@@ -143,6 +155,8 @@ body {
 }
 
 .scene-content {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   width: 30%;
   max-width: 400px;
@@ -153,34 +167,59 @@ body {
 
 .scene h2 {
   margin: 0;
-  color: #fff;
+  color: white;
   font-size: 46pt;
   font-family: "ST Kooperativ", sans-serif;
 }
 
 .scene p {
   margin: 18px 0;
-  color: #fff;
+  color: white;
   line-height: 1.5;
   font-size: 13pt;
   font-family: "Gotham Pro", sans-serif;
 }
 
-.scene a {
-  position: relative;
-  top: 30px;
-  padding: 10px 50px;
-  padding-bottom: 6px;
-  float: right;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 21pt;
+/* Global Style for Buttons */
+.button {
+  background-color: var(--turquoiseblue);
+  box-sizing: border-box;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: "ST Kooperativ", sans-serif;
+  font-size: 37.5px;
+  height: 60px;
+  line-height: 0.88;
+  margin-top: 40px;
+  padding: 0 20px;
+  position: relative;
   text-decoration: none;
+  text-transform: uppercase;
+  min-width: 218px;
+}
+.button:hover {
+  background-color: var(--aeroblue);
+}
+.windows .button {
+  padding-bottom: 5px; /* font-fix */
+}
+.macos .button {
+  padding-top: 7px; /* font-fix */
 }
 
-.scene a:hover {
-  background-color: #c2fce6;
+/* X. Global Style for Buttons */
+
+.scene a {
+  font-size: 34px;
+  height: 52px;
+  margin-left: auto;
+  margin-top: 53px;
+  min-width: 309px;
+}
+.macos .scene a {
+  padding-top: 5px; /* font-fix */
 }
 
 .section-2 {
@@ -213,7 +252,7 @@ body {
 
 .section-2 .text-block {
   width: 100%;
-  color: #ff7cf9;
+  color: var(--fuchsiapink);
 }
 
 .section-2 .text-block.left {
@@ -280,25 +319,11 @@ body {
   margin-bottom: 50px;
 }
 
-.more-button {
-  padding: 14px;
-  padding-bottom: 9px;
-  width: 160px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 24pt;
-  font-family: "ST Kooperativ", sans-serif;
-  text-decoration: none;
-  margin-top: 20px;
-}
-
 .section-3 {
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: #ff8bff;
+  background: var(--lightfuchsiapink);
 }
 
 .section-3 .canvas-container {
@@ -312,7 +337,7 @@ body {
 .section-3 .background-text {
   font-family: "Demon Letter";
   width: 300px;
-  color: #f3abff;
+  color: var(--richbrilliantlavender);
   display: block;
   position: absolute;
   user-select: none;
@@ -444,8 +469,8 @@ body {
   width: 360px;
   text-align: center;
   display: block;
-  color: #000;
-  background-color: #a3f7d7;
+  color: black;
+  background-color: var(--magicmint);
   font-size: 24pt;
   font-family: "ST Kooperativ", sans-serif;
   text-decoration: none;
@@ -464,7 +489,7 @@ body {
 }
 
 .section-4 .socials {
-  background-color: #fff;
+  background-color: white;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -489,7 +514,7 @@ body {
 }
 
 .section-4 .socials .social {
-  color: #000;
+  color: black;
   display: block;
   font-family: "Demon Letter";
   font-size: 60.5px;
@@ -526,8 +551,8 @@ body {
   height: 38px;
   text-align: center;
   display: block;
-  color: #000;
-  background-color: #a3f7d7;
+  color: black;
+  background-color: var(--magicmint);
   font-size: 25pt;
   font-family: "ST Kooperativ", sans-serif;
   text-decoration: none;
@@ -581,15 +606,6 @@ body {
 }
 
 /* Windows related fixes */
-body.windows .scene a {
-  padding: 4px 50px;
-  padding-bottom: 8px;
-}
-
-body.windows .more-button {
-  padding-top: 6px;
-}
-
 body.windows .section-4 .buy-button {
   padding-top: 7px;
   padding-bottom: 7px;
