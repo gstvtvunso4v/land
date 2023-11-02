@@ -1,8 +1,8 @@
-import Assets from './core/assets.js';
-import Section1 from './section/section-1.js';
-import Section2 from './section/section-2.js';
-import MouseWheelSwitcher from './core/mouse-wheel-switcher.js';
-import section3 from './section/section-3.js';
+import Assets from "./core/assets.js";
+import Section1 from "./section/section-1.js";
+import Section2 from "./section/section-2.js";
+import MouseWheelSwitcher from "./core/mouse-wheel-switcher.js";
+import section3 from "./section/section-3.js";
 
 // + сделать переключалку и магнитный скролл с позишн стики
 // + выделить тридешку, переключение и её скролл в отдельный класс?
@@ -44,9 +44,7 @@ class Czarverse {
 
   scenesTimings = [
     // первая секция
-    2.3,
-    4.266666889190674,
-    6.233333110809326,
+    2.3, 4.266666889190674, 6.233333110809326,
   ];
 
   section1 = null;
@@ -64,12 +62,9 @@ class Czarverse {
     this.assets = new Assets(this);
     this.assets.manager.onProgress = this.updateLoading.bind(this);
 
-    const loads = [
-      this.assets.load(),
-    ];
+    const loads = [this.assets.load()];
 
-    Promise
-      .all(loads)
+    Promise.all(loads)
       .then(() => {
         this.onLoad();
       })
@@ -77,15 +72,15 @@ class Czarverse {
   }
 
   detectDevice() {
-    this.isWindows = window.navigator.platform.includes('Win');
-    this.isMacOS = window.navigator.platform.includes('Mac');
+    this.isWindows = window.navigator.platform.includes("Win");
+    this.isMacOS = window.navigator.platform.includes("Mac");
 
     if (this.isWindows) {
-      document.body.classList.add('windows');
+      document.body.classList.add("windows");
     }
 
     if (this.isMacOS) {
-      document.body.classList.add('macos');
+      document.body.classList.add("macos");
     }
   }
 
@@ -107,8 +102,8 @@ class Czarverse {
     this.section2.nextSection = this.section3;
     this.section3.previousSection = this.section2;
 
-    this.leftArrow = document.querySelector('.arrow-left');
-    this.rightArrow = document.querySelector('.arrow-right');
+    this.leftArrow = document.querySelector(".arrow-left");
+    this.rightArrow = document.querySelector(".arrow-right");
 
     this.mouseWheelSwitcher = new MouseWheelSwitcher(this);
 
@@ -131,20 +126,24 @@ class Czarverse {
 
   // ui functions
   updateLoading(url, itemsLoaded, itemsTotal) {
-    const percent = Math.round(itemsLoaded / this.totalResourcesCount * 80); // 80% is maximum width
+    const percent = Math.round((itemsLoaded / this.totalResourcesCount) * 80); // 80% is maximum width
 
-    document.querySelector('.loading-text').textContent = percent + '% LOADING...'
-    document.querySelector('.loading-bar-percent').style.width = percent + '%'
+    document.querySelector(".loading-text").textContent =
+      percent + "% LOADING...";
+    document.querySelector(".loading-bar-percent").style.width = percent + "%";
   }
 
   hideLoadingScreen() {
-    document.querySelector('.loading').classList.add('hidden');
-    document.querySelector('.menu').classList.remove('hidden');
+    document.querySelector(".loading").classList.add("hidden");
+    document.querySelector(".menu").classList.remove("hidden");
+    document.querySelector(".hamburger").classList.remove("hidden");
 
     // document.querySelectorAll('.section').forEach(el => el.classList.remove('hidden'));
-    document.querySelectorAll('.arrow').forEach(el => el.classList.remove('hidden'));
+    document
+      .querySelectorAll(".arrow")
+      .forEach((el) => el.classList.remove("hidden"));
 
-    document.querySelector('.logo').classList.remove('centered');
+    document.querySelector(".logo").classList.remove("centered");
   }
 
   onMenuItemClick(sectionIndex) {
@@ -179,7 +178,10 @@ class Czarverse {
 
   onLeftArrowClick(instant = false) {
     if (!instant) {
-      if (Date.now() - this.lastScenesSwitchTime < this.calmScenesSwitchDuration) {
+      if (
+        Date.now() - this.lastScenesSwitchTime <
+        this.calmScenesSwitchDuration
+      ) {
         return;
       }
     }
@@ -199,7 +201,10 @@ class Czarverse {
 
   onRightArrowClick(instant = false) {
     if (!instant) {
-      if (Date.now() - this.lastScenesSwitchTime < this.calmScenesSwitchDuration) {
+      if (
+        Date.now() - this.lastScenesSwitchTime <
+        this.calmScenesSwitchDuration
+      ) {
         return;
       }
     }
@@ -218,14 +223,14 @@ class Czarverse {
   }
 
   onArrowClick(instant = false) {
-    const scenesElements = document.querySelectorAll('.scene');
+    const scenesElements = document.querySelectorAll(".scene");
 
     let section;
 
     const left = this.leftArrow;
     const right = this.rightArrow;
 
-    const hiddenClassName = 'hidden';
+    const hiddenClassName = "hidden";
 
     left.classList.remove(hiddenClassName);
     right.classList.remove(hiddenClassName);
@@ -238,9 +243,9 @@ class Czarverse {
       right.classList.add(hiddenClassName);
     }
 
-    scenesElements.forEach(el => {
+    scenesElements.forEach((el) => {
       el.classList.add(hiddenClassName);
-      el.classList.remove('go-down', 'go-up');
+      el.classList.remove("go-down", "go-up");
     });
 
     // в первой секции 3 сцены
@@ -271,7 +276,12 @@ class Czarverse {
 
     // если нужно, скроллим к нужной секции с фейдом
     if (section !== this.currentSection && this.currentSection) {
-      this.scrollToSection(section, section.backgroundColor, this.currentSection, instant);
+      this.scrollToSection(
+        section,
+        section.backgroundColor,
+        this.currentSection,
+        instant
+      );
 
       this.currentSection = section;
     } else {
@@ -302,11 +312,11 @@ class Czarverse {
     //   // right
     // }
 
-    currentScene.classList.add('go-down');
+    currentScene.classList.add("go-down");
 
     // нужно в случае инициализации
     if (previousScene) {
-      previousScene.classList.add('go-up');
+      previousScene.classList.add("go-up");
     }
 
     if (this.currentSection === this.section1) {
@@ -318,42 +328,46 @@ class Czarverse {
     target.isVisible = true;
 
     previousSection.isVisible = true; // для того чтобы не выключать рендеринг до завершения анимации
-    const previousBg = previousSection.scrollContainer.querySelector('.section-animation');
+    const previousBg =
+      previousSection.scrollContainer.querySelector(".section-animation");
 
     previousBg.style.backgroundColor = color;
-    previousBg.style.opacity = '1';
+    previousBg.style.opacity = "1";
 
     // if (target === this.section2) {
     //   target.animationTarget = 0;
     // }
 
-    setTimeout(() => {
-      target.canvasContainer.scrollIntoView({ behavior: 'auto' }); // instant scroll
+    setTimeout(
+      () => {
+        target.canvasContainer.scrollIntoView({ behavior: "auto" }); // instant scroll
 
-      previousSection.isVisible = false;
-      previousBg.style.opacity = '0';
+        previousSection.isVisible = false;
+        previousBg.style.opacity = "0";
 
-      const menu = document.querySelector('.menu');
-      menu.classList.remove('white');
+        const menu = document.querySelector(".menu");
+        menu.classList.remove("white");
 
-      if (target === this.section2) {
-        this.section2.playShowAnimation();
-        this.section2.scrollContainer.scrollTo({
-          top: 0,
-          behaviour: 'instant'
-        }); // if we got here by menu
-      }
+        if (target === this.section2) {
+          this.section2.playShowAnimation();
+          this.section2.scrollContainer.scrollTo({
+            top: 0,
+            behaviour: "instant",
+          }); // if we got here by menu
+        }
 
-      if (target === this.section3) {
-        this.section3.showAction.reset().play();
-        this.section3.scrollContainer.scrollTo({
-          top: 0,
-          behaviour: 'instant'
-        }); // if we got here by menu
+        if (target === this.section3) {
+          this.section3.showAction.reset().play();
+          this.section3.scrollContainer.scrollTo({
+            top: 0,
+            behaviour: "instant",
+          }); // if we got here by menu
 
-        menu.classList.add('white');
-      }
-    }, (instant) ? 0 : 750);
+          menu.classList.add("white");
+        }
+      },
+      instant ? 0 : 750
+    );
   }
 
   restartAnimation(el, animationClassName) {

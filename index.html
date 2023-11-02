@@ -1,720 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
 
     <title>Czarverse</title>
-
-    <style>
-@font-face {
-  font-family: 'ST Kooperativ';
-  src: url('./assets/fonts/ST-Kooperativ.otf');
-}
-
-@font-face {
-  font-family: 'Gotham Pro';
-  src: url('./assets/fonts/GothamPro.ttf');
-}
-
-@font-face {
-  font-family: 'Demon Letter';
-  src: url('./assets/fonts/Demon_Letter.otf');
-}
-
-@font-face {
-  font-family: 'PPSupplyMono';
-  src: url('./assets/fonts/PPSupplyMono-Regular.otf');
-}
-
-
-
-body {
-  margin: 0;
-  background: #f0f0f0;
-  overflow: hidden;
-  overscroll-behavior-x: none;
-}
-
-.scroll-container {
-  height: 100vh;
-}
-
-.canvas-container {
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-.loading {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 1;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.hidden {
-  opacity: 0;
-  transition: opacity 500ms ease;
-  pointer-events: none;
-}
-
-.loading-text {
-  position: fixed;
-  left: 10%;
-  bottom: calc(12% + 24pt);
-  color: #a3f7d7;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-}
-
-.loading-bar,
-.loading-bar-percent {
-  position: fixed;
-  left: 10%;
-  bottom: 10%;
-  width: 80%;
-  height: 30px;
-}
-
-.loading-bar {
-  background-color: #263340;
-}
-
-.loading-bar-percent {
-  background-color: #a3f7d7;
-  width: 0%;
-  transition: width 150ms ease;
-}
-
-.logo {
-  display: block;
-  position: fixed;
-  width: 40vh;
-  top: 25%;
-
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  transition: width, top 1000ms ease;
-}
-
-.logo.centered {
-  width: 50vh;
-  top: 50%;
-}
-
-.menu {
-  position: fixed;
-  display: table;
-  width: 60%;
-  top: 4vh;
-  left: 42.8%;
-  opacity: 1;
-  z-index: 1;
-  transform: translateX(-40%);
-}
-
-.menu-item {
-  display: table-cell;
-  width: 20%;
-  font-size: 13pt;
-  font-family: 'PPSupplyMono';
-  text-align: center;
-  cursor: pointer;
-}
-
-.menu-item a {
-  color: #00fff6;
-  text-decoration: none;
-  transition: color 100ms ease-out;
-}
-
-.menu-item a:hover {
-  color: #eac1f9;
-}
-
-.menu.white .menu-item a {
-  color: #fff;
-}
-
-.scene {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  margin-top: -100vh;
-}
-
-.fake-scene {
-  position: absolute;
-}
-
-.scene-content {
-  position: absolute;
-  width: 30%;
-  max-width: 400px;
-  left: 60%;
-  top: 50%;
-  /*transform: translateY(-50%);*/
-}
-
-.scene h2 {
-  margin: 0;
-  color: #fff;
-  font-size: 46pt;
-  font-family: 'ST Kooperativ', sans-serif;
-}
-
-.scene p {
-  margin: 18px 0;
-  color: #fff;
-  line-height: 1.5;
-  font-size: 13pt;
-  font-family: 'Gotham Pro', sans-serif;
-}
-
-.scene a {
-  position: relative;
-  top: 30px;
-  padding: 10px 50px;
-  padding-bottom: 6px;
-  float: right;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 21pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-}
-
-.scene a:hover {
-  background-color: #c2fce6;
-}
-
-.section-2 {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.section-2 .long-scroll-container {
-  height: calc(4400px + 110vh);
-}
-
-.section-2 .text-blocks-container {
-  position: relative;
-  max-width: 1000px;
-  margin: auto;
-  margin-top: calc(-4400px - 110vh);
-  /*z-index: 100;*/
-}
-
-.section-2 .text-block {
-  width: 100%;
-  color: #ff7cf9;
-}
-
-.section-2 .text-block.left {
-  text-align: left;
-}
-
-.section-2 .text-block.right {
-  text-align: right;
-}
-
-.section-2 .text-block > * {
-  display: inline-block;
-  width: calc(1000px - 50%);
-  font-family: 'PPSupplyMono';
-}
-
-.left-hack {
-  text-align: left;
-  display: block;
-}
-
-.section-2 .dont-blink {
-  width: calc(1000px - 65%);
-  margin-top: 200px;
-  margin-bottom: 350px;
-}
-
-.section-2 .text-1 {
-  width: calc(1000px - 60%);
-  margin-bottom: 400px;
-}
-
-.section-2 .supress {
-  width: calc(1000px - 35%);
-}
-
-.section-2 .riot {
-  width: calc(1000px - 40%);
-  margin-bottom: 10px;
-}
-
-.section-2 .riot-video {
-  width: calc(1000px - 50%);
-  margin-bottom: 70px;
-}
-
-.section-2 .text-2 {
-  width: calc(1000px - 54%);
-  margin-bottom: 700px;
-}
-
-.section-2 .mint {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
-}
-
-.section-2 .tank-video {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
-}
-
-.section-2 .text-3 {
-  width: calc(1000px - 60%);
-  margin-bottom: 50px;
-}
-
-.more-button {
-  padding: 14px;
-  padding-bottom: 9px;
-  width: 160px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-  margin-top: 20px;
-}
-
-/* mobile */
-@media only screen and (max-width: 1000px) {
-  .section-2 .dont-blink {
-    width: calc(1000px - 50%);
-  }
-}
-
-/*.section-2 .scene {*/
-/*  !*background: rgba(0, 0, 0, 0.65);*!*/
-/*}*/
-
-/*.section-2 .scene .scene-content {*/
-/*  width: 60%;*/
-/*  max-width: 500px;*/
-/*  left: 33%;*/
-/*  top: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
-
-/*.section-2 .scene h2 {*/
-/*  color: #e98af9;*/
-/*  font-size: 72pt;*/
-/*}*/
-
-/*.section-2 .scene p {*/
-/*  color: #e98af9;*/
-/*  font-size: 13pt;*/
-/*  line-height: 1.7;*/
-/*}*/
-
-/*.section-2 .scene a {*/
-/*  top: 34px;*/
-/*  font-size: 19pt;*/
-/*  padding: 15px 17px;*/
-/*}*/
-
-/*.section-2 .scene .media {*/
-/*  position: absolute;*/
-/*  width: 30vw;*/
-/*  max-width: 500px;*/
-/*  right: -36vw;*/
-/*}*/
-
-
-
-/*.section-2 .first-scene.centered .scene-content {*/
-/*  width: 60%;*/
-/*  max-width: 500px;*/
-/*  left: 50%;*/
-/*  top: 50%;*/
-/*  text-align: center;*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
-
-/*.section-2 .centered .scene-content h2 {*/
-/*  font-size: 96pt;*/
-/*}*/
-
-/*.section-2 .centered .scene-content p {*/
-
-/*}*/
-
-/*.section-2 .centered .scene-content a {*/
-
-/*}*/
-
-/*.section-2 .second-scene .media {*/
-/*  top: -3%;*/
-/*}*/
-
-/*.section-2 .third-scene .media {*/
-/*  top: -37%;*/
-/*  max-width: 400px;*/
-/*}*/
-
-/*.section-2 .fourth-scene .media {*/
-/*  top: -110%;*/
-/*}*/
-
-
-.section-3 {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: #ff8bff;
-}
-
-.section-3 .canvas-container {
-  position: sticky;
-}
-
-.section-3 .long-scroll-container {
-  height: 166vh;
-}
-
-.section-3 .background-text {
-  font-family: 'Demon Letter';
-  width: 300px;
-  color: #f3abff;
-  display: block;
-  position: absolute;
-  user-select: none;
-
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-.section-3 .background-text.background-text-left {
-  left: -10vw;
-  font-size: 9vw;
-}
-
-.section-3 .background-text.background-text-right {
-  right: -10vw;
-  font-size: 35vw;
-  margin-top: 130px;
-}
-
-.section-3 .background-text.background-text-left.fade-in {
-  animation: whoweare-left-fade-in 750ms ease-in-out;
-}
-
-.section-3 .background-text.background-text-right.fade-in {
-  animation: whoweare-right-fade-in 750ms ease-in-out;
-}
-
-@keyframes whoweare-left-fade-in {
-  0% { left: 3vw; }
-  100% { left: -10vw; }
-}
-
-@keyframes whoweare-right-fade-in {
-  0% { right: 3vw; }
-  100% { right: -10vw; }
-}
-
-
-.section-3 .text-blocks-container {
-  margin: auto;
-  margin-bottom: 400px;
-  max-width: 900px;
-  position: relative;
-}
-
-.section-3 .text-block {
-  position: relative;
-}
-
-.section-3 .text-block.right {
-  float: right;
-}
-
-.section-3 .text-block .avatar {
-  width: 170px;
-  margin-top: -50px;
-}
-
-.section-3 .text-block .avatar.left {
-  float: left;
-  left: 13px;
-  position: relative;
-}
-
-.section-3 .text-block .avatar.center {
-
-}
-
-.section-3 .text-block .title {
-  font-family: 'Demon Letter';
-  font-size: 70px;
-  margin: 0;
-  margin-bottom: -10px;
-}
-
-.section-3 .text-block p {
-  width: 450px;
-  margin: 0;
-  font-family: 'PPSupplyMono';
-  font-size: 14.5px;
-}
-
-.section-3 > .buy-button {
-  position: relative;
-  top: -230px;
-  left: 260px;
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 10px;
-  width: 360px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #a3f7d7;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-}
-
-
-
-.section-4 {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  /*background-attachment: fixed;*/
-  /*background-size: cover;*/
-  /*background-position: center center;*/
-  /*background-image: url('./assets/img/section-4.jpg');*/
-
-  /*background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 1);*/
-  /*background-attachment: fixed;*/
-  /*background-size: cover;*/
-  /*background-position: center center;*/
-  /*background-blend-mode: lighten;*/
-}
-
-.section-4 .poster {
-  display: none;
-
-  width: 100vw;
-  height: 100vh;
-}
-
-.section-4 .socials {
-  position: absolute;
-  bottom: calc(125px + 70px);
-  padding-left: 20px;
-  width: 100vw;
-  text-align: center;
-}
-
-.section-4 .socials .social {
-  display: inline-block;
-  font-size: 28pt;
-  margin: 0 70px;
-  color: #6ceae1;
-  text-decoration: none;
-  font-family: 'ST Kooperativ', sans-serif;
-
-  opacity: 0;
-}
-
-.section-4 .socials .social-logo {
-  height: 30px;
-  margin-right: 15px;
-}
-
-.section-4 .buy-button {
-  position: absolute;
-  bottom: calc(30px + 70px);
-  left: 50%;
-  transform: translateX(-50%);
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 6px;
-  width: 310px;
-  height: 38px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #a3f7d7;
-  font-size: 25pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-
-  opacity: 0;
-}
-
-
-.section-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  background-color: transparent;
-  pointer-events: none;
-  transition: all 750ms ease-out;
-  transition-property: opacity, background-color;
-  will-change: opacity;
-}
-
-
-
-
-.arrow {
-  position: fixed;
-  width: 34px;
-  height: 54px;
-  top: 50%;
-  background: url('./assets/img/arrow.svg');
-  /*opacity: 1;*/
-  cursor: pointer;
-  z-index: 1;
-  transition: opacity 500ms ease;
-}
-
-
-.arrow-left {
-  left: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
-  transform: rotate(180deg);
-}
-
-.arrow-right {
-  right: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
-}
-
-
-
-.scene.go-up {
-  animation: scene-go-up 500ms ease-in-out;
-}
-
-.scene.go-down {
-  animation: scene-go-down 500ms ease-in-out;
-}
-
-/* Windows related fixes */
-body.windows .scene a {
-  padding: 4px 50px;
-  padding-bottom: 8px;
-}
-
-body.windows .more-button {
-  padding-top: 6px;
-}
-
-body.windows .section-4 .buy-button {
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-
-@keyframes scene-go-up {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-400px);
-    opacity: 0;
-  }
-}
-
-@keyframes scene-go-down {
-  0% {
-    transform: translateY(400px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4.fade-in {
-  animation: section4-poster-fade-in 1500ms ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-poster-fade-in {
-  0% {
-    background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 1);
-    background-attachment: fixed;
-    background-size: auto 100%;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-
-  100% {
-    background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 0);
-    background-attachment: fixed;
-    background-size: auto 110%;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-}
-
-.section-4 .social.fade-in {
-  animation: section4-socials-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-socials-fade-in {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4 .buy-button.fade-in {
-  animation: section4-button-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-button-fade-in {
-  0% {
-    transform: translateY(100px) translateX(-50%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0) translateX(-50%);
-    opacity: 1;
-  }
-}
-    </style>
+    <!-- It's better to minify & combine these css files -->
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/responsive.css" />
   </head>
 
   <body>
@@ -725,57 +19,88 @@ body.windows .section-4 .buy-button {
       </div>
     </div>
 
-    <img class="logo centered hidden" src="./assets/img/logo.png">
+    <img class="logo centered hidden" src="./assets/img/logo.png" />
     <!--        <img class="logo centered" src="./assets/img/logo.png">-->
 
     <div class="menu hidden">
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(0);">VERSE</a></div>
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(1);">ABOUT</a></div>
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(2);">TEAM</a></div>
+      <a href="javascript:void(0)" class="menu-close">
+        <svg viewBox="0 0 60 60">
+          <path d="M4,4l52,52" />
+          <path d="M56,4l-52,52" />
+        </svg>
+      </a>
+      <div class="menu-item">
+        <a onclick="window.czarverse.onMenuItemClick(0);">VERSE</a>
+      </div>
+      <div class="menu-item">
+        <a onclick="window.czarverse.onMenuItemClick(1);">ABOUT</a>
+      </div>
+      <div class="menu-item">
+        <a onclick="window.czarverse.onMenuItemClick(2);">TEAM</a>
+      </div>
       <div class="menu-item"><a href="https://discord.com">DISCORD</a></div>
       <div class="menu-item"><a href="https://discord.com">SOCIAL</a></div>
     </div>
+    <div class="hamburger hidden">
+      <img src="./assets/img/hamburger.svg" alt="Open Menu" title="Open Menu" />
+    </div>
 
-    <div class="arrow arrow-left hidden" onclick="window.czarverse.onLeftArrowClick();"></div>
-    <div class="arrow arrow-right hidden" onclick="window.czarverse.onRightArrowClick();"></div>
+    <div
+      class="arrow arrow-left hidden"
+      onclick="window.czarverse.onLeftArrowClick();"
+    ></div>
+    <div
+      class="arrow arrow-right hidden"
+      onclick="window.czarverse.onRightArrowClick();"
+    ></div>
 
     <div class="scroll-container section-1">
       <div class="canvas-container"></div>
 
       <div class="scene first-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_1.svg" class="title">
-<!--          <h2>DON'T TRY TO RUN AWAY! 1</h2>-->
-<!--          <p>-->
-<!--            Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--            who are tired of creating formulaic worlds.-->
-<!--          </p>-->
-          <a href="#">WATCH VIDEO</a>
+          <img
+            src="./assets/img/section-1/main_page_title_1.svg"
+            class="title"
+          />
+          <div class="scene-content-title">feel our<br />ambraace</div>
+          <!--          <h2>DON'T TRY TO RUN AWAY! 1</h2>-->
+          <!--          <p>-->
+          <!--            Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
+          <!--            who are tired of creating formulaic worlds.-->
+          <!--          </p>-->
+          <a href="#">MARKET</a>
         </div>
       </div>
 
       <div class="scene second-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_2.svg" class="title">
-
-<!--          <h2>DON'T TRY TO RUN AWAY! 2</h2>-->
-<!--          <p>-->
-<!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--  who are tired of creating formulaic worlds.-->
-<!--          </p>-->
+          <img
+            src="./assets/img/section-1/main_page_title_2.svg"
+            class="title"
+          />
+          <div class="scene-content-title">don’t try to<br />run away!</div>
+          <!--          <h2>DON'T TRY TO RUN AWAY! 2</h2>-->
+          <!--          <p>-->
+          <!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
+          <!--  who are tired of creating formulaic worlds.-->
+          <!--          </p>-->
           <a href="#">WATCH VIDEO</a>
         </div>
       </div>
 
       <div class="scene third-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_3.svg" class="title">
-
-<!--          <h2>DON'T TRY TO RUN AWAY! 3</h2>-->
-<!--          <p>-->
-<!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--  who are tired of creating formulaic worlds.-->
-<!--          </p>-->
+          <img
+            src="./assets/img/section-1/main_page_title_3.svg"
+            class="title"
+          />
+          <div class="scene-content-title">don’t try to<br />run away!</div>
+          <!--          <h2>DON'T TRY TO RUN AWAY! 3</h2>-->
+          <!--          <p>-->
+          <!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
+          <!--  who are tired of creating formulaic worlds.-->
+          <!--          </p>-->
           <a href="#">WATCH VIDEO</a>
         </div>
       </div>
@@ -784,61 +109,92 @@ body.windows .section-4 .buy-button {
     </div>
 
     <div class="scroll-container section-2">
-      <div class="scene fake-scene"></div> <!-- fake scene for scroll -->
+      <div class="scene fake-scene"></div>
+      <!-- fake scene for scroll -->
 
       <div class="long-scroll-container">
         <div class="canvas-container"></div>
-      </div>
 
-      <div class="text-blocks-container">
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_Dont_blink.svg" class="dont-blink">
-        </div>
+        <div class="text-blocks-container">
+          <div class="text-block left">
+            <img
+              src="./assets/img/section-2/Title_Dont_blink.svg"
+              class="dont-blink"
+            />
+          </div>
 
-        <div class="text-block right">
-          <span class="text-1">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
+          <div class="text-block right">
+            <span class="text-1">
+              <span class="left-hack">
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </span>
             </span>
-          </span>
-        </div>
+          </div>
 
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_supress.svg" class="supress">
-        </div>
+          <div class="text-block left">
+            <img
+              src="./assets/img/section-2/Title_supress.svg"
+              class="supress"
+            />
+          </div>
 
-        <div class="text-block right">
-          <img src="./assets/img/section-2/Title_the_Riot.svg" class="riot">
-        </div>
+          <div class="text-block right">
+            <img src="./assets/img/section-2/Title_the_Riot.svg" class="riot" />
+          </div>
 
-        <div class="text-block left">
-          <video src="./assets/videos/tank_web.webm" autoplay muted loop class="riot-video"></video>
-        </div>
+          <div class="text-block left">
+            <video
+              src="./assets/videos/tank_web.webm"
+              autoplay
+              muted
+              loop
+              class="riot-video"
+            ></video>
+          </div>
 
-        <div class="text-block right">
-          <span class="text-2">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
+          <div class="text-block right">
+            <span class="text-2">
+              <span class="left-hack">
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </span>
+              <a href="#" class="more-button">MORE</a>
             </span>
-            <a href="#" class="more-button">MORE</a>
-          </span>
-        </div>
+          </div>
 
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_Mint_Play_Discuss.svg" class="mint">
-        </div>
+          <div class="text-block left">
+            <img
+              src="./assets/img/section-2/Title_Mint_Play_Discuss.svg"
+              class="mint"
+            />
+          </div>
 
-        <div class="text-block right">
-          <video src="./assets/videos/tank_web.webm" autoplay muted loop class="tank-video"></video>
-        </div>
+          <div class="text-block right">
+            <video
+              src="./assets/videos/tank_web.webm"
+              autoplay
+              muted
+              loop
+              class="tank-video"
+            ></video>
+          </div>
 
-        <div class="text-block left">
-          <span class="text-3">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
+          <div class="text-block left">
+            <span class="text-3">
+              <span class="left-hack">
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </span>
+              <a href="#" class="more-button">MARKET</a>
             </span>
-            <a href="#" class="more-button">MARKET</a>
-          </span>
+          </div>
         </div>
       </div>
 
@@ -846,82 +202,109 @@ body.windows .section-4 .buy-button {
     </div>
 
     <div class="scroll-container section-3">
-      <div class="scene fake-scene"></div> <!-- fake scene for scroll -->
+      <div class="scene fake-scene"></div>
+      <!-- fake scene for scroll -->
 
       <div class="long-scroll-container">
         <div class="canvas-container"></div>
+
+        <div class="text-blocks-container">
+          <div class="background-texts">
+            <span class="background-text background-text-left">WHO WE ARE</span>
+            <span class="background-text background-text-right">?</span>
+          </div>
+
+          <div class="text-block centered">
+            <img
+              src="./assets/img/section-3/Title_from_street_to_gamedev.svg"
+              class="gamedev"
+            />
+          </div>
+
+          <div class="text-block right section-3-photo">
+            <img src="./assets/img/section-3/photo.png" alt="" />
+          </div>
+
+          <div class="text-block section-3-text-1">
+            <p>
+              A summary of our plans and work within a few lines. A summary of
+              our plans and work within a few lines. A summary of our plans and
+              work within a few lines.A summary of our plans and work within a
+              few lines. A summary of our plans and work within a few lines. A
+              summary of our plans and work within a few lines.
+            </p>
+          </div>
+
+          <div class="text-block right section-3-text-2">
+            <p>
+              A summary of our plans and work within a few lines. A summary of
+              our plans and work within a few.A summary of our plans and work
+              within a few lines. A summary of our plans and work within a few.A
+              summary of our plans and work within a few lines. A summary of our
+              plans and work within a few.
+            </p>
+          </div>
+
+          <!--        <div class="text-block" style="margin-top: 280px;">-->
+          <!--          <img src="./assets/img/section-3/5.png" class="avatar" style="margin-bottom: 60px;">-->
+
+          <!--          <h2 class="title">IPOS</h2>-->
+          <!--          <p style="width: 300px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.</p>-->
+          <!--        </div>-->
+        </div>
       </div>
 
-      <div class="text-blocks-container">
-        <div>
-          <span class="background-text background-text-left">WHO WE ARE</span>
-          <span class="background-text background-text-right">?</span>
-        </div>
-
-        <div class="text-block" style="text-align: center;">
-          <img src="./assets/img/section-3/Title_from_street_to_gamedev.svg" style="
-  width: 100%;
-  margin-left: -80px;
-  margin-top: 70px;">
-        </div>
-
-        <div class="text-block right" style="margin-top: 50px;margin-right: -80px;">
-          <img src="./assets/img/section-3/photo.png" style="width: 65%;">
-        </div>
-
-        <div class="text-block" style="margin-top: 480px;">
-          <p style="text-align: left; width: 340px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.A summary of our plans and work within a few lines. A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.</p>
-        </div>
-
-        <div class="text-block right" style="width: 470px;
-  margin-top: 60px;">
-          <p style="width: 350px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few.A summary of our plans and work within a few lines. A summary of our plans and work within a few.A summary of our plans and work within a few lines. A summary of our plans and work within a few.</p>
-        </div>
-
-<!--        <div class="text-block" style="margin-top: 280px;">-->
-<!--          <img src="./assets/img/section-3/5.png" class="avatar" style="margin-bottom: 60px;">-->
-
-<!--          <h2 class="title">IPOS</h2>-->
-<!--          <p style="width: 300px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.</p>-->
-<!--        </div>-->
-      </div>
-
-<!--      <a href="#" class="buy-button">BUY TOKENS</a>-->
+      <!--      <a href="#" class="buy-button">BUY TOKENS</a>-->
 
       <div class="section-4">
         <div class="poster"></div>
 
         <div class="socials">
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/mint.png">
+            <img class="social-logo" src="./assets/img/socials/mint.png" />
             <span>MINT</span>
           </a>
 
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/instagram.png">
+            <img class="social-logo" src="./assets/img/socials/instagram.png" />
             <span>FOLLOW</span>
           </a>
 
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/discord.png">
+            <img class="social-logo" src="./assets/img/socials/discord.png" />
             <span>DISCUSS</span>
           </a>
         </div>
 
-        <a href="#" class="buy-button">BUY TOKENS</a>
+        <!-- <a href="#" class="buy-button">BUY TOKENS</a> -->
       </div>
 
       <div class="section-animation"></div>
     </div>
 
     <!--  stats.js, tmp  -->
-    <script>(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()</script>
+    <script>
+      (function () {
+        var script = document.createElement("script");
+        script.onload = function () {
+          var stats = new Stats();
+          document.body.appendChild(stats.dom);
+          requestAnimationFrame(function loop() {
+            stats.update();
+            requestAnimationFrame(loop);
+          });
+        };
+        script.src = "//mrdoob.github.io/stats.js/build/stats.min.js";
+        document.head.appendChild(script);
+      })();
+    </script>
 
     <script type="module">
-import Czarverse from './build/czarverse.js';
+      import Czarverse from "./build/czarverse.js";
 
-const czarverse = new Czarverse();
-window.czarverse = czarverse; // for debug
+      const czarverse = new Czarverse();
+      window.czarverse = czarverse; // for debug
     </script>
+    <script src="./scripts/main.js"></script>
   </body>
 </html>
