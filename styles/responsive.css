@@ -174,181 +174,117 @@
 }
 /* X. Home Screen */
 
-/* About Screen */
-.section-2 .long-scroll-container {
-  height: auto;
-  min-height: 4400px;
-}
-.section-2 .text-blocks-container {
-  margin-top: -100vh;
-}
-
+/* Global Style for Columns Container */
 @media (max-width: 1199.98px) {
-  .section-2 .text-blocks-container {
-    box-sizing: border-box;
-    padding: 0 64px;
-    max-width: calc(1000px + 64px * 2);
+  .text-blocks-container {
+    padding-left: 64px;
+    padding-right: 64px;
   }
-  .section-2 .text-2 {
-    margin-bottom: 640px;
+  .text-blocks-container > .text-block {
+    width: calc((100% - 36px) / 2);
+  }
+  .text-block-text {
+    padding-right: 44px;
   }
 }
 @media (max-width: 1024px) {
-  .section-2 .text-blocks-container {
-    padding: 0 48px;
+  .text-blocks-container {
+    padding-left: 48px;
+    padding-right: 48px;
   }
-  .section-2 .dont-blink {
-    max-width: 35vw;
+  .text-blocks-container > .text-block {
+    width: calc((100% - 32px) / 2);
   }
-  .section-2 .text-1 {
-    min-height: 517px;
-    margin-bottom: 0;
-    max-width: 40vw;
-  }
-  .section-2 .supress {
-    max-width: 65vw;
-  }
-  .section-2 .riot {
-    max-width: 60vw;
-  }
-  .section-2 .riot-video {
-    max-width: 50vw;
-  }
-  .section-2 .text-2 {
-    min-height: 890px;
-    margin-bottom: 0;
-    max-width: 46vw;
-  }
-  .section-2 .mint {
-    max-width: 50vw;
-  }
-  .section-2 .tank-video {
-    max-width: 50vw;
-  }
-  .section-2 .text-3 {
-    max-width: 40vw;
+  .text-block-text {
+    padding-right: 40px;
   }
 }
 @media (max-width: 767.98px) {
-  .section-2 .text-blocks-container {
-    padding: 0 32px;
+  .text-blocks-container {
+    padding-left: 32px;
+    padding-right: 32px;
   }
+  .text-blocks-container > .text-block {
+    width: 100%;
+    max-width: 480px;
+  }
+  .text-blocks-container > .text-block.right {
+    margin-left: 0;
+  }
+  .text-blocks-container > .text-block > video,
+  .text-block-photo {
+    margin-bottom: 27px;
+    margin-top: 27px;
+  }
+  .text-block-text {
+    font-size: 12px;
+    line-height: 1.19;
+    padding-right: 0;
+  }
+}
+/* X. Global Style for Container */
+
+/* About Screen */
+@media (max-width: 1324.98px) {
   .section-2 .dont-blink {
-    display: block;
+    max-width: 34.8679245283019vw;
+  }
+  .section-2 .supress {
+    max-width: 63.5471698113208vw;
+  }
+  .section-2 .riot {
+    max-width: 51.9245283018868vw;
+  }
+  .section-2 .mint {
+    max-width: 44.3018867924528vw;
+  }
+}
+@media (max-width: 767.98px) {
+  .section-2 .dont-blink {
     margin-bottom: 240px;
     margin-top: 93px;
-    width: 100%;
     max-width: 480px;
   }
   .section-2 .text-1 {
-    font-size: 12px;
-    line-height: 1.19;
-    min-height: 0;
     margin-bottom: 365px;
-    width: 100%;
-    max-width: 480px;
   }
   .section-2 .supress {
-    display: block;
     margin-bottom: 12px;
-    width: 100%;
     max-width: 480px;
   }
   .section-2 .riot {
-    display: block;
-    margin-bottom: 18px;
-    width: 100%;
-    max-width: 480px;
-  }
-  .section-2 .riot-video {
-    display: block;
-    margin-bottom: 27px;
-    width: 100%;
     max-width: 480px;
   }
   .section-2 .text-2 {
-    font-size: 12px;
-    line-height: 1.19;
-    min-height: 0;
     margin-bottom: 300px;
-    width: 100%;
-    max-width: 480px;
   }
   .section-2 .mint {
-    display: block;
-    margin-bottom: 27px;
-    width: 100%;
-    max-width: 480px;
-  }
-  .section-2 .tank-video {
-    display: block;
-    margin-bottom: 27px;
-    width: 100%;
-    max-width: 480px;
-  }
-  .section-2 .text-3 {
-    font-size: 12px;
-    line-height: 1.19;
-    min-height: 0;
-    margin-bottom: 27px;
-    width: 100%;
     max-width: 480px;
   }
 }
 /* X. About Screen */
 
 /* Team Screen */
-.section-3 .long-scroll-container {
-  height: auto;
-}
-.section-3 .text-blocks-container {
-  margin-top: 66vh;
-}
-@media (max-width: 1199.98px) {
-  .section-3 .text-blocks-container {
-    box-sizing: border-box;
-    padding: 0 64px;
-    max-width: calc(1000px + 64px * 2);
-  }
+@media (max-width: 1324.98px) {
   .section-3 .background-text {
-    width: auto;
-    max-width: 300px;
+    width: 50.9433962264151vw;
   }
   .section-3 .background-text.background-text-left {
-    font-size: 12vw;
-    left: 0;
-    margin-left: 64px;
-  }
-  .section-3 .background-text.background-text-left.fade-in {
-    animation: whoweare-left-fade-in-responsive 750ms ease-in-out;
+    font-size: 22.4905660377358vw;
+    top: -27.1698113207547vw;
   }
   .section-3 .background-text.background-text-right {
-    font-size: 40vw;
-    right: 0;
-    margin-right: 64px;
-    text-align: right;
-  }
-  .section-3 .background-text.background-text-right.fade-in {
-    animation: whoweare-right-fade-in-responsive 750ms ease-in-out;
-  }
-  .section-3 .gamedev {
-    margin-left: auto !important;
-    width: auto !important;
-    max-width: calc(100% - 12.5vw);
-  }
-}
-@media (max-width: 1024px) {
-  .section-3 .text-blocks-container {
-    padding: 0 48px;
+    margin-right: -5.6603773584906vw;
+    font-size: 60.2641509433962vw;
+    top: -11.3207547169811vw;
   }
 }
 @media (max-width: 767.98px) {
   .section-3 .text-blocks-container {
     margin-bottom: 0;
     margin-top: 0;
-    padding: 66vh 32px 0;
+    padding-top: 66vh;
     overflow: hidden;
-    position: relative;
   }
   .background-texts {
     display: flex;
@@ -363,90 +299,26 @@
     font-size: 21.6vw;
     left: auto;
     margin-left: 0;
+    top: 0;
   }
   .section-3 .background-text.background-text-right {
     font-size: 57.8666666666667vw;
     right: auto;
     margin-right: -5.5vw;
     margin-top: 13.25vw;
+    top: 0;
   }
   .section-3 .gamedev {
+    margin-bottom: 0;
     margin-top: -6.725vw !important;
     width: 100% !important;
     max-width: none;
   }
   .section-3-photo {
-    margin-bottom: 32px;
-    margin-top: 27px;
-    margin-right: 0;
-    overflow: hidden;
-    position: relative;
-  }
-  .section-3-photo > img {
-    display: block;
-    width: 100%;
-    max-width: 480px;
-  }
-  .section-3-photo::after {
-    content: "";
-    clear: both;
-    display: table;
-    width: 100%;
-  }
-  .section-3-text-1 {
     margin-top: 0;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
-  .section-3 .text-block p {
-    font-size: 12px;
-    width: 100%;
-  }
-  .section-3-text-1 > p {
-    font-size: 12px;
-    line-height: 1.19;
-    min-height: 0;
-    width: 100%;
-    max-width: 480px;
   }
   .section-3-text-2 {
     margin-bottom: 130px;
-    margin-top: 32px;
-    overflow: hidden;
-    position: relative;
-    width: auto;
-  }
-  .section-3-text-2 > p {
-    font-size: 12px;
-    line-height: 1.19;
-    min-height: 0;
-    width: 100%;
-    max-width: 480px;
-  }
-  .section-3-text-2::after {
-    content: "";
-    clear: both;
-    display: table;
-    width: 100%;
-  }
-}
-
-@keyframes whoweare-left-fade-in-responsive {
-  0% {
-    left: 13vw;
-  }
-  100% {
-    left: 0;
-  }
-}
-
-@keyframes whoweare-right-fade-in-responsive {
-  0% {
-    right: 13vw;
-  }
-  100% {
-    right: 0;
   }
 }
 /* X. Team Screen */

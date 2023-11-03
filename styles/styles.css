@@ -16,11 +16,6 @@
 }
 
 @font-face {
-  font-family: "Gotham Pro";
-  src: url("../assets/fonts/GothamPro.ttf");
-}
-
-@font-face {
   font-family: "Demon Letter";
   src: url("../assets/fonts/Demon_Letter.otf");
 }
@@ -31,6 +26,9 @@
 }
 
 body {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin: 0;
   background: var(--antiflashwhite);
   overflow: hidden;
@@ -97,10 +95,8 @@ body {
   position: fixed;
   width: 40vh;
   top: 25%;
-
   left: 50%;
   transform: translate(-50%, -50%);
-
   transition: width, top 1000ms ease;
 }
 
@@ -162,7 +158,6 @@ body {
   max-width: 400px;
   left: 60%;
   top: 50%;
-  /*transform: translateY(-50%);*/
 }
 
 .scene h2 {
@@ -170,14 +165,6 @@ body {
   color: white;
   font-size: 46pt;
   font-family: "ST Kooperativ", sans-serif;
-}
-
-.scene p {
-  margin: 18px 0;
-  color: white;
-  line-height: 1.5;
-  font-size: 13pt;
-  font-family: "Gotham Pro", sans-serif;
 }
 
 /* Global Style for Buttons */
@@ -211,6 +198,42 @@ body {
 
 /* X. Global Style for Buttons */
 
+/* Global Style for Columns Container */
+.text-blocks-container {
+  box-sizing: content-box;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: relative;
+  max-width: calc(540px + 45px + 540px);
+}
+.text-blocks-container > .text-block {
+  width: calc((100% - 45px) / 2);
+}
+.text-blocks-container > .text-block.right {
+  margin-left: auto;
+}
+.text-blocks-container > .text-block > video,
+.text-block-photo {
+  margin-bottom: 48px;
+  margin-top: 56px;
+  max-width: 100%;
+}
+.text-block-text {
+  font-size: 21px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.36;
+  padding-right: 50px;
+}
+.text-block-text > p {
+  display: block;
+  margin: 0;
+}
+/* X. Global Style for Container */
+
+/* Section #1: Homepage */
 .scene a {
   font-size: 34px;
   height: 52px;
@@ -221,11 +244,15 @@ body {
 .macos .scene a {
   padding-top: 5px; /* font-fix */
 }
+/* X. Section #1: Homepage */
 
+/* Section #2: About */
 .section-2 {
-  position: relative;
+  color: var(--fuchsiapink);
+  font-family: "PPSupplyMono";
   overflow-x: hidden;
   overflow-y: scroll;
+  position: relative;
 }
 
 .section-2 .canvas-container::after {
@@ -239,91 +266,53 @@ body {
 }
 
 .section-2 .long-scroll-container {
-  height: calc(4400px + 110vh);
+  height: auto;
+  min-height: 4400px;
 }
-
 .section-2 .text-blocks-container {
-  position: relative;
-  max-width: 1000px;
-  margin: auto;
-  margin-top: calc(-4400px - 110vh);
-  /*z-index: 100;*/
-}
-
-.section-2 .text-block {
-  width: 100%;
-  color: var(--fuchsiapink);
-}
-
-.section-2 .text-block.left {
-  text-align: left;
-}
-
-.section-2 .text-block.right {
-  text-align: right;
-}
-
-.section-2 .text-block > * {
-  display: inline-block;
-  width: calc(1000px - 50%);
-  font-family: "PPSupplyMono";
-}
-
-.left-hack {
-  text-align: left;
-  display: block;
+  margin-top: -100vh;
 }
 
 .section-2 .dont-blink {
-  width: calc(1000px - 65%);
+  display: block;
   margin-top: 200px;
-  margin-bottom: 350px;
+  margin-bottom: 234px;
+  max-width: 462px;
 }
 
 .section-2 .text-1 {
-  width: calc(1000px - 60%);
-  margin-bottom: 400px;
+  margin-bottom: 365px;
 }
 
 .section-2 .supress {
-  width: calc(1000px - 35%);
+  display: block;
+  margin-bottom: 16px;
+  max-width: 842px;
 }
 
 .section-2 .riot {
-  width: calc(1000px - 40%);
-  margin-bottom: 10px;
-}
-
-.section-2 .riot-video {
-  width: calc(1000px - 50%);
-  margin-bottom: 70px;
+  display: block;
+  margin-left: auto;
+  max-width: 688px;
 }
 
 .section-2 .text-2 {
-  width: calc(1000px - 54%);
-  margin-bottom: 700px;
+  margin-bottom: 254px;
 }
 
 .section-2 .mint {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
+  display: block;
+  max-width: 587px;
 }
+/* X. Section #2: About */
 
-.section-2 .tank-video {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
-}
-
-.section-2 .text-3 {
-  width: calc(1000px - 60%);
-  margin-bottom: 50px;
-}
-
+/* Section #3: Team */
 .section-3 {
+  background: var(--lightfuchsiapink);
+  font-family: "PPSupplyMono";
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: var(--lightfuchsiapink);
 }
 
 .section-3 .canvas-container {
@@ -331,30 +320,35 @@ body {
 }
 
 .section-3 .long-scroll-container {
-  height: 166vh;
+  height: auto;
+}
+.section-3 .text-blocks-container {
+  margin-top: 66vh;
 }
 
 .section-3 .background-text {
   font-family: "Demon Letter";
-  width: 300px;
+  width: 675px;
   color: var(--richbrilliantlavender);
   display: block;
   position: absolute;
   user-select: none;
-
   animation-delay: 450ms;
   animation-fill-mode: forwards;
 }
 
 .section-3 .background-text.background-text-left {
-  left: -10vw;
-  font-size: 9vw;
+  left: 0;
+  font-size: 298px;
+  top: -360px;
 }
 
 .section-3 .background-text.background-text-right {
-  right: -10vw;
-  font-size: 35vw;
-  margin-top: 130px;
+  text-align: right;
+  margin-right: -75px;
+  right: 0;
+  font-size: 798.5px;
+  top: -150px;
 }
 
 .section-3 .background-text.background-text-left.fade-in {
@@ -367,114 +361,42 @@ body {
 
 @keyframes whoweare-left-fade-in {
   0% {
-    left: 3vw;
+    left: 13vw;
   }
   100% {
-    left: -10vw;
+    left: 0;
   }
 }
 
 @keyframes whoweare-right-fade-in {
   0% {
-    right: 3vw;
+    right: 13vw;
   }
   100% {
-    right: -10vw;
+    right: 0;
   }
 }
 
 .section-3 .text-blocks-container {
-  margin: auto;
   margin-bottom: 400px;
-  max-width: 900px;
-  position: relative;
-}
-
-.section-3 .text-block {
-  position: relative;
-}
-
-.section-3 .text-block.right {
-  float: right;
 }
 
 .section-3 .gamedev {
+  display: block;
   width: 100%;
-  margin-left: -80px;
-  margin-top: 70px;
+  margin-bottom: -60px;
+  margin-top: 512px;
+  position: relative;
 }
 
 .section-3-photo {
-  margin-top: 50px;
-  margin-right: -80px;
-}
-
-.section-3-photo > img {
-  width: 65%;
-}
-
-.section-3-text-1 {
-  margin-top: 480px;
-}
-
-.section-3-text-1 > p {
-  text-align: left;
-  width: 340px;
+  margin-top: 140px;
 }
 
 .section-3-text-2 {
-  width: 470px;
-  margin-top: 60px;
+  margin-top: 24px;
 }
-
-.section-3-text-2 > p {
-  width: 350px;
-}
-
-.section-3 .text-block .avatar {
-  width: 170px;
-  margin-top: -50px;
-}
-
-.section-3 .text-block .avatar.left {
-  float: left;
-  left: 13px;
-  position: relative;
-}
-
-.section-3 .text-block .avatar.center {
-}
-
-.section-3 .text-block .title {
-  font-family: "Demon Letter";
-  font-size: 70px;
-  margin: 0;
-  margin-bottom: -10px;
-}
-
-.section-3 .text-block p {
-  width: 450px;
-  margin: 0;
-  font-family: "PPSupplyMono";
-  font-size: 14.5px;
-}
-
-.section-3 > .buy-button {
-  position: relative;
-  top: -230px;
-  left: 260px;
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 10px;
-  width: 360px;
-  text-align: center;
-  display: block;
-  color: black;
-  background-color: var(--magicmint);
-  font-size: 24pt;
-  font-family: "ST Kooperativ", sans-serif;
-  text-decoration: none;
-}
+/* X. Section #3: Team */
 
 .section-4 {
   position: relative;
@@ -580,7 +502,6 @@ body {
   height: 54px;
   top: 50%;
   background: url("../assets/img/arrow.svg");
-  /*opacity: 1;*/
   cursor: pointer;
   z-index: 1;
   transition: opacity 500ms ease;
@@ -588,13 +509,11 @@ body {
 
 .arrow-left {
   left: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
   transform: rotate(180deg);
 }
 
 .arrow-right {
   right: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
 }
 
 .scene.go-up {
@@ -603,12 +522,6 @@ body {
 
 .scene.go-down {
   animation: scene-go-down 500ms ease-in-out;
-}
-
-/* Windows related fixes */
-body.windows .section-4 .buy-button {
-  padding-top: 7px;
-  padding-bottom: 7px;
 }
 
 @keyframes scene-go-up {
