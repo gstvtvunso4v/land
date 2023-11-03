@@ -37,6 +37,8 @@ body {
 
 .scroll-container {
   height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .canvas-container {
@@ -47,6 +49,7 @@ body {
 }
 
 .loading {
+  overflow: hidden;
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -497,7 +500,7 @@ body {
 }
 
 .arrow {
-  position: fixed;
+  position: absolute;
   width: 34px;
   height: 54px;
   top: 50%;
@@ -557,7 +560,7 @@ body {
   0% {
     background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 1);
     background-attachment: fixed;
-    background-size: auto 100%;
+    background-size: auto 100lvh;
     background-position: center center;
     background-blend-mode: lighten;
   }
@@ -565,7 +568,7 @@ body {
   100% {
     background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 0);
     background-attachment: fixed;
-    background-size: auto 110%;
+    background-size: auto 100lvh;
     background-position: center center;
     background-blend-mode: lighten;
   }

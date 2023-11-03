@@ -6,11 +6,14 @@ class MouseWheelSwitcher {
     this.lastScenesSwitchTime = this.czarverse.lastScenesSwitchTime;
     this.calmScenesSwitchDuration = this.czarverse.calmScenesSwitchDuration;
 
-    this.container.addEventListener('wheel', this.onWheel.bind(this));
+    this.container.addEventListener("wheel", this.onWheel.bind(this));
   }
 
   onWheel(event) {
-    if (Date.now() - this.lastScenesSwitchTime < this.calmScenesSwitchDuration) {
+    if (
+      Date.now() - this.lastScenesSwitchTime <
+      this.calmScenesSwitchDuration
+    ) {
       return;
     }
 
@@ -25,7 +28,9 @@ class MouseWheelSwitcher {
         czarverse.onLeftArrowClick();
       }
     } else if (section2.isVisible) {
-      const heightWithoutCanvas = section2.longScrollContainer.scrollHeight - section2.containerBounds.height;
+      const heightWithoutCanvas =
+        section2.longScrollContainer.scrollHeight -
+        section2.containerBounds.height;
       const scrollTop = section2.scrollContainer.scrollTop;
 
       // во 2 секции мы можем скроллить назад и попадать в 1 секцию

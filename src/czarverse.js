@@ -105,7 +105,13 @@ class Czarverse {
     this.leftArrow = document.querySelector(".arrow-left");
     this.rightArrow = document.querySelector(".arrow-right");
 
-    this.mouseWheelSwitcher = new MouseWheelSwitcher(this);
+    if (
+      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      this.mouseWheelSwitcher = new MouseWheelSwitcher(this);
+    }
 
     this.update();
 

@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>Czarverse</title>
     <!-- It's better to minify & combine these css files -->
@@ -34,13 +38,13 @@
         </svg>
       </a>
       <div class="menu-item">
-        <a onclick="window.czarverse.onMenuItemClick(0);">VERSE</a>
+        <a data-index="0" class="interactive">VERSE</a>
       </div>
       <div class="menu-item">
-        <a onclick="window.czarverse.onMenuItemClick(1);">ABOUT</a>
+        <a data-index="1" class="interactive">ABOUT</a>
       </div>
       <div class="menu-item">
-        <a onclick="window.czarverse.onMenuItemClick(2);">TEAM</a>
+        <a data-index="2" class="interactive">TEAM</a>
       </div>
       <div class="menu-item"><a href="https://discord.com">DISCORD</a></div>
       <div class="menu-item"><a href="https://discord.com">SOCIAL</a></div>
@@ -49,16 +53,16 @@
       <img src="./assets/img/hamburger.svg" alt="Open Menu" title="Open Menu" />
     </div>
 
-    <div
-      class="arrow arrow-left hidden"
-      onclick="window.czarverse.onLeftArrowClick();"
-    ></div>
-    <div
-      class="arrow arrow-right hidden"
-      onclick="window.czarverse.onRightArrowClick();"
-    ></div>
-
     <div class="scroll-container section-1">
+      <div
+        class="arrow arrow-left hidden"
+        onclick="window.czarverse.onLeftArrowClick();"
+      ></div>
+      <div
+        class="arrow arrow-right hidden"
+        onclick="window.czarverse.onRightArrowClick();"
+      ></div>
+
       <div class="canvas-container"></div>
 
       <div class="scene first-scene hidden">
