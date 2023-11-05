@@ -355,7 +355,6 @@ class Czarverse {
         menu.classList.remove("white");
 
         if (target === this.section2) {
-          this.section2.playShowAnimation();
           this.section2.scrollContainer.scrollTo({
             top: 0,
             behaviour: "instant",
