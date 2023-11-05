@@ -1,5 +1,6 @@
 import { BoxGeometry, Mesh, MeshBasicMaterial, Object3D, Quaternion, Vector2, Vector3 } from 'three';
 import lerp from '../utils/lerp.js';
+import isMobile from 'is-mobile';
 
 // used in Section2
 class CameraWiggle2 {
@@ -25,6 +26,10 @@ class CameraWiggle2 {
 
     this.target = this.section.scene.getObjectByName('Focus_center');
 
+    if (isMobile()) {
+      return;
+    }
+
     window.addEventListener('pointermove', this.onPointerMove.bind(this));
     window.addEventListener('blur', this.onWindowBlur.bind(this));
     window.addEventListener('focus', this.onWindowFocus.bind(this));
@@ -39,6 +44,10 @@ class CameraWiggle2 {
   }
 
   update() {
+    if (isMobile()) {
+      return;
+    }
+
     const { camera } = this.section;
 
     this.lerpMouse.x = lerp(this.lerpMouse.x, 0, this.inertia);

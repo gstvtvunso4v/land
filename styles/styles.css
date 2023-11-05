@@ -153,6 +153,10 @@ body {
   position: absolute;
 }
 
+.section-2 .fake-scene {
+  /*pointer-events: none;*/
+}
+
 .scene-content {
   display: flex;
   flex-direction: column;

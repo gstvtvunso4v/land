@@ -1,7 +1,7 @@
 import Assets from "./core/assets.js";
 import Section1 from "./section/section-1.js";
 import Section2 from "./section/section-2.js";
-import MouseWheelSwitcher from "./core/mouse-wheel-switcher.js";
+import SceneSwitcher from "./core/scene-switcher.js";
 import section3 from "./section/section-3.js";
 
 // + сделать переключалку и магнитный скролл с позишн стики
@@ -87,6 +87,8 @@ class Czarverse {
   update(time) {
     requestAnimationFrame(this.update.bind(this));
 
+    this.sceneSwitcher.update();
+
     this.section1.update();
     this.section2.update();
     this.section3.update();
@@ -105,13 +107,7 @@ class Czarverse {
     this.leftArrow = document.querySelector(".arrow-left");
     this.rightArrow = document.querySelector(".arrow-right");
 
-    if (
-      !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      this.mouseWheelSwitcher = new MouseWheelSwitcher(this);
-    }
+    this.sceneSwitcher = new SceneSwitcher(this);
 
     this.update();
 
@@ -154,6 +150,8 @@ class Czarverse {
 
   onMenuItemClick(sectionIndex) {
     let targetSceneIndex;
+
+    console.log(sectionIndex)
 
     switch (sectionIndex) {
       case 0:
@@ -230,6 +228,12 @@ class Czarverse {
 
   onArrowClick(instant = false) {
     const scenesElements = document.querySelectorAll(".scene");
+
+    this.sceneSwitcher.blockTopScroll = true;
+
+    setTimeout(() => {
+      this.sceneSwitcher.blockTopScroll = false;
+    }, 1000);
 
     let section;
 

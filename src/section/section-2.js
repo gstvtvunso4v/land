@@ -12,6 +12,7 @@ import {
 import { LoopOnce, LoopRepeat, Vector2 } from 'three';
 import CameraWiggle2 from '../core/camera-wiggle2.js';
 import lerp from '../utils/lerp.js';
+import isMobile from 'is-mobile';
 
 class Section2 extends Section {
   effects = {
@@ -161,6 +162,11 @@ class Section2 extends Section {
   getScrollPercent() {
     // container
     let scrollTop = this.scrollContainer.scrollTop;
+
+    if (isMobile()) {
+      // body scroll - window height
+      scrollTop = window.pageYOffset - window.innerHeight;
+    }
 
     const height = this.longScrollContainer.scrollHeight;
     const heightWithoutCanvas = height - this.containerBounds.height;

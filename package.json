@@ -10,11 +10,13 @@
   },
   "author": "",
   "dependencies": {
+    "is-mobile": "^4.0.0",
     "lil-gui": "^0.18.1",
     "postprocessing": "^6.30.2",
     "stats.js": "^0.17.0",
     "sticky-js": "^1.3.0",
-    "three": "^0.149.0"
+    "three": "^0.149.0",
+    "zingtouch": "^1.0.6"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
