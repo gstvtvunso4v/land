@@ -158,6 +158,9 @@
 
 /* Global Style for Buttons */
 @media (max-width: 767.98px) {
+  .button-wrapper {
+    text-align: center;
+  }
   .button {
     font-size: 26px;
     height: 42px;
@@ -166,6 +169,7 @@
     padding-right: 16px;
     min-width: 178px;
   }
+
   .windows .button {
     padding-bottom: 2px; /* font-fix */
   }
@@ -312,13 +316,30 @@
 /* About Screen */
 @media (max-width: 1324.98px) {
   .section-2 .dont-blink {
-    max-width: 34.8679245283019vw;
+    font-size: 14.9811320754717vw;
+  }
+  .section-2 .dont-blink > span {
+    margin-bottom: 0.9056603773585vw;
   }
   .section-2 .supress {
-    max-width: 63.5471698113208vw;
+    font-size: 14.6415094339623vw;
+    margin-bottom: -1.1320754716981vw;
+  }
+  .windows .section-2 .supress {
+    margin-bottom: -2vw;
   }
   .section-2 .riot {
-    max-width: 51.9245283018868vw;
+    font-size: 24.4150943396226vw;
+    margin-bottom: -4.7vw;
+  }
+  .section-2 .riot > span:first-child {
+    font-size: 6.7924528301887vw;
+  }
+  .windows .section-2 .riot {
+    margin-bottom: -0.25vw;
+  }
+  .windows .section-2 .riot > span:first-child {
+    margin-top: 2.5vw;
   }
   .section-2 .mint {
     max-width: 44.3018867924528vw;
@@ -326,25 +347,69 @@
 }
 @media (max-width: 767.98px) {
   .section-2 .dont-blink {
+    font-size: 196px;
     margin-bottom: 240px;
     margin-top: 93px;
-    max-width: 480px;
+  }
+  .section-2 .dont-blink > span {
+    margin-bottom: 12px;
   }
   .section-2 .text-1 {
     margin-bottom: 365px;
   }
   .section-2 .supress {
-    margin-bottom: 12px;
+    font-size: 112px;
+    margin-bottom: -6px;
     max-width: 480px;
   }
+  .windows .section-2 .supress {
+    margin-bottom: -20px;
+  }
   .section-2 .riot {
-    max-width: 480px;
+    font-size: 213px;
+    margin-bottom: -33px;
+  }
+  .section-2 .riot > span:first-child {
+    font-size: 59px;
+  }
+  .windows .section-2 .riot > span:first-child {
+    margin-top: 21px;
   }
   .section-2 .text-2 {
     margin-bottom: 300px;
   }
   .section-2 .mint {
     max-width: 480px;
+  }
+}
+@media (max-width: 581.98px) {
+  .windows .section-2 .supress {
+    margin-bottom: -2vw;
+  }
+  .section-2 .riot {
+    justify-content: space-between;
+    font-size: calc(41.25vw - 26.4px);
+    margin-bottom: -5vw;
+  }
+  .section-2 .riot > span:first-child {
+    font-size: calc(12vw - 7.68px);
+    margin-left: 0.75vw;
+  }
+  .windows .section-2 .riot > span:first-child {
+    margin-top: 3.25vw;
+  }
+}
+@media (max-width: 549.98px) {
+  .section-2 .dont-blink {
+    font-size: calc(40.25vw - 25.76px);
+  }
+  .section-2 .dont-blink > span {
+    margin-bottom: 8px;
+  }
+}
+@media (max-width: 511.98px) {
+  .section-2 .supress {
+    font-size: calc(25vw - 16px);
   }
 }
 /* X. About Screen */

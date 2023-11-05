@@ -276,11 +276,28 @@ body {
   margin-top: -100vh;
 }
 
-.section-2 .dont-blink {
+.section-2 .text-block-title {
   display: block;
-  margin-top: 200px;
+  font-family: "ST Kooperativ", sans-serif;
+  line-height: 0.85;
+  text-transform: uppercase;
+}
+
+.section-2 .text-block-title > span {
+  display: block;
+}
+
+.section-2 .dont-blink {
+  font-size: 198.5px;
+  line-height: 0.7;
+  margin-top: 224px;
   margin-bottom: 234px;
-  max-width: 462px;
+}
+.section-2 .dont-blink > span {
+  margin-bottom: 12px;
+}
+.section-2 .dont-blink > span:last-child {
+  margin-bottom: 0;
 }
 
 .section-2 .text-1 {
@@ -288,15 +305,30 @@ body {
 }
 
 .section-2 .supress {
-  display: block;
-  margin-bottom: 16px;
-  max-width: 842px;
+  font-size: 194px;
+  line-height: 0.85;
+  margin-bottom: -15px;
+}
+.windows .section-2 .supress {
+  margin-bottom: -33px;
 }
 
 .section-2 .riot {
-  display: block;
-  margin-left: auto;
-  max-width: 688px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  font-size: 323.5px;
+  margin-bottom: -49px;
+  width: 100%;
+}
+.section-2 .riot > span:first-child {
+  font-size: 90px;
+}
+.windows .section-2 .riot {
+  margin-bottom: -3px;
+}
+.windows .section-2 .riot > span:first-child {
+  margin-top: 33px;
 }
 
 .section-2 .text-2 {
