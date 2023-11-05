@@ -158,6 +158,9 @@
 
 /* Global Style for Buttons */
 @media (max-width: 767.98px) {
+  .button-wrapper {
+    text-align: center;
+  }
   .button {
     font-size: 26px;
     height: 42px;
