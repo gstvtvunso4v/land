@@ -26,10 +26,6 @@ class Section2 extends Section {
 
   backgroundColor = '#13071d';
 
-  showAnimationTime = 0;
-  showAnimationTimeTarget = 2.5847336152593723;
-  showAnimationInertia = 0.02;
-
   constructor(czarverse) {
     super(
       czarverse,
@@ -186,17 +182,11 @@ class Section2 extends Section {
   }
 
   updateActions() {
-    this.showAnimationTime = lerp(this.showAnimationTime, this.showAnimationTimeTarget, this.showAnimationInertia);
-
     this.animationTarget = this.getScrollPercent();
 
     this.actionsToAnimate.forEach(action => {
-      action.time = action.getClip().duration * this.animationTime + this.showAnimationTime; // плюс длинна анимации появления глаза
+      action.time = action.getClip().duration * this.animationTime;
     });
-  }
-
-  playShowAnimation() {
-    this.showAnimationTime = 0;
   }
 }
 
