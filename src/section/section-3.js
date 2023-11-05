@@ -7,6 +7,7 @@ import {
   RenderPass,
   SMAAEffect,
 } from "postprocessing";
+import isMobile from 'is-mobile';
 
 class Section3 extends Section {
   castShadow = ["Demons", "Candles"];
@@ -125,6 +126,14 @@ class Section3 extends Section {
   getScrollPercent() {
     // container
     let scrollTop = this.scrollContainer.scrollTop;
+
+    if (isMobile()) {
+      const section1Height = window.innerHeight;
+      const section2Height = this.czarverse.section2.longScrollContainer.scrollHeight;
+
+      // body scroll - section1 height - section2 height
+      scrollTop = window.pageYOffset - section1Height - section2Height;
+    }
 
     const height = this.longScrollContainer.scrollHeight;
     const heightWithoutCanvas = height - this.containerBounds.height;

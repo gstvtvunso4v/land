@@ -27,6 +27,8 @@ menuItemLink.forEach((item) => {
           top: target.offsetTop,
           behavior: "smooth",
         });
+
+        window.czarverse.onMenuItemClick(+this.dataset.index);
       }
     } else {
       if (this.classList.contains("interactive")) {

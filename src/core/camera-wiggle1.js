@@ -1,5 +1,6 @@
 import { BoxGeometry, Mesh, MeshBasicMaterial, Object3D, Quaternion, Vector2, Vector3 } from 'three';
 import lerp from '../utils/lerp.js';
+import isMobile from 'is-mobile';
 
 const _dummyPosition = new Vector3()
 const _dummyScale = new Vector3()
@@ -28,8 +29,13 @@ class CameraWiggle1 {
   constructor(section) {
     this.section = section;
 
-    this.logo = this.section.scene.getObjectByName('Title');
-    this.target = this.section.scene.getObjectByName('Camera_focus_center');
+    if (isMobile()) {
+      this.logo = this.section.scene.getObjectByName('Title_mobile');
+      this.target = this.section.scene.getObjectByName('Camera_focus_center__mobile');
+    } else {
+      this.logo = this.section.scene.getObjectByName('Title');
+      this.target = this.section.scene.getObjectByName('Camera_focus_center');
+    }
 
     // this.target.add(
     //   new Mesh(
@@ -39,6 +45,10 @@ class CameraWiggle1 {
     // );
 
     // console.log(this.target);
+
+    if (isMobile()) {
+      return;
+    }
 
     window.addEventListener('pointermove', this.onPointerMove.bind(this));
     window.addEventListener('blur', this.onWindowBlur.bind(this));
@@ -54,6 +64,10 @@ class CameraWiggle1 {
   }
 
   update() {
+    if (isMobile()) {
+      return;
+    }
+
     const { camera } = this.section;
 
     this.lerpMouse.x = lerp(this.lerpMouse.x, 0, this.inertia);

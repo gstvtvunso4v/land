@@ -21,7 +21,7 @@ class Section {
   czarverse = null;
   canvasContainer = null;
   cameraWiggle = null;
-  mouseWheelSwitcher = null;
+  sceneSwitcher = null;
 
   castShadow = [];
   receiveShadow = [];

@@ -3,6 +3,7 @@ import { Frustum, LoopOnce, Matrix4, Vector3 } from 'three';
 import GUI from 'lil-gui';
 import CameraWiggle1 from '../core/camera-wiggle1.js';
 import { EffectComposer, EffectPass, HueSaturationEffect, RenderPass, SMAAEffect } from 'postprocessing';
+import isMobile from 'is-mobile';
 
 const _position = new Vector3();
 
@@ -70,7 +71,13 @@ class Section1 extends Section {
 
     console.log(this.model);
 
-    this.camera = this.model.cameras[0];
+    if (isMobile()) {
+      this.camera = this.model.cameras[1];
+      this.scene.getObjectByName('Title').visible = false;
+    } else {
+      this.camera = this.model.cameras[0];
+      this.scene.getObjectByName('Title_mobile').visible = false;
+    }
 
     this.playAnimations(LoopOnce);
 
@@ -90,7 +97,7 @@ class Section1 extends Section {
     });
 
     this.ch1 = this.scene.getObjectByName('CH_1').children[0];
-    this.ch2 = this.scene.getObjectByName('CH_2').children[1]; // 1))))
+    this.ch2 = this.scene.getObjectByName('CH_2').children[0];
     this.ch3 = this.scene.getObjectByName('CH_3').children[0];
 
     this.initShadows();
@@ -117,7 +124,7 @@ class Section1 extends Section {
         action = this.ch3Action;
       }
 
-      if (this.isObjectInFrustum(ch) && !action.isRunning()) {
+      if (ch !== undefined && this.isObjectInFrustum(ch) && !action.isRunning()) {
         action.reset().play();
       }
     }
