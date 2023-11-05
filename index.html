@@ -1,720 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>Czarverse</title>
-
-    <style>
-@font-face {
-  font-family: 'ST Kooperativ';
-  src: url('./assets/fonts/ST-Kooperativ.otf');
-}
-
-@font-face {
-  font-family: 'Gotham Pro';
-  src: url('./assets/fonts/GothamPro.ttf');
-}
-
-@font-face {
-  font-family: 'Demon Letter';
-  src: url('./assets/fonts/Demon_Letter.otf');
-}
-
-@font-face {
-  font-family: 'PPSupplyMono';
-  src: url('./assets/fonts/PPSupplyMono-Regular.otf');
-}
-
-
-
-body {
-  margin: 0;
-  background: #f0f0f0;
-  overflow: hidden;
-  overscroll-behavior-x: none;
-}
-
-.scroll-container {
-  height: 100vh;
-}
-
-.canvas-container {
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-.loading {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 1;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.hidden {
-  opacity: 0;
-  transition: opacity 500ms ease;
-  pointer-events: none;
-}
-
-.loading-text {
-  position: fixed;
-  left: 10%;
-  bottom: calc(12% + 24pt);
-  color: #a3f7d7;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-}
-
-.loading-bar,
-.loading-bar-percent {
-  position: fixed;
-  left: 10%;
-  bottom: 10%;
-  width: 80%;
-  height: 30px;
-}
-
-.loading-bar {
-  background-color: #263340;
-}
-
-.loading-bar-percent {
-  background-color: #a3f7d7;
-  width: 0%;
-  transition: width 150ms ease;
-}
-
-.logo {
-  display: block;
-  position: fixed;
-  width: 40vh;
-  top: 25%;
-
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  transition: width, top 1000ms ease;
-}
-
-.logo.centered {
-  width: 50vh;
-  top: 50%;
-}
-
-.menu {
-  position: fixed;
-  display: table;
-  width: 60%;
-  top: 4vh;
-  left: 42.8%;
-  opacity: 1;
-  z-index: 1;
-  transform: translateX(-40%);
-}
-
-.menu-item {
-  display: table-cell;
-  width: 20%;
-  font-size: 13pt;
-  font-family: 'PPSupplyMono';
-  text-align: center;
-  cursor: pointer;
-}
-
-.menu-item a {
-  color: #00fff6;
-  text-decoration: none;
-  transition: color 100ms ease-out;
-}
-
-.menu-item a:hover {
-  color: #eac1f9;
-}
-
-.menu.white .menu-item a {
-  color: #fff;
-}
-
-.scene {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  margin-top: -100vh;
-}
-
-.fake-scene {
-  position: absolute;
-}
-
-.scene-content {
-  position: absolute;
-  width: 30%;
-  max-width: 400px;
-  left: 60%;
-  top: 50%;
-  /*transform: translateY(-50%);*/
-}
-
-.scene h2 {
-  margin: 0;
-  color: #fff;
-  font-size: 46pt;
-  font-family: 'ST Kooperativ', sans-serif;
-}
-
-.scene p {
-  margin: 18px 0;
-  color: #fff;
-  line-height: 1.5;
-  font-size: 13pt;
-  font-family: 'Gotham Pro', sans-serif;
-}
-
-.scene a {
-  position: relative;
-  top: 30px;
-  padding: 10px 50px;
-  padding-bottom: 6px;
-  float: right;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 21pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-}
-
-.scene a:hover {
-  background-color: #c2fce6;
-}
-
-.section-2 {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-.section-2 .long-scroll-container {
-  height: calc(4400px + 110vh);
-}
-
-.section-2 .text-blocks-container {
-  position: relative;
-  max-width: 1000px;
-  margin: auto;
-  margin-top: calc(-4400px - 110vh);
-  /*z-index: 100;*/
-}
-
-.section-2 .text-block {
-  width: 100%;
-  color: #ff7cf9;
-}
-
-.section-2 .text-block.left {
-  text-align: left;
-}
-
-.section-2 .text-block.right {
-  text-align: right;
-}
-
-.section-2 .text-block > * {
-  display: inline-block;
-  width: calc(1000px - 50%);
-  font-family: 'PPSupplyMono';
-}
-
-.left-hack {
-  text-align: left;
-  display: block;
-}
-
-.section-2 .dont-blink {
-  width: calc(1000px - 65%);
-  margin-top: 200px;
-  margin-bottom: 350px;
-}
-
-.section-2 .text-1 {
-  width: calc(1000px - 60%);
-  margin-bottom: 400px;
-}
-
-.section-2 .supress {
-  width: calc(1000px - 35%);
-}
-
-.section-2 .riot {
-  width: calc(1000px - 40%);
-  margin-bottom: 10px;
-}
-
-.section-2 .riot-video {
-  width: calc(1000px - 50%);
-  margin-bottom: 70px;
-}
-
-.section-2 .text-2 {
-  width: calc(1000px - 54%);
-  margin-bottom: 700px;
-}
-
-.section-2 .mint {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
-}
-
-.section-2 .tank-video {
-  /*width: calc(1000px - 50%);*/
-  margin-bottom: 50px;
-}
-
-.section-2 .text-3 {
-  width: calc(1000px - 60%);
-  margin-bottom: 50px;
-}
-
-.more-button {
-  padding: 14px;
-  padding-bottom: 9px;
-  width: 160px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #00fff6;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-  margin-top: 20px;
-}
-
-/* mobile */
-@media only screen and (max-width: 1000px) {
-  .section-2 .dont-blink {
-    width: calc(1000px - 50%);
-  }
-}
-
-/*.section-2 .scene {*/
-/*  !*background: rgba(0, 0, 0, 0.65);*!*/
-/*}*/
-
-/*.section-2 .scene .scene-content {*/
-/*  width: 60%;*/
-/*  max-width: 500px;*/
-/*  left: 33%;*/
-/*  top: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
-
-/*.section-2 .scene h2 {*/
-/*  color: #e98af9;*/
-/*  font-size: 72pt;*/
-/*}*/
-
-/*.section-2 .scene p {*/
-/*  color: #e98af9;*/
-/*  font-size: 13pt;*/
-/*  line-height: 1.7;*/
-/*}*/
-
-/*.section-2 .scene a {*/
-/*  top: 34px;*/
-/*  font-size: 19pt;*/
-/*  padding: 15px 17px;*/
-/*}*/
-
-/*.section-2 .scene .media {*/
-/*  position: absolute;*/
-/*  width: 30vw;*/
-/*  max-width: 500px;*/
-/*  right: -36vw;*/
-/*}*/
-
-
-
-/*.section-2 .first-scene.centered .scene-content {*/
-/*  width: 60%;*/
-/*  max-width: 500px;*/
-/*  left: 50%;*/
-/*  top: 50%;*/
-/*  text-align: center;*/
-/*  transform: translate(-50%, -50%);*/
-/*}*/
-
-/*.section-2 .centered .scene-content h2 {*/
-/*  font-size: 96pt;*/
-/*}*/
-
-/*.section-2 .centered .scene-content p {*/
-
-/*}*/
-
-/*.section-2 .centered .scene-content a {*/
-
-/*}*/
-
-/*.section-2 .second-scene .media {*/
-/*  top: -3%;*/
-/*}*/
-
-/*.section-2 .third-scene .media {*/
-/*  top: -37%;*/
-/*  max-width: 400px;*/
-/*}*/
-
-/*.section-2 .fourth-scene .media {*/
-/*  top: -110%;*/
-/*}*/
-
-
-.section-3 {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: #ff8bff;
-}
-
-.section-3 .canvas-container {
-  position: sticky;
-}
-
-.section-3 .long-scroll-container {
-  height: 166vh;
-}
-
-.section-3 .background-text {
-  font-family: 'Demon Letter';
-  width: 300px;
-  color: #f3abff;
-  display: block;
-  position: absolute;
-  user-select: none;
-
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-.section-3 .background-text.background-text-left {
-  left: -10vw;
-  font-size: 9vw;
-}
-
-.section-3 .background-text.background-text-right {
-  right: -10vw;
-  font-size: 35vw;
-  margin-top: 130px;
-}
-
-.section-3 .background-text.background-text-left.fade-in {
-  animation: whoweare-left-fade-in 750ms ease-in-out;
-}
-
-.section-3 .background-text.background-text-right.fade-in {
-  animation: whoweare-right-fade-in 750ms ease-in-out;
-}
-
-@keyframes whoweare-left-fade-in {
-  0% { left: 3vw; }
-  100% { left: -10vw; }
-}
-
-@keyframes whoweare-right-fade-in {
-  0% { right: 3vw; }
-  100% { right: -10vw; }
-}
-
-
-.section-3 .text-blocks-container {
-  margin: auto;
-  margin-bottom: 400px;
-  max-width: 900px;
-  position: relative;
-}
-
-.section-3 .text-block {
-  position: relative;
-}
-
-.section-3 .text-block.right {
-  float: right;
-}
-
-.section-3 .text-block .avatar {
-  width: 170px;
-  margin-top: -50px;
-}
-
-.section-3 .text-block .avatar.left {
-  float: left;
-  left: 13px;
-  position: relative;
-}
-
-.section-3 .text-block .avatar.center {
-
-}
-
-.section-3 .text-block .title {
-  font-family: 'Demon Letter';
-  font-size: 70px;
-  margin: 0;
-  margin-bottom: -10px;
-}
-
-.section-3 .text-block p {
-  width: 450px;
-  margin: 0;
-  font-family: 'PPSupplyMono';
-  font-size: 14.5px;
-}
-
-.section-3 > .buy-button {
-  position: relative;
-  top: -230px;
-  left: 260px;
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 10px;
-  width: 360px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #a3f7d7;
-  font-size: 24pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-}
-
-
-
-.section-4 {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  /*background-attachment: fixed;*/
-  /*background-size: cover;*/
-  /*background-position: center center;*/
-  /*background-image: url('./assets/img/section-4.jpg');*/
-
-  /*background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 1);*/
-  /*background-attachment: fixed;*/
-  /*background-size: cover;*/
-  /*background-position: center center;*/
-  /*background-blend-mode: lighten;*/
-}
-
-.section-4 .poster {
-  display: none;
-
-  width: 100vw;
-  height: 100vh;
-}
-
-.section-4 .socials {
-  position: absolute;
-  bottom: calc(125px + 70px);
-  padding-left: 20px;
-  width: 100vw;
-  text-align: center;
-}
-
-.section-4 .socials .social {
-  display: inline-block;
-  font-size: 28pt;
-  margin: 0 70px;
-  color: #6ceae1;
-  text-decoration: none;
-  font-family: 'ST Kooperativ', sans-serif;
-
-  opacity: 0;
-}
-
-.section-4 .socials .social-logo {
-  height: 30px;
-  margin-right: 15px;
-}
-
-.section-4 .buy-button {
-  position: absolute;
-  bottom: calc(30px + 70px);
-  left: 50%;
-  transform: translateX(-50%);
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 6px;
-  width: 310px;
-  height: 38px;
-  text-align: center;
-  display: block;
-  color: #000;
-  background-color: #a3f7d7;
-  font-size: 25pt;
-  font-family: 'ST Kooperativ', sans-serif;
-  text-decoration: none;
-
-  opacity: 0;
-}
-
-
-.section-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  background-color: transparent;
-  pointer-events: none;
-  transition: all 750ms ease-out;
-  transition-property: opacity, background-color;
-  will-change: opacity;
-}
-
-
-
-
-.arrow {
-  position: fixed;
-  width: 34px;
-  height: 54px;
-  top: 50%;
-  background: url('./assets/img/arrow.svg');
-  /*opacity: 1;*/
-  cursor: pointer;
-  z-index: 1;
-  transition: opacity 500ms ease;
-}
-
-
-.arrow-left {
-  left: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
-  transform: rotate(180deg);
-}
-
-.arrow-right {
-  right: 3%;
-  /*transform: scale(0.5) translateY(-50%);*/
-}
-
-
-
-.scene.go-up {
-  animation: scene-go-up 500ms ease-in-out;
-}
-
-.scene.go-down {
-  animation: scene-go-down 500ms ease-in-out;
-}
-
-/* Windows related fixes */
-body.windows .scene a {
-  padding: 4px 50px;
-  padding-bottom: 8px;
-}
-
-body.windows .more-button {
-  padding-top: 6px;
-}
-
-body.windows .section-4 .buy-button {
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-
-@keyframes scene-go-up {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-400px);
-    opacity: 0;
-  }
-}
-
-@keyframes scene-go-down {
-  0% {
-    transform: translateY(400px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4.fade-in {
-  animation: section4-poster-fade-in 1500ms ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-poster-fade-in {
-  0% {
-    background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 1);
-    background-attachment: fixed;
-    background-size: auto 100%;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-
-  100% {
-    background: url('./assets/img/section-4.jpg') rgba(233, 138, 249, 0);
-    background-attachment: fixed;
-    background-size: auto 110%;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-}
-
-.section-4 .social.fade-in {
-  animation: section4-socials-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-socials-fade-in {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4 .buy-button.fade-in {
-  animation: section4-button-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-button-fade-in {
-  0% {
-    transform: translateY(100px) translateX(-50%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0) translateX(-50%);
-    opacity: 1;
-  }
-}
-    </style>
+    <!-- It's better to minify & combine these css files -->
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/responsive.css" />
   </head>
 
   <body>
@@ -725,58 +23,81 @@ body.windows .section-4 .buy-button {
       </div>
     </div>
 
-    <img class="logo centered hidden" src="./assets/img/logo.png">
-    <!--        <img class="logo centered" src="./assets/img/logo.png">-->
+    <img
+      class="logo centered hidden"
+      src="./assets/img/logo.png"
+      alt="Czarverse"
+      title="Czarverse"
+    />
 
     <div class="menu hidden">
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(0);">VERSE</a></div>
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(1);">ABOUT</a></div>
-      <div class="menu-item"><a onclick="window.czarverse.onMenuItemClick(2);">TEAM</a></div>
+      <a href="javascript:void(0)" class="menu-close">
+        <svg viewBox="0 0 60 60">
+          <path d="M4,4l52,52" />
+          <path d="M56,4l-52,52" />
+        </svg>
+      </a>
+      <div class="menu-item">
+        <a data-index="0" class="interactive">VERSE</a>
+      </div>
+      <div class="menu-item">
+        <a data-index="1" class="interactive">ABOUT</a>
+      </div>
+      <div class="menu-item">
+        <a data-index="2" class="interactive">TEAM</a>
+      </div>
       <div class="menu-item"><a href="https://discord.com">DISCORD</a></div>
       <div class="menu-item"><a href="https://discord.com">SOCIAL</a></div>
     </div>
-
-    <div class="arrow arrow-left hidden" onclick="window.czarverse.onLeftArrowClick();"></div>
-    <div class="arrow arrow-right hidden" onclick="window.czarverse.onRightArrowClick();"></div>
+    <div class="hamburger hidden">
+      <img src="./assets/img/hamburger.svg" alt="Open Menu" title="Open Menu" />
+    </div>
 
     <div class="scroll-container section-1">
+      <div
+        class="arrow arrow-left hidden"
+        onclick="window.czarverse.onLeftArrowClick();"
+      ></div>
+      <div
+        class="arrow arrow-right hidden"
+        onclick="window.czarverse.onRightArrowClick();"
+      ></div>
+
       <div class="canvas-container"></div>
 
       <div class="scene first-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_1.svg" class="title">
-<!--          <h2>DON'T TRY TO RUN AWAY! 1</h2>-->
-<!--          <p>-->
-<!--            Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--            who are tired of creating formulaic worlds.-->
-<!--          </p>-->
-          <a href="#">WATCH VIDEO</a>
+          <img
+            src="./assets/img/section-1/main_page_title_1.svg"
+            class="title"
+            alt=""
+          />
+          <div class="scene-content-title">feel our<br />ambraace</div>
+          <a href="#" class="button">MARKET</a>
         </div>
       </div>
 
       <div class="scene second-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_2.svg" class="title">
-
-<!--          <h2>DON'T TRY TO RUN AWAY! 2</h2>-->
-<!--          <p>-->
-<!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--  who are tired of creating formulaic worlds.-->
-<!--          </p>-->
-          <a href="#">WATCH VIDEO</a>
+          <img
+            src="./assets/img/section-1/main_page_title_2.svg"
+            class="title"
+            alt=""
+          />
+          <div class="scene-content-title">don’t try to<br />run away!</div>
+          <a href="#" class="button">WATCH VIDEO</a>
         </div>
       </div>
 
       <div class="scene third-scene hidden">
         <div class="scene-content">
-          <img src="./assets/img/section-1/main_page_title_3.svg" class="title">
-
-<!--          <h2>DON'T TRY TO RUN AWAY! 3</h2>-->
-<!--          <p>-->
-<!--  Better join the community and take part in CZARVERSE evolution with a team of veteran game developers-->
-<!--  who are tired of creating formulaic worlds.-->
-<!--          </p>-->
-          <a href="#">WATCH VIDEO</a>
+          <img
+            src="./assets/img/section-1/main_page_title_3.svg"
+            class="title"
+            alt=""
+          />
+          <div class="scene-content-title">don’t try to<br />run away!</div>
+          <a href="#" class="button">WATCH VIDEO</a>
         </div>
       </div>
 
@@ -784,61 +105,89 @@ body.windows .section-4 .buy-button {
     </div>
 
     <div class="scroll-container section-2">
-      <div class="scene fake-scene"></div> <!-- fake scene for scroll -->
+      <div class="scene fake-scene"></div>
+      <!-- fake scene for scroll -->
 
       <div class="long-scroll-container">
         <div class="canvas-container"></div>
-      </div>
 
-      <div class="text-blocks-container">
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_Dont_blink.svg" class="dont-blink">
-        </div>
+        <div class="text-blocks-container">
+          <div class="text-block left">
+            <img
+              src="./assets/img/section-2/Title_Dont_blink.svg"
+              class="dont-blink"
+            />
+          </div>
 
-        <div class="text-block right">
-          <span class="text-1">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
-            </span>
-          </span>
-        </div>
+          <div class="text-block right">
+            <div class="text-block-text text-1">
+              <p>
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </p>
+            </div>
+          </div>
 
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_supress.svg" class="supress">
-        </div>
+          <img src="./assets/img/section-2/Title_supress.svg" class="supress" />
+          <img
+            src="./assets/img/section-2/Title_the_Riot.svg"
+            class="riot right"
+          />
 
-        <div class="text-block right">
-          <img src="./assets/img/section-2/Title_the_Riot.svg" class="riot">
-        </div>
+          <div class="text-block left">
+            <video
+              src="./assets/videos/tank_web.webm"
+              autoplay
+              muted
+              loop
+              class="riot-video"
+            ></video>
+          </div>
 
-        <div class="text-block left">
-          <video src="./assets/videos/tank_web.webm" autoplay muted loop class="riot-video"></video>
-        </div>
+          <div class="text-block right">
+            <div class="text-block-text text-2">
+              <p>
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </p>
+              <div class="button-wrapper">
+                <a href="#" class="button more-button">MORE</a>
+              </div>
+            </div>
+          </div>
 
-        <div class="text-block right">
-          <span class="text-2">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
-            </span>
-            <a href="#" class="more-button">MORE</a>
-          </span>
-        </div>
+          <img
+            src="./assets/img/section-2/Title_Mint_Play_Discuss.svg"
+            class="mint"
+          />
 
-        <div class="text-block left">
-          <img src="./assets/img/section-2/Title_Mint_Play_Discuss.svg" class="mint">
-        </div>
+          <div class="text-block right">
+            <video
+              src="./assets/videos/tank_web.webm"
+              autoplay
+              muted
+              loop
+              class="tank-video"
+            ></video>
+          </div>
 
-        <div class="text-block right">
-          <video src="./assets/videos/tank_web.webm" autoplay muted loop class="tank-video"></video>
-        </div>
-
-        <div class="text-block left">
-          <span class="text-3">
-            <span class="left-hack">
-            A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines. A summary of our plans and work wi in a few lines. A summary of our plans and work with the community in a few lines.
-            </span>
-            <a href="#" class="more-button">MARKET</a>
-          </span>
+          <div class="text-block left">
+            <div class="text-block-text text-3">
+              <p>
+                A summary of our plans and work wi in a few lines. A summary of
+                our plans and work with the community in a few lines. A summary
+                of our plans and work wi in a few lines. A summary of our plans
+                and work with the community in a few lines.
+              </p>
+              <div class="button-wrapper">
+                <a href="#" class="button more-button">MARKET</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -846,82 +195,131 @@ body.windows .section-4 .buy-button {
     </div>
 
     <div class="scroll-container section-3">
-      <div class="scene fake-scene"></div> <!-- fake scene for scroll -->
+      <div class="scene fake-scene"></div>
+      <!-- fake scene for scroll -->
 
       <div class="long-scroll-container">
         <div class="canvas-container"></div>
+
+        <div class="text-blocks-container">
+          <div class="background-texts">
+            <span class="background-text background-text-left">WHO WE ARE</span>
+            <span class="background-text background-text-right">?</span>
+          </div>
+
+          <img
+            src="./assets/img/section-3/Title_from_street_to_gamedev.svg"
+            class="gamedev"
+          />
+
+          <div class="text-block right section-3-photo">
+            <img
+              class="text-block-photo"
+              src="./assets/img/section-3/photo.png"
+              alt=""
+            />
+          </div>
+
+          <div class="text-block section-3-text-1">
+            <div class="text-block-text">
+              <p>
+                A summary of our plans and work within a few lines. A summary of
+                our plans and work within a few lines. A summary of our plans
+                and work within a few lines.A summary of our plans and work
+                within a few lines. A summary of our plans and work within a few
+                lines. A summary of our plans and work within a few lines.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-block right section-3-text-2">
+            <div class="text-block-text">
+              <p>
+                A summary of our plans and work within a few lines. A summary of
+                our plans and work within a few.A summary of our plans and work
+                within a few lines. A summary of our plans and work within a
+                few.A summary of our plans and work within a few lines. A
+                summary of our plans and work within a few.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="text-blocks-container">
-        <div>
-          <span class="background-text background-text-left">WHO WE ARE</span>
-          <span class="background-text background-text-right">?</span>
-        </div>
-
-        <div class="text-block" style="text-align: center;">
-          <img src="./assets/img/section-3/Title_from_street_to_gamedev.svg" style="
-  width: 100%;
-  margin-left: -80px;
-  margin-top: 70px;">
-        </div>
-
-        <div class="text-block right" style="margin-top: 50px;margin-right: -80px;">
-          <img src="./assets/img/section-3/photo.png" style="width: 65%;">
-        </div>
-
-        <div class="text-block" style="margin-top: 480px;">
-          <p style="text-align: left; width: 340px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.A summary of our plans and work within a few lines. A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.</p>
-        </div>
-
-        <div class="text-block right" style="width: 470px;
-  margin-top: 60px;">
-          <p style="width: 350px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few.A summary of our plans and work within a few lines. A summary of our plans and work within a few.A summary of our plans and work within a few lines. A summary of our plans and work within a few.</p>
-        </div>
-
-<!--        <div class="text-block" style="margin-top: 280px;">-->
-<!--          <img src="./assets/img/section-3/5.png" class="avatar" style="margin-bottom: 60px;">-->
-
-<!--          <h2 class="title">IPOS</h2>-->
-<!--          <p style="width: 300px;">A summary of our plans and work within a few lines. A summary of our plans and work within a few lines.</p>-->
-<!--        </div>-->
-      </div>
-
-<!--      <a href="#" class="buy-button">BUY TOKENS</a>-->
 
       <div class="section-4">
         <div class="poster"></div>
 
         <div class="socials">
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/mint.png">
+            <svg
+              class="social-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 188.65 188.65"
+            >
+              <path
+                d="m188.42,34.07s0-.01,0-.02c-.89-8.65-4.33-16.14-10.34-22.41-5.76-6.01-12.79-9.99-20.98-11.39-1.32-.23-3.25-.25-4.64-.25H36.2c-9.18,0-18.25,4.55-24.51,10.53C6.05,15.91,2.42,22.45.85,30.08c-.37,1.8-.85,4.36-.85,7v115.38c0,.79.03,1.43.1,2.15.89,8.65,4.46,16.14,10.47,22.41,5.76,6.01,12.79,9.67,20.98,11.08,1.32.23,3.12.56,4.64.56h116.26c8.68,0,18.33-4.58,24.6-10.62,5.98-5.75,9.63-12.77,11.04-20.94.23-1.32.56-3.17.56-4.64V38.45c0-1.46-.08-2.93-.23-4.38Zm-46.02,92.45v.77h-27.15v-.72c0-5.32.01-10.64,0-15.96,0-1.65-.57-3.11-1.8-4.26-.95-.88-2.12-1.34-3.37-1.51-1.1-.16-2.23-.25-3.34-.26-10.22-.02-20.44-.01-30.67-.01h-.76v22.71h-27.14V60.45h.72c22.41,0,44.83-.01,67.24.02,1.94,0,3.87.31,5.81.48,2.36.21,4.66.71,6.93,1.38,2,.59,3.91,1.39,5.64,2.54,2,1.33,3.67,3,4.83,5.14,1,1.84,1.61,3.8,1.81,5.89.09.95.26,1.9.23,2.84-.08,2.56-.44,5.08-1.6,7.41-1.19,2.38-2.9,4.32-5.24,5.6-1.37.75-2.83,1.32-4.14,1.92.97.43,2.14.86,3.23,1.43,2.83,1.48,5.05,3.61,6.58,6.44,1.05,1.95,1.75,4.01,1.95,6.23.09.99.23,1.98.24,2.97.02,5.26.01,10.52.01,15.77Z"
+              />
+              <path
+                d="m109.68,80.07c-11.25-.02-22.5-.01-33.75-.01h-.66v6.54h.8c10.96,0,21.91.01,32.87-.02.95,0,1.92-.21,2.83-.49,1.88-.56,2.53-3.42,1.18-4.85-.9-.94-2.08-1.16-3.27-1.17Z"
+              />
+            </svg>
             <span>MINT</span>
           </a>
 
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/instagram.png">
+            <svg
+              class="social-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 188.65 188.77"
+            >
+              <path
+                d="m187.95,48.28c-.29-6.19-.95-12.33-2.75-18.29-3.26-10.8-9.77-18.92-19.91-23.97-6.32-3.14-13.13-4.65-20.11-5-10-.51-20-.86-30.01-.95-15.11-.14-30.21-.04-45.32.05-6.63.04-13.26.27-19.89.48-6.15.19-12.26.75-18.24,2.32C20.75,5.8,12.22,11.93,6.72,21.94c-3.64,6.64-5.3,13.92-5.7,21.41C.49,53.22.15,63.11.06,72.99c-.13,15.72-.03,31.43.06,47.15.03,6.14.27,12.28.48,18.42.2,6.15.74,12.26,2.3,18.25,2.93,11.2,9.2,19.84,19.5,25.32,6.53,3.48,13.66,5.08,20.98,5.46,10.03.53,20.09.76,30.13.97,6.92.14,13.84.03,20.77.03,0,.05,0,.11,0,.17,13.39-.2,26.78-.34,40.17-.6,7.2-.14,14.39-.5,21.44-2.22,11.41-2.77,20.34-8.93,26.02-19.33,3.67-6.72,5.29-14.09,5.69-21.66.5-9.34.93-18.7.93-28.05,0-22.88.47-45.76-.6-68.63Zm-93.92,105.05c-32.39-.02-58.76-26.61-58.73-59.24.03-32.39,26.55-58.8,59.05-58.79,32.56,0,58.99,26.49,58.98,59.12-.01,32.58-26.53,58.93-59.3,58.92Zm61.63-106.63c-7.56-.01-13.73-6.19-13.73-13.75,0-7.62,6.27-13.85,13.85-13.78,7.58.08,13.74,6.3,13.68,13.82-.06,7.6-6.23,13.72-13.8,13.71Zm-61.36,9.25c-21.13,0-38.34,17.17-38.35,38.26-.01,21.24,17.12,38.47,38.26,38.48,21.23.01,38.46-17.11,38.47-38.26.02-21.28-17.14-38.48-38.38-38.47Z"
+              />
+            </svg>
             <span>FOLLOW</span>
           </a>
 
           <a class="social" href="#" target="_blank">
-            <img class="social-logo" src="./assets/img/socials/discord.png">
+            <svg
+              class="social-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 248.34 183.6"
+            >
+              <path
+                d="m247.08,122.84c-.59-5.4-1.4-10.79-2.39-16.13-1.35-7.31-2.67-14.65-4.51-21.84-2.35-9.19-5.03-18.3-7.9-27.34-2.93-9.27-6.69-18.24-11.26-26.83-1.95-3.66-3.84-7.49-7.13-10.16-2.86-2.32-5.96-4.4-9.13-6.29-5.78-3.45-12.01-5.95-18.4-8.01-6.99-2.26-14.1-4.07-21.4-5.05-1.83-.25-5.75-.86-8.08-1.1-1.3-.13-2.62.25-3.61,1.1-1.81,1.57-2.39,4.03-3.21,6.43,2.11.39,4.13.73,6.14,1.15,9.13,1.9,18.08,4.5,26.59,8.29,5.26,2.34,10.28,5.26,15.24,8.2,2.33,1.38,2.66,4.93,1.15,7.07-1.73,2.45-4.99,3.22-7.39,1.72-10.3-6.46-21.5-10.73-33.3-13.46-5.18-1.2-10.43-2.19-15.68-3-3.63-.56-7.33-.75-11-.94-4.21-.21-8.44-.46-12.64-.27-4.85.23-9.7.76-14.51,1.47-5.56.83-11.12,1.75-16.57,3.09-4.96,1.22-9.91,2.71-14.59,4.7-5.84,2.48-11.4,5.63-17.1,8.45-2.53,1.25-5.52.9-7.31-1.78-1.77-2.65-.61-6.16,1.41-7.42,5.42-3.39,11.11-6.18,17.01-8.63,6.44-2.66,13.05-4.71,19.8-6.37,3.49-.85,7.03-1.52,10.7-2.3-.65-2.69-1.26-5.43-3.74-6.95-.76-.46-1.63-.68-2.52-.65-7.91.25-20.56,3.17-27.58,5.6-5.78,2-11.59,4.08-17.05,6.81-4.65,2.33-9.11,5.2-13.17,8.44-2.34,1.87-3.94,4.81-5.47,7.5-5.86,10.28-10.11,21.27-13.62,32.53-2.72,8.72-5.24,17.53-7.47,26.39-1.58,6.25-2.6,12.64-3.75,18.99-.81,4.42-1.52,8.86-2.09,13.32C1.1,123.22,0,133.06,0,137.62v7.34c0,1.4.35,2.79,1.04,4.01,2.79,4.94,6.53,9.11,10.85,12.85,5.51,4.76,11.65,8.47,18.22,11.52,7.87,3.66,16.09,6.37,24.59,8.11,3.86.79,7.9,1.6,14.99,1.89,2.94-1.38,5.25-3.84,7.05-6.28,2.17-2.94,4.2-5.98,6.46-9.08-2.66-.85-5.22-1.6-7.74-2.48-3.62-1.26-7.28-2.46-10.81-3.93-6.67-2.77-13.05-6.12-18.93-10.35-1.52-1.09-3.06-2.25-4.24-3.68-1.67-2.01-1.46-5.27,1.17-7.39,1.77-1.43,4.86-1.24,6.91.24,2.99,2.18,6.01,4.36,9.23,6.16,6.98,3.9,14.31,7.11,22.04,9.19,6.08,1.63,12.23,3.06,18.42,4.19,4.62.85,9.35,1.31,14.05,1.52,6.82.31,13.68.6,20.49.25,6.16-.32,12.29-1.44,18.41-2.31,8.68-1.24,17.03-3.78,25.12-7.04,7.66-3.09,15.04-6.8,21.56-12,2.54-2.03,6.08-1.57,7.91.97,1.85,2.55,1.09,5.79-1.46,7.83-5.45,4.36-11.5,7.69-17.77,10.66-6.6,3.12-13.45,5.59-20.51,7.47-.61.16-1.23.33-2.05.55,1.57,2.21,2.8,4.04,4.18,5.96,1.28,1.78,2.73,3.61,5.17,6.66,1.87,2.34,4.85,3.5,7.8,3.05,5.79-.89,13.38-2.38,16.94-3.31,7.91-2.08,15.59-4.87,22.86-8.68,5.21-2.74,10.12-5.92,14.6-9.78,4.23-3.64,7.76-7.8,10.65-12.54v-.02c.74-1.2,1.13-2.58,1.13-3.98v-6.94c-.13-4.88-.73-10.59-1.26-15.39Zm-147.18-2.51c-6.83,5.58-15.33,5.4-22.13-.37-5.33-4.52-7.58-10.43-7.63-17.29-.14-4.88,1.25-9.32,3.96-13.31,4.11-6.05,9.85-8.97,17.16-8.24,3.16.32,6.02,1.7,8.57,3.71,4.29,3.38,6.85,7.86,7.75,13.1,1.51,8.77-.64,16.66-7.67,22.41Zm70.37-.11c-4.97,4.21-11.98,5.54-18.17,2.41-6.65-3.37-10.31-8.85-11.46-16.14-1.11-7.05.49-13.45,4.99-18.94,3.22-3.93,7.47-6.24,12.73-6.5,5.61-.27,10.21,1.84,13.94,5.84,3.1,3.33,4.94,7.35,5.56,11.88.18,1.28.29,2.57.43,3.85-.09,7.07-2.62,13.03-8.01,17.6Z"
+              />
+            </svg>
             <span>DISCUSS</span>
           </a>
         </div>
-
-        <a href="#" class="buy-button">BUY TOKENS</a>
       </div>
 
       <div class="section-animation"></div>
     </div>
 
     <!--  stats.js, tmp  -->
-    <script>(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()</script>
+    <script>
+      (function () {
+        var script = document.createElement("script");
+        script.onload = function () {
+          var stats = new Stats();
+          document.body.appendChild(stats.dom);
+          requestAnimationFrame(function loop() {
+            stats.update();
+            requestAnimationFrame(loop);
+          });
+        };
+        script.src = "//mrdoob.github.io/stats.js/build/stats.min.js";
+        document.head.appendChild(script);
+      })();
+    </script>
 
     <script type="module">
-import Czarverse from './build/czarverse.js';
+      import Czarverse from "./build/czarverse.js";
 
-const czarverse = new Czarverse();
-window.czarverse = czarverse; // for debug
+      const czarverse = new Czarverse();
+      window.czarverse = czarverse; // for debug
     </script>
+    <script src="./scripts/main.js"></script>
   </body>
 </html>
