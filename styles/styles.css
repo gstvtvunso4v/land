@@ -464,6 +464,15 @@ body {
   width: auto;
 }
 
+.section-4 .socials .social-logo > path {
+  fill: black;
+  transition: fill 0.25s ease;
+}
+
+.section-4 .socials .social:hover .social-logo > path {
+  fill: var(--fuchsiapink);
+}
+
 .section-4 .buy-button {
   position: absolute;
   bottom: calc(30px + 70px);
