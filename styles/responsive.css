@@ -3,6 +3,9 @@
   body {
     overflow: unset;
   }
+  .arrow {
+    display: none !important;
+  }
   .scroll-container,
   .canvas-container,
   .section-4,
@@ -45,6 +48,9 @@
 @media (max-width: 767.98px) {
   body {
     overflow: unset;
+  }
+  .arrow {
+    display: none !important;
   }
   .scroll-container,
   .canvas-container,
@@ -200,6 +206,14 @@
     right: 20px;
   }
 
+  .scene.go-up {
+    animation: scene-go-up-device 0.75s ease-in-out;
+  }
+
+  .scene.go-down {
+    animation: scene-go-down-device 0.75s ease-out;
+  }
+
   .section-1 > .canvas-container::before {
     background: linear-gradient(
       0deg,
@@ -258,6 +272,34 @@
   }
   .macos .scene-content-title {
     margin-bottom: -5px; /* font-fix */
+  }
+}
+
+@keyframes scene-go-up-device {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-156px);
+    opacity: 0;
+  }
+}
+
+@keyframes scene-go-down-device {
+  0% {
+    transform: translateY(156px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 /* X. Home Screen */
@@ -348,6 +390,10 @@
   }
   .section-2 .mint {
     max-width: 480px;
+  }
+  .section-2 .text-4 {
+    margin-top: 520px;
+    padding-bottom: 27px;
   }
 }
 /* X. About Screen */

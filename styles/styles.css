@@ -189,6 +189,7 @@ body {
   margin-top: 40px;
   padding: 0 20px;
   position: relative;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   min-width: 218px;
@@ -220,6 +221,9 @@ body {
 }
 .text-blocks-container > .text-block.right {
   margin-left: auto;
+}
+.text-blocks-container > .text-block.center {
+  width: auto;
 }
 .text-blocks-container > .text-block > video,
 .text-block-photo {
@@ -262,7 +266,7 @@ body {
   position: relative;
 }
 
-.section-2 .canvas-container::after {
+.section-darken {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
   content: "";
@@ -310,6 +314,17 @@ body {
 .section-2 .mint {
   display: block;
   max-width: 587px;
+}
+
+.section-2 .text-4 {
+  margin-top: 955px;
+  padding-bottom: 130px;
+}
+.section-2 .text-4 .button-wrapper {
+  text-align: center;
+}
+.section-2 .text-4 .button-wrapper > button {
+  margin-top: 0;
 }
 /* X. Section #2: About */
 
