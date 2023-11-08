@@ -8,8 +8,6 @@
   }
   .scroll-container,
   .canvas-container,
-  .section-4,
-  .section-4 .poster,
   .section-animation {
     height: 100lvh;
   }
@@ -48,16 +46,6 @@
   .section-3 .gamedev {
     transform: translate3d(0, -500px, 0);
   }
-  .section-4 {
-    padding-bottom: 150px;
-  }
-  .section-4.fade-in {
-    animation: none;
-    background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 0);
-    background-size: auto 100lvh;
-    background-position: 50% 0;
-    background-blend-mode: lighten;
-  }
 }
 @media (max-width: 767.98px) {
   body {
@@ -68,8 +56,6 @@
   }
   .scroll-container,
   .canvas-container,
-  .section-4,
-  .section-4 .poster,
   .section-animation {
     height: 100lvh;
   }
@@ -107,13 +93,6 @@
   }
   .section-3 .gamedev {
     transform: translate3d(0, 0, 0);
-  }
-  .section-4.fade-in {
-    animation: none;
-    background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 0);
-    background-size: auto 100lvh;
-    background-position: 50% 0;
-    background-blend-mode: lighten;
   }
 }
 
@@ -508,24 +487,24 @@
     margin-top: 0;
   }
   .section-3-text-2 {
-    margin-bottom: 130px;
+    margin-bottom: 0;
   }
 }
 /* X. Team Screen */
 
 /* Footer */
 @media (max-width: 1024px) {
-  .section-4 .socials {
+  .socials {
     flex-wrap: wrap;
     padding-top: 0;
   }
 
-  .section-4 .socials .social {
+  .socials .social {
     font-size: 50px;
     margin: 15px 40px;
   }
 
-  .section-4 .socials .social-logo {
+  .socials .social-logo {
     height: 16px;
     right: calc(100% + 2px);
     top: -36px;
@@ -533,14 +512,21 @@
 }
 @media (max-width: 767.98px) {
   .section-4 {
-    padding-bottom: 320px;
+    overflow: hidden;
   }
-  .section-4 .socials {
+  .throne {
+    padding-bottom: 300px;
+  }
+  .throne > img {
+    transform: translate3d(calc((100vw - 978px) / 2), 0, 0);
+    width: 978px;
+  }
+  .socials {
     align-items: center;
     flex-direction: column;
     padding-bottom: 70px;
   }
-  .section-4 .socials .social {
+  .socials .social {
     font-size: 40px;
   }
 }

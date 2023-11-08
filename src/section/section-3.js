@@ -78,10 +78,10 @@ class Section3 extends Section {
     // );
     // this.whoweareObserver.observe(document.querySelector(".gamedev"));
 
-    this.section4Observer = new IntersectionObserver(
-      this.onSection4Intersection.bind(this)
-    );
-    this.section4Observer.observe(document.querySelector(".section-4"));
+    // this.section4Observer = new IntersectionObserver(
+    //   this.onSection4Intersection.bind(this)
+    // );
+    // this.section4Observer.observe(document.querySelector(".section-4"));
 
     this.initDebugGui();
   }
@@ -223,18 +223,18 @@ class Section3 extends Section {
   }
 
   // анимация появления 4 секции
-  onSection4Intersection() {
-    const poster = document.querySelector(".section-4");
-    const socials = document.querySelectorAll(".section-4 .social");
+  // onSection4Intersection() {
+  //   const poster = document.querySelector(".section-4");
+  //   const socials = document.querySelectorAll(".section-4 .social");
 
-    const elements = [poster, ...socials];
+  //   const elements = [poster, ...socials];
 
-    elements.forEach((el) => {
-      el.classList.remove("fade-in");
-      el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
-      el.classList.add("fade-in");
-    });
-  }
+  //   elements.forEach((el) => {
+  //     el.classList.remove("fade-in");
+  //     el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //     el.classList.add("fade-in");
+  //   });
+  // }
 }
 
 export default Section3;
