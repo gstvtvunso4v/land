@@ -209,7 +209,7 @@ class Section3 extends Section {
     const gamedev = document.querySelector(".gamedev");
     const elements = [left, right];
 
-    if (this.scrollTop > window.innerHeight) {
+    if (this.scrollTop > gamedev.offsetTop * 0.95) {
       elements.forEach((el) => {
         el.classList.add("fade-in");
       });

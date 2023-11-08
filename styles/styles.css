@@ -338,7 +338,7 @@ body {
 }
 
 .section-3 .canvas-sticky-container {
-  height: calc(100vh + 606px);
+  height: 100vh;
 }
 
 .section-3 .canvas-container {
@@ -429,7 +429,6 @@ body {
   display: block;
   width: 100%;
   margin-bottom: -560px;
-  margin-top: calc(812px - 100vh);
   position: relative;
 }
 

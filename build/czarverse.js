@@ -47230,42 +47230,40 @@ class Section3 extends Section {
   }
 
   // анимация появления who we are
-  onWhoweareIntersection() {
-    const left = document.querySelector(".background-text-left");
-    const right = document.querySelector(".background-text-right");
-    const gamedev = document.querySelector(".gamedev");
-    console.log(document.querySelector(".section-3").scrollTop);
+  //   onWhoweareIntersection() {
+  //     const left = document.querySelector(".background-text-left");
+  //     const right = document.querySelector(".background-text-right");
+  //     const gamedev = document.querySelector(".gamedev");
+  //     console.log(document.querySelector(".section-3").scrollTop);
 
-    const elements = [left, right];
+  //     const elements = [left, right];
 
-    elements.forEach((el) => {
-      el.classList.remove("fade-in");
-    });
-    gamedev.classList.remove("move-up");
+  //     elements.forEach((el) => {
+  //       el.classList.remove("fade-in");
+  //     });
+  //     gamedev.classList.remove("move-up");
 
-    if (
-      !document.querySelector(".section-3 .scene").classList.contains("hidden")
-    ) {
-      elements.forEach((el) => {
-        el.classList.remove("fade-in");
-        el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
-        el.classList.add("fade-in");
-      });
-      gamedev.classList.remove("move-up");
-      gamedev.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
-      gamedev.classList.add("move-up");
-    }
-  }
+  //     if (
+  //       !document.querySelector(".section-3 .scene").classList.contains("hidden")
+  //     ) {
+  //       elements.forEach((el) => {
+  //         el.classList.remove("fade-in");
+  //         el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //         el.classList.add("fade-in");
+  //       });
+  //       gamedev.classList.remove("move-up");
+  //       gamedev.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //       gamedev.classList.add("move-up");
+  //     }
+  //   }
 
   onWhoweareScroll() {
-    console.log("onWhoweareScroll " + this.scrollTop);
-
     const left = document.querySelector(".background-text-left");
     const right = document.querySelector(".background-text-right");
     const gamedev = document.querySelector(".gamedev");
     const elements = [left, right];
 
-    if (this.scrollTop > window.innerHeight) {
+    if (this.scrollTop > gamedev.offsetTop * 0.95) {
       elements.forEach((el) => {
         el.classList.add("fade-in");
       });

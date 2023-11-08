@@ -34,6 +34,20 @@
     margin-top: -100lvh;
     padding-bottom: 38px;
   }
+  .section-3 .canvas-sticky-container {
+    height: auto;
+  }
+  .section-3 .canvas-container {
+    position: relative;
+  }
+  .section-3 .background-texts {
+    height: 100svh;
+    position: relative;
+    top: auto;
+  }
+  .section-3 .gamedev {
+    transform: translate3d(0, -500px, 0);
+  }
   .section-4 {
     padding-bottom: 150px;
   }
@@ -79,6 +93,20 @@
   .section-2 .text-blocks-container {
     margin-top: -100lvh;
     padding-bottom: 38px;
+  }
+  .section-3 .canvas-sticky-container {
+    height: auto;
+  }
+  .section-3 .canvas-container {
+    position: relative;
+  }
+  .section-3 .background-texts {
+    height: auto;
+    position: relative;
+    top: auto;
+  }
+  .section-3 .gamedev {
+    transform: translate3d(0, 0, 0);
   }
   .section-4.fade-in {
     animation: none;
@@ -405,12 +433,38 @@
   }
   .section-3 .background-text.background-text-left {
     font-size: 22.4905660377358vw;
-    top: -27.1698113207547vw;
+    margin-top: -27.1698113207547vw;
   }
   .section-3 .background-text.background-text-right {
     margin-right: -5.6603773584906vw;
     font-size: 60.2641509433962vw;
-    top: -11.3207547169811vw;
+    margin-top: -11.3207547169811vw;
+  }
+  .section-3 .background-text.background-text-left.fade-in {
+    animation: whoweare-left-fade-in-tablet 750ms ease-in-out;
+    left: -64px;
+  }
+
+  .section-3 .background-text.background-text-right.fade-in {
+    animation: whoweare-right-fade-in-tablet 750ms ease-in-out;
+    right: -64px;
+  }
+}
+@keyframes whoweare-left-fade-in-tablet {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -64px;
+  }
+}
+
+@keyframes whoweare-right-fade-in-tablet {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -64px;
   }
 }
 @media (max-width: 767.98px) {
@@ -419,7 +473,7 @@
   }
   .section-3 .text-blocks-container {
     margin-bottom: 0;
-    margin-top: -100px;
+    margin-top: -200px;
     padding-top: 200px;
     overflow: hidden;
   }
@@ -436,14 +490,13 @@
     font-size: 21.6vw;
     left: auto;
     margin-left: 0;
-    top: 0;
+    margin-top: 0;
   }
   .section-3 .background-text.background-text-right {
     font-size: 57.8666666666667vw;
     right: auto;
     margin-right: -5.5vw;
     margin-top: 13.25vw;
-    top: 0;
   }
   .section-3 .gamedev {
     margin-bottom: 0;
