@@ -44,6 +44,7 @@ class MouseWheelSwitcher {
       if (event.deltaY < 0 && section3.scrollContainer.scrollTop === 0) {
         czarverse.onLeftArrowClick();
       }
+      czarverse.section3.scrollHandler(section3.scrollContainer.scrollTop);
     }
 
     this.lastScenesSwitchTime = Date.now();

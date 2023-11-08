@@ -337,6 +337,10 @@ body {
   overflow-y: scroll;
 }
 
+.section-3 .canvas-sticky-container {
+  height: calc(100vh + 606px);
+}
+
 .section-3 .canvas-container {
   position: sticky;
 }
@@ -344,8 +348,14 @@ body {
 .section-3 .long-scroll-container {
   height: auto;
 }
-.section-3 .text-blocks-container {
-  margin-top: 66vh;
+
+.section-3 .background-texts-sticky {
+  position: relative;
+}
+.section-3 .background-texts {
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
 .section-3 .background-text {
@@ -354,6 +364,7 @@ body {
   color: var(--richbrilliantlavender);
   display: block;
   position: absolute;
+  top: 50%;
   user-select: none;
   animation-delay: 450ms;
   animation-fill-mode: forwards;
@@ -362,7 +373,7 @@ body {
 .section-3 .background-text.background-text-left {
   left: 0;
   font-size: 298px;
-  top: -360px;
+  margin-top: -360px;
 }
 
 .section-3 .background-text.background-text-right {
@@ -370,32 +381,43 @@ body {
   margin-right: -75px;
   right: 0;
   font-size: 798.5px;
-  top: -150px;
+  margin-top: -150px;
 }
 
 .section-3 .background-text.background-text-left.fade-in {
   animation: whoweare-left-fade-in 750ms ease-in-out;
+  left: -100px;
 }
 
 .section-3 .background-text.background-text-right.fade-in {
   animation: whoweare-right-fade-in 750ms ease-in-out;
+  right: -100px;
 }
 
 @keyframes whoweare-left-fade-in {
   0% {
-    left: 13vw;
+    left: 0;
   }
   100% {
-    left: 0;
+    left: -100px;
   }
 }
 
 @keyframes whoweare-right-fade-in {
   0% {
-    right: 13vw;
+    right: 0;
   }
   100% {
-    right: 0;
+    right: -100px;
+  }
+}
+
+@keyframes move-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -500px, 0);
   }
 }
 
@@ -406,17 +428,27 @@ body {
 .section-3 .gamedev {
   display: block;
   width: 100%;
-  margin-bottom: -60px;
-  margin-top: 512px;
+  margin-bottom: -560px;
+  margin-top: calc(812px - 100vh);
   position: relative;
+}
+
+.section-3 .gamedev.move-up {
+  animation: move-up 750ms ease-in-out;
+  transform: translate3d(0, -500px, 0);
 }
 
 .section-3-photo {
   margin-top: 140px;
+  position: relative;
 }
 
+.section-3-text-1 {
+  position: relative;
+}
 .section-3-text-2 {
   margin-top: 24px;
+  position: relative;
 }
 /* X. Section #3: Team */
 
