@@ -216,27 +216,27 @@ body {
   position: relative;
   max-width: calc(540px + 45px + 540px);
 }
-.text-blocks-container > .text-block {
+.text-blocks-container .text-block {
   width: calc((100% - 45px) / 2);
 }
-.text-blocks-container > .text-block.right {
+.text-blocks-container .text-block.right {
   margin-left: auto;
 }
-.text-blocks-container > .text-block.center {
+.text-blocks-container .text-block.center {
   width: auto;
 }
-.text-blocks-container > .text-block > video,
+.text-blocks-container .text-block > video,
 .text-block-photo {
   margin-bottom: 48px;
   margin-top: 56px;
   max-width: 100%;
 }
 .text-block-text {
-  font-size: 21px;
+  font-size: 18px;
   font-weight: normal;
   font-style: normal;
-  line-height: 1.36;
-  padding-right: 50px;
+  line-height: 1.47;
+  padding-right: 60px;
 }
 .text-block-text > p {
   display: block;
@@ -267,11 +267,11 @@ body {
 }
 
 .section-darken {
-  bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  content: "";
+  height: 100vh;
   left: 0;
-  position: absolute;
+  margin-top: -100vh;
+  position: sticky;
   right: 0;
   top: 0;
 }
@@ -282,17 +282,18 @@ body {
 }
 .section-2 .text-blocks-container {
   margin-top: -100vh;
+  padding-bottom: calc(100vh + 107px); /* CEH9 */
 }
 
 .section-2 .dont-blink {
   display: block;
-  margin-top: 200px;
+  margin-top: 91px;
   margin-bottom: 234px;
   max-width: 462px;
 }
 
 .section-2 .text-1 {
-  margin-bottom: 365px;
+  margin-bottom: 384px;
 }
 
 .section-2 .supress {
@@ -366,35 +367,39 @@ body {
   position: absolute;
   top: 50%;
   user-select: none;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
+  /* animation-delay: 450ms;
+  animation-fill-mode: forwards; */
 }
 
 .section-3 .background-text.background-text-left {
   left: 0;
-  font-size: 298px;
+  font-size: 244.5px;
+  line-height: normal;
   margin-top: -360px;
+  transition: left 750ms ease-in-out;
 }
 
 .section-3 .background-text.background-text-right {
   text-align: right;
   margin-right: -75px;
   right: 0;
-  font-size: 798.5px;
-  margin-top: -150px;
+  font-size: 655px;
+  line-height: normal;
+  margin-top: -74px;
+  transition: right 750ms ease-in-out;
 }
 
 .section-3 .background-text.background-text-left.fade-in {
-  animation: whoweare-left-fade-in 750ms ease-in-out;
+  /* animation: whoweare-left-fade-in 750ms ease-in-out; */
   left: -100px;
 }
 
 .section-3 .background-text.background-text-right.fade-in {
-  animation: whoweare-right-fade-in 750ms ease-in-out;
+  /* animation: whoweare-right-fade-in 750ms ease-in-out; */
   right: -100px;
 }
 
-@keyframes whoweare-left-fade-in {
+/* @keyframes whoweare-left-fade-in {
   0% {
     left: 0;
   }
@@ -410,26 +415,27 @@ body {
   100% {
     right: -100px;
   }
-}
+} */
 
-@keyframes move-up {
+/* @keyframes move-up {
   0% {
     transform: translate3d(0, 0, 0);
   }
   100% {
     transform: translate3d(0, -500px, 0);
   }
-}
+} */
 
 .section-3 .gamedev {
   display: block;
   width: 100%;
   margin-bottom: -560px;
   position: relative;
+  transition: transform 500ms ease-in-out;
 }
 
 .section-3 .gamedev.move-up {
-  animation: move-up 750ms ease-in-out;
+  /* animation: move-up 750ms ease-in-out; */
   transform: translate3d(0, -500px, 0);
 }
 
@@ -442,7 +448,7 @@ body {
   position: relative;
 }
 .section-3-text-2 {
-  margin-top: 24px;
+  margin-top: 46px;
   position: relative;
 }
 /* X. Section #3: Team */
@@ -453,69 +459,63 @@ body {
 
 .throne {
   display: block;
+  margin-top: 400px;
 }
 
 .throne > img {
   display: block;
-  width: 100%;
+  margin: 0 auto;
+  width: 965px;
 }
 
 .socials {
-  background-color: white;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   bottom: 0;
-  left: 0;
-  padding-top: 40px;
-  position: absolute;
-  right: 0;
-}
-
-.socials::before {
-  background-image: url(../assets/img/footer-bg.png);
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 50% 100%;
-  bottom: calc(100% - 1px);
-  content: "";
-  height: 180px;
   left: 0;
   position: absolute;
   right: 0;
 }
 
 .socials .social {
-  color: black;
+  color: white;
   display: block;
   font-family: "Demon Letter";
   font-size: 60.5px;
-  margin: 0 60px 70px;
+  margin: 0 40px 135px;
+  padding: 0 32px;
   position: relative;
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 .socials .social:hover {
-  color: var(--fuchsiapink);
+  color: var(--turquoiseblue);
 }
 
 .socials .social-logo {
   display: block;
   height: 24px;
   position: absolute;
-  right: calc(100% + 4px);
-  top: -48px;
+  right: calc(100% - 28px);
+  top: -24px;
   width: auto;
+}
+.socials .follow {
+  padding-left: 64px;
+}
+.socials .follow .social-logo {
+  right: calc(100% - 60px);
 }
 
 .socials .social-logo > path {
-  fill: black;
+  fill: white;
   transition: fill 0.25s ease;
 }
 
 .socials .social:hover .social-logo > path {
-  fill: var(--fuchsiapink);
+  fill: var(--turquoiseblue);
 }
 
 .section-animation {

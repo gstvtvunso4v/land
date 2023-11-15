@@ -47112,6 +47112,8 @@ class Section3 extends Section {
     // tmp?
     this.cameraWiggle = null;
 
+    this.onWhoweareScrollBusy = false;
+
     window.addEventListener(
       "scroll",
       function () {
@@ -47263,16 +47265,32 @@ class Section3 extends Section {
     const gamedev = document.querySelector(".gamedev");
     const elements = [left, right];
 
-    if (this.scrollTop > gamedev.offsetTop * 0.95) {
-      elements.forEach((el) => {
-        el.classList.add("fade-in");
-      });
-      gamedev.classList.add("move-up");
-    } else {
-      elements.forEach((el) => {
-        el.classList.remove("fade-in");
-      });
-      gamedev.classList.remove("move-up");
+    if (!this.onWhoweareScrollBusy) {
+      if (this.scrollTop > gamedev.offsetTop * 0.75) {
+        if (!gamedev.classList.contains("move-up")) {
+          console.log("onWhoweareScroll apply", gamedev.offsetTop);
+          this.onWhoweareScrollBusy = true;
+          elements.forEach((el) => {
+            el.classList.add("fade-in");
+          });
+          gamedev.classList.add("move-up");
+          setTimeout(() => {
+            this.onWhoweareScrollBusy = false;
+          }, 250);
+        }
+      } else {
+        if (gamedev.classList.contains("move-up")) {
+          console.log("onWhoweareScroll destroy", gamedev.offsetTop);
+          this.onWhoweareScrollBusy = true;
+          elements.forEach((el) => {
+            el.classList.remove("fade-in");
+          });
+          gamedev.classList.remove("move-up");
+          setTimeout(() => {
+            this.onWhoweareScrollBusy = false;
+          }, 250);
+        }
+      }
     }
   }
 
