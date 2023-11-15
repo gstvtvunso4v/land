@@ -7,7 +7,7 @@ import {
   RenderPass,
   SMAAEffect,
 } from "postprocessing";
-import isMobile from 'is-mobile';
+import isMobile from "is-mobile";
 
 class Section3 extends Section {
   castShadow = ["Demons", "Candles"];
@@ -35,6 +35,9 @@ class Section3 extends Section {
     this.longScrollContainer = document.querySelector(
       ".section-3 .long-scroll-container"
     );
+    this.canvasStickyContainer = document.querySelector(
+      ".section-3 .canvas-sticky-container"
+    );
 
     this.init3D();
     this.scene.background = new Color(0xe98af9);
@@ -60,15 +63,25 @@ class Section3 extends Section {
     // tmp?
     this.cameraWiggle = null;
 
-    this.whoweareObserver = new IntersectionObserver(
-      this.onWhoweareIntersection.bind(this)
-    );
-    this.whoweareObserver.observe(document.querySelector(".background-text"));
+    this.longScrollContainer.addEventListener("scroll", function () {
+      console.log(document.scrollTop);
+    });
 
-    this.section4Observer = new IntersectionObserver(
-      this.onSection4Intersection.bind(this)
-    );
-    this.section4Observer.observe(document.querySelector(".section-4"));
+    this.scrollTop = 0;
+    this.scrollHandler = (scrollTop) => {
+      this.scrollTop = scrollTop;
+      this.onWhoweareScroll(this);
+    };
+
+    // this.whoweareObserver = new IntersectionObserver(
+    //   this.onWhoweareIntersection.bind(this)
+    // );
+    // this.whoweareObserver.observe(document.querySelector(".gamedev"));
+
+    // this.section4Observer = new IntersectionObserver(
+    //   this.onSection4Intersection.bind(this)
+    // );
+    // this.section4Observer.observe(document.querySelector(".section-4"));
 
     this.initDebugGui();
   }
@@ -129,7 +142,8 @@ class Section3 extends Section {
 
     if (isMobile()) {
       const section1Height = window.innerHeight;
-      const section2Height = this.czarverse.section2.longScrollContainer.scrollHeight;
+      const section2Height =
+        this.czarverse.section2.longScrollContainer.scrollHeight;
 
       // body scroll - section1 height - section2 height
       scrollTop = window.pageYOffset - section1Height - section2Height;
@@ -138,7 +152,7 @@ class Section3 extends Section {
     const height = this.longScrollContainer.scrollHeight;
     const heightWithoutCanvas = height - this.containerBounds.height;
 
-    let percent = scrollTop / heightWithoutCanvas;
+    let percent = scrollTop / this.canvasStickyContainer.scrollHeight;
     percent = Math.max(0, percent);
 
     return percent;
@@ -163,32 +177,64 @@ class Section3 extends Section {
   }
 
   // анимация появления who we are
-  onWhoweareIntersection() {
+  // onWhoweareIntersection() {
+  //   const left = document.querySelector(".background-text-left");
+  //   const right = document.querySelector(".background-text-right");
+  //   const gamedev = document.querySelector(".gamedev");
+
+  //   const elements = [left, right];
+
+  //   elements.forEach((el) => {
+  //     el.classList.remove("fade-in");
+  //   });
+  //   gamedev.classList.remove("move-up");
+
+  //   if (
+  //     !document.querySelector(".section-3 .scene").classList.contains("hidden")
+  //   ) {
+  //     elements.forEach((el) => {
+  //       el.classList.remove("fade-in");
+  //       el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //       el.classList.add("fade-in");
+  //     });
+  //     gamedev.classList.remove("move-up");
+  //     gamedev.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //     gamedev.classList.add("move-up");
+  //   }
+  // }
+
+  onWhoweareScroll() {
     const left = document.querySelector(".background-text-left");
     const right = document.querySelector(".background-text-right");
-
+    const gamedev = document.querySelector(".gamedev");
     const elements = [left, right];
 
-    elements.forEach((el) => {
-      el.classList.remove("fade-in");
-      el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
-      el.classList.add("fade-in");
-    });
+    if (this.scrollTop > gamedev.offsetTop * 0.95) {
+      elements.forEach((el) => {
+        el.classList.add("fade-in");
+      });
+      gamedev.classList.add("move-up");
+    } else {
+      elements.forEach((el) => {
+        el.classList.remove("fade-in");
+      });
+      gamedev.classList.remove("move-up");
+    }
   }
 
   // анимация появления 4 секции
-  onSection4Intersection() {
-    const poster = document.querySelector(".section-4");
-    const socials = document.querySelectorAll(".section-4 .social");
+  // onSection4Intersection() {
+  //   const poster = document.querySelector(".section-4");
+  //   const socials = document.querySelectorAll(".section-4 .social");
 
-    const elements = [poster, ...socials];
+  //   const elements = [poster, ...socials];
 
-    elements.forEach((el) => {
-      el.classList.remove("fade-in");
-      el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
-      el.classList.add("fade-in");
-    });
-  }
+  //   elements.forEach((el) => {
+  //     el.classList.remove("fade-in");
+  //     el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
+  //     el.classList.add("fade-in");
+  //   });
+  // }
 }
 
 export default Section3;

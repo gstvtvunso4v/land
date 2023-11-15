@@ -189,6 +189,7 @@ body {
   margin-top: 40px;
   padding: 0 20px;
   position: relative;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
   min-width: 218px;
@@ -220,6 +221,9 @@ body {
 }
 .text-blocks-container > .text-block.right {
   margin-left: auto;
+}
+.text-blocks-container > .text-block.center {
+  width: auto;
 }
 .text-blocks-container > .text-block > video,
 .text-block-photo {
@@ -262,7 +266,7 @@ body {
   position: relative;
 }
 
-.section-2 .canvas-container::after {
+.section-darken {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
   content: "";
@@ -311,6 +315,17 @@ body {
   display: block;
   max-width: 587px;
 }
+
+.section-2 .text-4 {
+  margin-top: 955px;
+  padding-bottom: 130px;
+}
+.section-2 .text-4 .button-wrapper {
+  text-align: center;
+}
+.section-2 .text-4 .button-wrapper > button {
+  margin-top: 0;
+}
 /* X. Section #2: About */
 
 /* Section #3: Team */
@@ -322,6 +337,10 @@ body {
   overflow-y: scroll;
 }
 
+.section-3 .canvas-sticky-container {
+  height: 100vh;
+}
+
 .section-3 .canvas-container {
   position: sticky;
 }
@@ -329,8 +348,14 @@ body {
 .section-3 .long-scroll-container {
   height: auto;
 }
-.section-3 .text-blocks-container {
-  margin-top: 66vh;
+
+.section-3 .background-texts-sticky {
+  position: relative;
+}
+.section-3 .background-texts {
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
 .section-3 .background-text {
@@ -339,6 +364,7 @@ body {
   color: var(--richbrilliantlavender);
   display: block;
   position: absolute;
+  top: 50%;
   user-select: none;
   animation-delay: 450ms;
   animation-fill-mode: forwards;
@@ -347,7 +373,7 @@ body {
 .section-3 .background-text.background-text-left {
   left: 0;
   font-size: 298px;
-  top: -360px;
+  margin-top: -360px;
 }
 
 .section-3 .background-text.background-text-right {
@@ -355,69 +381,86 @@ body {
   margin-right: -75px;
   right: 0;
   font-size: 798.5px;
-  top: -150px;
+  margin-top: -150px;
 }
 
 .section-3 .background-text.background-text-left.fade-in {
   animation: whoweare-left-fade-in 750ms ease-in-out;
+  left: -100px;
 }
 
 .section-3 .background-text.background-text-right.fade-in {
   animation: whoweare-right-fade-in 750ms ease-in-out;
+  right: -100px;
 }
 
 @keyframes whoweare-left-fade-in {
   0% {
-    left: 13vw;
+    left: 0;
   }
   100% {
-    left: 0;
+    left: -100px;
   }
 }
 
 @keyframes whoweare-right-fade-in {
   0% {
-    right: 13vw;
+    right: 0;
   }
   100% {
-    right: 0;
+    right: -100px;
   }
 }
 
-.section-3 .text-blocks-container {
-  margin-bottom: 400px;
+@keyframes move-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -500px, 0);
+  }
 }
 
 .section-3 .gamedev {
   display: block;
   width: 100%;
-  margin-bottom: -60px;
-  margin-top: 512px;
+  margin-bottom: -560px;
   position: relative;
+}
+
+.section-3 .gamedev.move-up {
+  animation: move-up 750ms ease-in-out;
+  transform: translate3d(0, -500px, 0);
 }
 
 .section-3-photo {
   margin-top: 140px;
+  position: relative;
 }
 
+.section-3-text-1 {
+  position: relative;
+}
 .section-3-text-2 {
   margin-top: 24px;
+  position: relative;
 }
 /* X. Section #3: Team */
 
 .section-4 {
   position: relative;
-  width: 100vw;
-  height: 100vh;
 }
 
-.section-4 .poster {
-  display: none;
-  width: 100vw;
-  height: 100vh;
+.throne {
+  display: block;
 }
 
-.section-4 .socials {
+.throne > img {
+  display: block;
+  width: 100%;
+}
+
+.socials {
   background-color: white;
   display: flex;
   align-items: flex-end;
@@ -429,7 +472,7 @@ body {
   right: 0;
 }
 
-.section-4 .socials::before {
+.socials::before {
   background-image: url(../assets/img/footer-bg.png);
   background-repeat: repeat-x;
   background-size: auto 100%;
@@ -442,7 +485,7 @@ body {
   right: 0;
 }
 
-.section-4 .socials .social {
+.socials .social {
   color: black;
   display: block;
   font-family: "Demon Letter";
@@ -451,15 +494,13 @@ body {
   position: relative;
   text-decoration: none;
   transition: color 0.25s ease;
-
-  opacity: 0;
 }
 
-.section-4 .socials .social:hover {
+.socials .social:hover {
   color: var(--fuchsiapink);
 }
 
-.section-4 .socials .social-logo {
+.socials .social-logo {
   display: block;
   height: 24px;
   position: absolute;
@@ -468,34 +509,13 @@ body {
   width: auto;
 }
 
-.section-4 .socials .social-logo > path {
+.socials .social-logo > path {
   fill: black;
   transition: fill 0.25s ease;
 }
 
-.section-4 .socials .social:hover .social-logo > path {
+.socials .social:hover .social-logo > path {
   fill: var(--fuchsiapink);
-}
-
-.section-4 .buy-button {
-  position: absolute;
-  bottom: calc(30px + 70px);
-  left: 50%;
-  transform: translateX(-50%);
-  margin: auto;
-  padding: 16px;
-  padding-bottom: 6px;
-  width: 310px;
-  height: 38px;
-  text-align: center;
-  display: block;
-  color: black;
-  background-color: var(--magicmint);
-  font-size: 25pt;
-  font-family: "ST Kooperativ", sans-serif;
-  text-decoration: none;
-
-  opacity: 0;
 }
 
 .section-animation {
@@ -560,65 +580,6 @@ body {
 
   100% {
     transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4.fade-in {
-  animation: section4-poster-fade-in 1500ms ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-poster-fade-in {
-  0% {
-    background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 1);
-    background-attachment: fixed;
-    background-size: auto 100lvh;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-
-  100% {
-    background: url("../assets/img/section-4.jpg") rgba(233, 138, 249, 0);
-    background-attachment: fixed;
-    background-size: auto 100lvh;
-    background-position: center center;
-    background-blend-mode: lighten;
-  }
-}
-
-.section-4 .social.fade-in {
-  animation: section4-socials-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-socials-fade-in {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.section-4 .buy-button.fade-in {
-  animation: section4-button-fade-in 750ms ease-in-out;
-  animation-delay: 450ms;
-  animation-fill-mode: forwards;
-}
-
-@keyframes section4-button-fade-in {
-  0% {
-    transform: translateY(100px) translateX(-50%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0) translateX(-50%);
     opacity: 1;
   }
 }
