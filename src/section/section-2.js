@@ -77,75 +77,17 @@ class Section2 extends Section {
     this.composer.addPass(new EffectPass(this.camera, this.effects.colorDepth));
     this.composer.addPass(new EffectPass(this.camera, this.effects.hueSaturation));
     this.composer.addPass(new EffectPass(this.camera, this.effects.smaa));
-
-    this.initDebugGui();
-  }
-
-  initDebugGui() {
-    const props = {
-      pixelation: 10,
-
-      glitchChromaticAberrationOffsetMin: 0,
-      glitchChromaticAberrationOffsetMax: 0,
-
-      glitchDelayMin: 0.4,
-      glitchDelayMax: 3,
-
-      glitchDurationMin: 0.1,
-      glitchDurationMax: 0.6,
-
-      glitchStrengthMin: 0.1,
-      glitchStrengthMax: 0.4,
-
-      glitchColumns: 0.04,
-      glitchRatio: 0.3,
-
-      chromaOffsetX: 0,
-      chromaOffsetY: 0,
-
-      chromaRadialModulation: false,
-      chromaModulationOffset: 0,
-
-      colorDepthBits: 32,
-
-      hue2: 0,
-      saturation2: 0
-    };
-
-    // window.gui was init in section-1.js
-    gui.add(props, 'pixelation', 0, 100, 1).onChange(value => this.effects.pixelation.granularity = value);
-
-    // gui.add(props, 'glitchChromaticAberrationOffsetMin', 0, 100, 0.0001).onChange(value => this.effects.glitch.chromaticAberrationOffset.x = value);
-
-    gui.add(props, 'glitchDelayMin', 0, 10, 0.001).onChange(value => this.effects.glitch.delay.x = value);
-    gui.add(props, 'glitchDelayMax', 0, 10, 0.001).onChange(value => this.effects.glitch.delay.y = value);
-
-    gui.add(props, 'glitchDurationMin', 0, 10, 0.001).onChange(value => this.effects.glitch.duration.y = value);
-    gui.add(props, 'glitchDurationMax', 0, 10, 0.001).onChange(value => this.effects.glitch.duration.y = value);
-
-    gui.add(props, 'glitchStrengthMin', 0, 10, 0.001).onChange(value => this.effects.glitch.strength.y = value);
-    gui.add(props, 'glitchStrengthMax', 0, 10, 0.001).onChange(value => this.effects.glitch.strength.y = value);
-
-    gui.add(props, 'glitchColumns', 0, 5, 0.00001).onChange(value => this.effects.glitch.columns = value);
-    gui.add(props, 'glitchRatio', 0, 10, 0.001).onChange(value => this.effects.glitch.ratio = value);
-
-    gui.add(props, 'chromaOffsetX', 0, 0.3, 0.00001).onChange(value => this.effects.chroma.offset.x = value);
-    gui.add(props, 'chromaOffsetY', 0, 0.3, 0.00001).onChange(value => this.effects.chroma.offset.y = value);
-
-    gui.add(props, 'chromaRadialModulation').onChange(value => this.effects.chroma.radialModulation = value);
-    gui.add(props, 'chromaModulationOffset', 0, 1, 0.00001).onChange(value => this.effects.chroma.modulationOffset = value);
-
-    gui.add(props, 'colorDepthBits', 0, 32, 0.1).onChange(value => this.effects.colorDepth.bitDepth = value);
-
-    gui.add(props, 'hue2', 0, Math.PI * 2, 0.0001).onChange(value => this.effects.hueSaturation.hue = value);
-    gui.add(props, 'saturation2', -1, 1, 0.0001).onChange(value => this.effects.hueSaturation.saturation = value);
   }
 
   initModel() {
     this.model = this.czarverse.assets.gltfs['second'];
     this.scene.add(this.model.scene);
 
-    this.camera = this.model.cameras[0];
+    if (isMobile()) {
+      this.camera = this.model.cameras[1];
+    } else {
+      this.camera = this.model.cameras[0];
+    }
 
     console.log(this.model.animations);
 
