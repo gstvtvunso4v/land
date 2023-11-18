@@ -10,6 +10,9 @@ import {
 import isMobile from "is-mobile";
 
 class Section3 extends Section {
+  animationInertia = 0.04;
+  animationInertiaBack = 0.04 * 2;
+  
   castShadow = ["Demons", "Candles"];
 
   receiveShadow = ["Ground", "Candles"];
@@ -90,6 +93,8 @@ class Section3 extends Section {
 
   initDebugGui() {
     const props = {
+      sectionAnimationInertia3: 0.04,
+      sectionAnimationInertiaBack3: 0.04 * 2,
       hue3: 0,
       saturation3: 0,
     };
@@ -101,6 +106,9 @@ class Section3 extends Section {
     gui
       .add(props, "saturation3", -1, 1, 0.0001)
       .onChange((value) => (this.effects.hueSaturation.saturation = value));
+
+    gui.add(props, 'sectionAnimationInertia3', 0, 50, 0.000001).onChange(value => this.animationInertia = value);
+    // gui.add(props, 'sectionAnimationInertiaBack3', 0, 0.1, 0.000001).onChange(value => this.animationInertiaBack = value);
   }
 
   // это код от второй секции, его надо будет поменять
@@ -108,11 +116,15 @@ class Section3 extends Section {
     this.model = this.czarverse.assets.gltfs["third"];
     this.scene.add(this.model.scene);
 
-    this.camera = this.model.cameras[0];
+    if (isMobile()) {
+      this.camera = this.model.cameras[1];
+    } else {
+      this.camera = this.model.cameras[0];
+    }
 
     this.model.animations.forEach((a) => {
       // idle анимации
-      if (a.name === "Rotation_Idle" || a.name === "Demons_animation.002") {
+      if (a.name === "Rotation_Idle" || a.name === "Demons_action") {
         const action = this.animationMixer.clipAction(a);
         action.loop = LoopRepeat;
         action.play();
@@ -161,7 +173,7 @@ class Section3 extends Section {
   }
 
   getInertia(delta) {
-    let inertia = 1.5 * delta;
+    let inertia = this.animationInertia * delta;
 
     if (this.noInertia) {
       inertia = 0.9;
