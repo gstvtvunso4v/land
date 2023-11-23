@@ -45068,6 +45068,11 @@ class Section2 extends Section {
     this.longScrollContainer = document.querySelector(
       ".section-2 .long-scroll-container"
     );
+    this.backArrow = document.querySelector(".section-2 .back-arrow");
+    this.backArrow.addEventListener(
+      "click",
+      this.backArrowClickHandler.bind(this)
+    );
 
     this.init3D();
 
@@ -45255,6 +45260,12 @@ class Section2 extends Section {
     this.actionsToAnimate.forEach((action) => {
       action.time = action.getClip().duration * this.animationTime;
     });
+  }
+
+  backArrowClickHandler() {
+    for (let i = 0; i <= 2; i++) {
+      this.czarverse.onLeftArrowClick(true);
+    }
   }
 }
 
@@ -46985,7 +46996,9 @@ class SceneSwitcher {
     if (
       this.czarverse.currentSceneIndex > 2 &&
       y === 0 &&
-      !this.blockTopScroll
+      !this.blockTopScroll &&
+      window.innerWidth >= 768 &&
+      !window.matchMedia("(pointer: coarse)").matches
     ) {
       // this.czarverse.onMenuItemClick(0);
       // this.czarverse.onLeftArrowClick(true);
@@ -47000,20 +47013,23 @@ class SceneSwitcher {
   }
 
   initTouch() {
-    const { czarverse } = this;
-
-    const section1Element = document.querySelector(".section-1");
-    const section1Region = zingtouch.Region(section1Element, true, true);
-
-    section1Region.bind(section1Element, "swipe", (event) => {
-      const directionInDegrees = event.detail.data[0].currentDirection;
-
-      if (directionInDegrees >= 0 && directionInDegrees <= 180) {
-        czarverse.onRightArrowClick();
-      } else {
-        czarverse.onLeftArrowClick();
-      }
-    });
+    // const { czarverse } = this;
+    // const section1Element = document.querySelector(".section-1");
+    // const section1Region = zingtouch.Region(section1Element, true, true);
+    // section1Region.bind(section1Element, "tap", (event) => {
+    //   console.log(event);
+    //   if (czarverse.leftArrow.contains(event.target)) {
+    //     console.log("LEFT");
+    //   }
+    // });
+    // section1Region.bind(section1Element, "swipe", (event) => {
+    //   const directionInDegrees = event.detail.data[0].currentDirection;
+    //   if (directionInDegrees >= 0 && directionInDegrees <= 180) {
+    //     czarverse.onRightArrowClick();
+    //   } else {
+    //     czarverse.onLeftArrowClick();
+    //   }
+    // });
   }
 
   onWheel(event) {
@@ -47051,7 +47067,7 @@ class SceneSwitcher {
       if (event.deltaY < 0 && section3.scrollContainer.scrollTop === 0) {
         czarverse.onLeftArrowClick();
       }
-      czarverse.section3.scrollHandler(section3.scrollContainer.scrollTop);
+      //czarverse.section3.scrollHandler(section3.scrollContainer.scrollTop);
     }
 
     this.lastScenesSwitchTime = Date.now();
@@ -47086,6 +47102,12 @@ class Section3 extends Section {
     );
     this.canvasStickyContainer = document.querySelector(
       ".section-3 .canvas-sticky-container"
+    );
+
+    this.backArrow = document.querySelector(".section-3 .back-arrow");
+    this.backArrow.addEventListener(
+      "click",
+      this.backArrowClickHandler.bind(this)
     );
 
     this.init3D();
@@ -47292,6 +47314,10 @@ class Section3 extends Section {
         }
       }
     }
+  }
+
+  backArrowClickHandler() {
+    this.czarverse.onLeftArrowClick(true);
   }
 
   // анимация появления 4 секции
@@ -47532,6 +47558,7 @@ class Czarverse {
   }
 
   onArrowClick(instant = false) {
+    console.log("inside onArrowClick");
     const scenesElements = document.querySelectorAll(".scene");
 
     this.sceneSwitcher.blockTopScroll = true;
@@ -47591,14 +47618,25 @@ class Czarverse {
 
     // если нужно, скроллим к нужной секции с фейдом
     if (section !== this.currentSection && this.currentSection) {
-      this.scrollToSection(
-        section,
-        section.backgroundColor,
-        this.currentSection,
-        instant
-      );
+      if (
+        window.innerWidth < 768 ||
+        window.matchMedia("(pointer: coarse)").matches
+      ) {
+        this.switchScreensMobile(
+          this.currentSection.scrollContainer,
+          section.scrollContainer
+        );
+        this.currentSection = section;
+      } else {
+        this.scrollToSection(
+          section,
+          section.backgroundColor,
+          this.currentSection,
+          instant
+        );
 
-      this.currentSection = section;
+        this.currentSection = section;
+      }
     } else {
       this.currentSection = section;
 
@@ -47688,6 +47726,40 @@ class Czarverse {
     el.classList.remove(animationClassName);
     el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
     el.classList.add(animationClassName);
+  }
+
+  switchScreensMobile(previousScene, currentScene) {
+    console.log({ previousScene, currentScene });
+    if (
+      previousScene !== undefined &&
+      currentScene !== undefined &&
+      previousScene !== currentScene
+    ) {
+      document.body.style.overflow = "hidden";
+
+      currentScene.scrollTo({ top: 0 });
+      currentScene.style.position = "fixed";
+      currentScene.style.top = 0;
+      currentScene.style.zIndex = 1;
+
+      function finishSwitchingScreen() {
+        console.log("transitionend");
+        previousScene.classList.remove("deviceVisible");
+        this.removeEventListener("transitionend", finishSwitchingScreen);
+        this.style.position = "";
+        this.style.top = "";
+        this.style.zIndex = "";
+        if (this.classList.contains("section-1")) {
+          document.body.style.overflow = "";
+        } else {
+          window.scrollTo({ top: 0 });
+          document.body.style.overflow = "unset";
+        }
+      }
+
+      currentScene.addEventListener("transitionend", finishSwitchingScreen);
+      currentScene.classList.add("deviceVisible");
+    }
   }
 }
 

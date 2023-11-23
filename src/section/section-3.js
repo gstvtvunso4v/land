@@ -42,6 +42,12 @@ class Section3 extends Section {
       ".section-3 .canvas-sticky-container"
     );
 
+    this.backArrow = document.querySelector(".section-3 .back-arrow");
+    this.backArrow.addEventListener(
+      "click",
+      this.backArrowClickHandler.bind(this)
+    );
+
     this.init3D();
     this.scene.background = new Color(0xe98af9);
 
@@ -267,6 +273,10 @@ class Section3 extends Section {
   //     el.classList.add("fade-in");
   //   });
   // }
+
+  backArrowClickHandler() {
+    this.czarverse.onLeftArrowClick(true);
+  }
 }
 
 export default Section3;

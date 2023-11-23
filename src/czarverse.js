@@ -151,7 +151,7 @@ class Czarverse {
   onMenuItemClick(sectionIndex) {
     let targetSceneIndex;
 
-    console.log(sectionIndex)
+    console.log(sectionIndex);
 
     switch (sectionIndex) {
       case 0:
@@ -286,14 +286,25 @@ class Czarverse {
 
     // если нужно, скроллим к нужной секции с фейдом
     if (section !== this.currentSection && this.currentSection) {
-      this.scrollToSection(
-        section,
-        section.backgroundColor,
-        this.currentSection,
-        instant
-      );
+      if (
+        window.innerWidth < 768 ||
+        window.matchMedia("(pointer: coarse)").matches
+      ) {
+        this.switchScreensMobile(
+          this.currentSection.scrollContainer,
+          section.scrollContainer
+        );
+        this.currentSection = section;
+      } else {
+        this.scrollToSection(
+          section,
+          section.backgroundColor,
+          this.currentSection,
+          instant
+        );
 
-      this.currentSection = section;
+        this.currentSection = section;
+      }
     } else {
       this.currentSection = section;
 
@@ -383,6 +394,35 @@ class Czarverse {
     el.classList.remove(animationClassName);
     el.offsetHeight; // trigger reflow to restart animation: https://stackoverflow.com/a/45036752
     el.classList.add(animationClassName);
+  }
+
+  switchScreensMobile(previousScene, currentScene) {
+    console.log({ previousScene, currentScene });
+    if (previousScene !== undefined && currentScene !== undefined) {
+      document.body.style.overflow = "hidden";
+
+      currentScene.scrollTo({ top: 0 });
+      currentScene.style.position = "fixed";
+      currentScene.style.top = 0;
+      currentScene.style.zIndex = 1;
+
+      function finishSwitchingScreen() {
+        console.log("transitionend");
+        previousScene.classList.remove("deviceVisible");
+        this.removeEventListener("transitionend", finishSwitchingScreen);
+        this.style.position = "";
+        this.style.top = "";
+        this.style.zIndex = "";
+        if (this.classList.contains("section-1")) {
+          document.body.style.overflow = "";
+        } else {
+          document.body.style.overflow = "unset";
+        }
+      }
+
+      currentScene.addEventListener("transitionend", finishSwitchingScreen);
+      currentScene.classList.add("deviceVisible");
+    }
   }
 }
 

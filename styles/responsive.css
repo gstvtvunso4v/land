@@ -1,11 +1,8 @@
 /* 100vh fix */
 @media (pointer: coarse) {
-  body {
+  /* body {
     overflow: unset;
-  }
-  .arrow {
-    display: none !important;
-  }
+  } */
   .scroll-container,
   .canvas-container,
   .section-animation {
@@ -52,14 +49,45 @@
   .section-3 .gamedev {
     transform: translate3d(0, -250px, 0);
   }
+
+  .scroll-container {
+    position: fixed;
+    top: -1000000px;
+    opacity: 0;
+    transition: opacity 1s ease;
+    width: 100%;
+  }
+  .scroll-container.deviceVisible {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+  video {
+    pointer-events: none !important;
+  }
+  .section-animation {
+    display: none;
+  }
+  .back-arrow {
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 66px;
+    width: 40px;
+    z-index: 1;
+  }
+  .back-arrow > svg {
+    display: block;
+    width: 100%;
+  }
+  .back-arrow > svg > polygon {
+    fill: #f6cdff;
+  }
 }
 @media (max-width: 767.98px) {
-  body {
+  /* body {
     overflow: unset;
-  }
-  .arrow {
-    display: none !important;
-  }
+  } */
   .scroll-container,
   .canvas-container,
   .section-animation {
@@ -106,6 +134,41 @@
   .section-3 .gamedev {
     transform: translate3d(0, 0, 0);
   }
+  .scroll-container {
+    position: fixed;
+    top: -1000000px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .scroll-container.deviceVisible {
+    position: relative;
+    top: 0;
+    opacity: 1;
+  }
+  video {
+    pointer-events: none !important;
+  }
+  .section-animation {
+    display: none;
+  }
+  .back-arrow {
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 30px;
+    width: 40px;
+    z-index: 1;
+  }
+  .back-arrow > svg {
+    display: block;
+    width: 100%;
+  }
+  .back-arrow > svg > polygon {
+    fill: #f6cdff;
+  }
+  .lil-gui {
+    opacity: 0.5;
+  }
 }
 
 /* Menu */
@@ -129,7 +192,7 @@
     right: 32px;
     top: 25px;
     width: 36px;
-    z-index: 1;
+    z-index: 2;
   }
   .menu-close {
     aspect-ratio: 1;
@@ -157,7 +220,6 @@
     left: 0;
     transform: translate3d(0, -100%, 0);
     transition: transform 0.25s ease-in;
-    z-index: 2;
   }
   .menu.open {
     transform: translate3d(0, 0, 0);
@@ -226,11 +288,11 @@
   }
 
   .scene.go-up {
-    animation: scene-go-up-device 0.75s ease-in-out;
+    animation: scene-go-up-device 0.5s ease-in-out;
   }
 
   .scene.go-down {
-    animation: scene-go-down-device 0.75s ease-out;
+    animation: scene-go-down-device 0.5s ease-out;
   }
 
   .section-1 > .canvas-container::before {
@@ -383,12 +445,8 @@
   }
 }
 @media (max-width: 1024px) {
-  .section-2 .bottom-button {
-    bottom: 27px;
+  .section-2 .back-arrow {
     display: block;
-    left: 0;
-    position: absolute;
-    width: 100%;
   }
 }
 @media (max-width: 767.98px) {
@@ -416,6 +474,9 @@
   .section-2 .text-4 {
     margin-top: 520px;
     padding-bottom: 27px;
+  }
+  .section-2 .bottom-button {
+    bottom: 27px;
   }
 }
 /* X. About Screen */
@@ -469,19 +530,6 @@
 @media (max-width: 1024px) {
   .section-3 .back-arrow {
     display: block;
-    left: 50%;
-    margin-left: -20px;
-    position: absolute;
-    top: 66px;
-    width: 40px;
-    z-index: 1;
-  }
-  .section-3 .back-arrow > svg {
-    display: block;
-    width: 100%;
-  }
-  .section-3 .back-arrow > svg > polygon {
-    fill: #f6cdff;
   }
   .section-3 .whoweare {
     max-width: calc(50% - 16px);

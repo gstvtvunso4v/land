@@ -1,18 +1,22 @@
-import GUI from 'lil-gui'; // tmp
-import Section from './section.js';
+import GUI from "lil-gui"; // tmp
+import Section from "./section.js";
 import {
-  BloomEffect, ChromaticAberrationEffect, ColorDepthEffect,
+  BloomEffect,
+  ChromaticAberrationEffect,
+  ColorDepthEffect,
   EffectComposer,
   EffectPass,
-  GlitchEffect, HueSaturationEffect,
+  GlitchEffect,
+  HueSaturationEffect,
   NoiseEffect,
   PixelationEffect,
-  RenderPass, SMAAEffect
-} from 'postprocessing';
-import { LoopOnce, LoopRepeat, Vector2 } from 'three';
-import CameraWiggle2 from '../core/camera-wiggle2.js';
-import lerp from '../utils/lerp.js';
-import isMobile from 'is-mobile';
+  RenderPass,
+  SMAAEffect,
+} from "postprocessing";
+import { LoopOnce, LoopRepeat, Vector2 } from "three";
+import CameraWiggle2 from "../core/camera-wiggle2.js";
+import lerp from "../utils/lerp.js";
+import isMobile from "is-mobile";
 
 class Section2 extends Section {
   effects = {
@@ -22,22 +26,29 @@ class Section2 extends Section {
     glitch: null,
     chroma: null,
     colorDepth: null,
-    hueSaturation: null
+    hueSaturation: null,
   };
 
-  backgroundColor = '#13071d';
+  backgroundColor = "#13071d";
 
   constructor(czarverse) {
     super(
       czarverse,
-      document.querySelector('.section-2 .canvas-container'),
-      document.querySelector('.section-2')
+      document.querySelector(".section-2 .canvas-container"),
+      document.querySelector(".section-2")
     );
 
     this.czarverse = czarverse;
 
     // просто длинный элемент
-    this.longScrollContainer = document.querySelector('.section-2 .long-scroll-container');
+    this.longScrollContainer = document.querySelector(
+      ".section-2 .long-scroll-container"
+    );
+    this.backArrow = document.querySelector(".section-2 .back-arrow");
+    this.backArrow.addEventListener(
+      "click",
+      this.backArrowClickHandler.bind(this)
+    );
 
     this.init3D();
 
@@ -45,7 +56,7 @@ class Section2 extends Section {
 
     this.effects.smaa = new SMAAEffect();
     this.effects.noise = new NoiseEffect({
-      premultiply: true
+      premultiply: true,
     });
     this.effects.pixelation = new PixelationEffect(10);
     this.effects.glitch = new GlitchEffect({
@@ -54,18 +65,16 @@ class Section2 extends Section {
       strength: new Vector2(0.1, 0.4),
       columns: 0.04,
       ratio: 0.3,
-      chromaticAberrationOffset: new Vector2(0, 0)
+      chromaticAberrationOffset: new Vector2(0, 0),
     });
-    this.effects.chroma = new ChromaticAberrationEffect({
-
-    });
+    this.effects.chroma = new ChromaticAberrationEffect({});
     this.effects.colorDepth = new ColorDepthEffect({
-      bits: 32
+      bits: 32,
     });
 
     this.effects.hueSaturation = new HueSaturationEffect({
       hue: 0,
-      saturation: 0
+      saturation: 0,
     });
 
     this.composer = new EffectComposer(this.renderer);
@@ -75,12 +84,14 @@ class Section2 extends Section {
     this.composer.addPass(new EffectPass(this.camera, this.effects.glitch));
     this.composer.addPass(new EffectPass(this.camera, this.effects.chroma));
     this.composer.addPass(new EffectPass(this.camera, this.effects.colorDepth));
-    this.composer.addPass(new EffectPass(this.camera, this.effects.hueSaturation));
+    this.composer.addPass(
+      new EffectPass(this.camera, this.effects.hueSaturation)
+    );
     this.composer.addPass(new EffectPass(this.camera, this.effects.smaa));
   }
 
   initModel() {
-    this.model = this.czarverse.assets.gltfs['second'];
+    this.model = this.czarverse.assets.gltfs["second"];
     this.scene.add(this.model.scene);
 
     if (isMobile()) {
@@ -92,7 +103,7 @@ class Section2 extends Section {
     console.log(this.model.animations);
 
     // останавливаем все анимации и записываем их список тех, что будут воспроизводится
-    this.model.animations.forEach(animation => {
+    this.model.animations.forEach((animation) => {
       const action = this.animationMixer.clipAction(animation);
       action.play().paused = true;
       this.actionsToAnimate.push(action);
@@ -132,9 +143,15 @@ class Section2 extends Section {
   updateActions() {
     this.animationTarget = this.getScrollPercent();
 
-    this.actionsToAnimate.forEach(action => {
+    this.actionsToAnimate.forEach((action) => {
       action.time = action.getClip().duration * this.animationTime;
     });
+  }
+
+  backArrowClickHandler() {
+    for (let i = 0; i <= 2; i++) {
+      this.czarverse.onLeftArrowClick(true);
+    }
   }
 }
 

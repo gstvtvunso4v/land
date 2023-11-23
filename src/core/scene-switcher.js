@@ -1,5 +1,5 @@
-import isMobile from 'is-mobile';
-import ZingTouch from 'zingtouch';
+import isMobile from "is-mobile";
+//import ZingTouch from "zingtouch";
 
 class SceneSwitcher {
   blockTopScroll = false;
@@ -66,7 +66,13 @@ class SceneSwitcher {
 
     // если мы доскроллили обратно на самый верх, переключаем нас в самое начало
     // 3 и 4 сцены в 2 и 3 секциях
-    if (this.czarverse.currentSceneIndex > 2 && y === 0 && !this.blockTopScroll) {
+    if (
+      this.czarverse.currentSceneIndex > 2 &&
+      y === 0 &&
+      !this.blockTopScroll &&
+      window.innerWidth >= 768 &&
+      !window.matchMedia("(pointer: coarse)").matches
+    ) {
       // this.czarverse.onMenuItemClick(0);
       // this.czarverse.onLeftArrowClick(true);
       // this.czarverse.onLeftArrowClick(true); // до 2 сцены
@@ -80,21 +86,18 @@ class SceneSwitcher {
   }
 
   initTouch() {
-    const { czarverse } = this;
-    const { section1, section2, section3 } = czarverse;
-
-    const section1Element = document.querySelector('.section-1');
-    const section1Region = ZingTouch.Region(section1Element, true, true);
-
-    section1Region.bind(section1Element, 'swipe', (event) => {
-      const directionInDegrees = event.detail.data[0].currentDirection;
-
-      if (directionInDegrees >= 0 && directionInDegrees <= 180) {
-        czarverse.onRightArrowClick();
-      } else {
-        czarverse.onLeftArrowClick();
-      }
-    });
+    // const { czarverse } = this;
+    // const { section1, section2, section3 } = czarverse;
+    // const section1Element = document.querySelector(".section-1");
+    // const section1Region = ZingTouch.Region(section1Element, true, true);
+    // section1Region.bind(section1Element, "swipe", (event) => {
+    //   const directionInDegrees = event.detail.data[0].currentDirection;
+    //   if (directionInDegrees >= 0 && directionInDegrees <= 180) {
+    //     czarverse.onRightArrowClick();
+    //   } else {
+    //     czarverse.onLeftArrowClick();
+    //   }
+    // });
   }
 
   onWheel(event) {

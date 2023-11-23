@@ -53,7 +53,7 @@
       <img src="./assets/img/hamburger.svg" alt="Open Menu" title="Open Menu" />
     </div>
 
-    <div class="scroll-container section-1">
+    <div class="scroll-container section-1 deviceVisible">
       <div
         class="arrow arrow-left hidden"
         onclick="window.czarverse.onLeftArrowClick();"
@@ -105,6 +105,13 @@
     </div>
 
     <div class="scroll-container section-2">
+      <a href="javascript:void(0)" class="back-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 31.64">
+          <polygon
+            points="25 0 0 24.72 7 31.64 24.96 13.88 43 31.64 50 24.72 25 0"
+          />
+        </svg>
+      </a>
       <div class="scene fake-scene"></div>
       <!-- fake scene for scroll -->
 
@@ -189,7 +196,12 @@
 
           <div class="bottom-button">
             <div class="button-wrapper">
-              <a href="javascript:void(0)" class="button">?????</a>
+              <a
+                href="javascript:void(0)"
+                class="button js-go-to-three"
+                onclick="window.czarverse.onRightArrowClick();"
+                >?????</a
+              >
             </div>
           </div>
         </div>
