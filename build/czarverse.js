@@ -47112,21 +47112,21 @@ class Section3 extends Section {
     // tmp?
     this.cameraWiggle = null;
 
-    this.onWhoweareScrollBusy = false;
+    // this.onWhoweareScrollBusy = false;
 
-    window.addEventListener(
-      "scroll",
-      function () {
-        console.log(document.querySelector(".section-3").scrollTop);
-      },
-      false
-    );
+    // window.addEventListener(
+    //   "scroll",
+    //   function () {
+    //     console.log(document.querySelector(".section-3").scrollTop);
+    //   },
+    //   false
+    // );
 
-    this.scrollTop = 0;
-    this.scrollHandler = (scrollTop) => {
-      this.scrollTop = scrollTop;
-      this.onWhoweareScroll(this);
-    };
+    // this.scrollTop = 0;
+    // this.scrollHandler = (scrollTop) => {
+    //   this.scrollTop = scrollTop;
+    //   this.onWhoweareScroll(this);
+    // };
 
     // this.whoweareObserver = new IntersectionObserver(
     //   this.onWhoweareIntersection.bind(this)

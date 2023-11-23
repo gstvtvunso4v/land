@@ -340,6 +340,10 @@ body {
   overflow-y: scroll;
 }
 
+.section-3 .back-arrow {
+  display: none;
+}
+
 .section-3 .canvas-sticky-container {
   height: 100vh;
 }
@@ -352,16 +356,7 @@ body {
   height: auto;
 }
 
-.section-3 .background-texts-sticky {
-  position: relative;
-}
-.section-3 .background-texts {
-  height: 100vh;
-  position: sticky;
-  top: 0;
-}
-
-.section-3 .background-text {
+/* .section-3 .background-text {
   font-family: "Demon Letter";
   width: 675px;
   color: var(--richbrilliantlavender);
@@ -369,8 +364,8 @@ body {
   position: absolute;
   top: 50%;
   user-select: none;
-  /* animation-delay: 450ms;
-  animation-fill-mode: forwards; */
+  animation-delay: 450ms;
+  animation-fill-mode: forwards; 
 }
 
 .section-3 .background-text.background-text-left {
@@ -392,16 +387,16 @@ body {
 }
 
 .section-3 .background-text.background-text-left.fade-in {
-  /* animation: whoweare-left-fade-in 750ms ease-in-out; */
+  animation: whoweare-left-fade-in 750ms ease-in-out;
   left: -100px;
 }
 
 .section-3 .background-text.background-text-right.fade-in {
-  /* animation: whoweare-right-fade-in 750ms ease-in-out; */
+  animation: whoweare-right-fade-in 750ms ease-in-out;
   right: -100px;
 }
 
-/* @keyframes whoweare-left-fade-in {
+@keyframes whoweare-left-fade-in {
   0% {
     left: 0;
   }
@@ -417,9 +412,9 @@ body {
   100% {
     right: -100px;
   }
-} */
+}
 
-/* @keyframes move-up {
+@keyframes move-up {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -430,27 +425,43 @@ body {
 
 .section-3 .gamedev {
   display: block;
+  margin-bottom: 117px;
   width: 100%;
-  margin-bottom: -560px;
   position: relative;
-  transition: transform 500ms ease-in-out;
 }
 
-.section-3 .gamedev.move-up {
-  /* animation: move-up 750ms ease-in-out; */
+.section-3 .background-texts-sticky {
+  margin-bottom: 27px;
+  position: relative;
+}
+
+.section-3 .background-texts {
+  height: 100%;
+  position: sticky;
+  top: 130px;
+}
+.section-3 .whoweare {
+  max-width: calc(50% - 20px);
+}
+
+/* .section-3 .gamedev.move-up {
+  animation: move-up 750ms ease-in-out;
   transform: translate3d(0, -500px, 0);
+} */
+
+.section-3-video {
+  position: relative;
 }
 
-.section-3-photo {
-  margin-top: 140px;
-  position: relative;
+.section-3-video > video {
+  margin-bottom: 0 !important;
 }
 
 .section-3-text-1 {
   position: relative;
 }
 .section-3-text-2 {
-  margin-top: 46px;
+  margin-top: 38px;
   position: relative;
 }
 /* X. Section #3: Team */
@@ -461,13 +472,13 @@ body {
 
 .throne {
   display: block;
-  margin-top: 400px;
+  margin-top: 121px;
 }
 
 .throne > img {
   display: block;
   margin: 0 auto;
-  width: 965px;
+  width: 1040px;
 }
 
 .socials {

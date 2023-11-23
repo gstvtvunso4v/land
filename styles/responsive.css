@@ -425,7 +425,7 @@
   .section-3 .background-text {
     width: 50.9433962264151vw;
   }
-  .section-3 .background-text.background-text-left {
+  /* .section-3 .background-text.background-text-left {
     font-size: 18.4528301886792vw;
     margin-top: -27.1698113207547vw;
   }
@@ -435,14 +435,14 @@
     margin-top: -5.5849056603774vw;
   }
   .section-3 .background-text.background-text-left.fade-in {
-    /* animation: whoweare-left-fade-in-tablet 750ms ease-in-out; */
+    animation: whoweare-left-fade-in-tablet 750ms ease-in-out;
     left: -64px;
   }
 
   .section-3 .background-text.background-text-right.fade-in {
-    /* animation: whoweare-right-fade-in-tablet 750ms ease-in-out; */
+    animation: whoweare-right-fade-in-tablet 750ms ease-in-out;
     right: -64px;
-  }
+  } */
 }
 /* @keyframes whoweare-left-fade-in-tablet {
   0% {
@@ -461,17 +461,53 @@
     right: -64px;
   }
 } */
+@media (max-width: 1199.98px) {
+  .section-3 .whoweare {
+    max-width: calc(50% - 18px);
+  }
+}
+@media (max-width: 1024px) {
+  .section-3 .back-arrow {
+    display: block;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    top: 66px;
+    width: 40px;
+    z-index: 1;
+  }
+  .section-3 .back-arrow > svg {
+    display: block;
+    width: 100%;
+  }
+  .section-3 .back-arrow > svg > polygon {
+    fill: #f6cdff;
+  }
+  .section-3 .whoweare {
+    max-width: calc(50% - 16px);
+  }
+}
 @media (max-width: 767.98px) {
   .section-3 .canvas-sticky-container {
     height: auto;
   }
   .section-3 .text-blocks-container {
     margin-bottom: 0;
-    margin-top: -200px;
-    padding-top: 200px;
     overflow: hidden;
   }
-  .background-texts {
+  .section-3 .gamedev {
+    left: 32px;
+    margin-bottom: 0;
+    position: absolute;
+    top: calc(100vw - 64px + 25px);
+    width: calc(100vw - 64px) !important;
+    max-width: none;
+  }
+  .section-3 .whoweare {
+    margin-bottom: calc((100vw - 64px) * 0.49 + 25px);
+    max-width: none;
+  }
+  /* .background-texts {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -491,16 +527,7 @@
     right: auto;
     margin-right: -5.5vw;
     margin-top: 25.25vw;
-  }
-  .section-3 .gamedev {
-    margin-bottom: 0;
-    margin-top: -6.725vw !important;
-    width: 100% !important;
-    max-width: none;
-  }
-  .section-3-photo {
-    margin-top: 0;
-  }
+  } */
   .section-3-text-2 {
     margin-bottom: 0;
     margin-top: 32px;
@@ -514,8 +541,8 @@
     overflow: hidden;
   }
   .throne > img {
-    transform: translate3d(calc((100vw - 965px) / 2), 0, 0);
-    width: 965px;
+    transform: translate3d(calc((100vw - 1040px) / 2), 0, 0);
+    width: 1040px;
   }
   .socials {
     flex-wrap: wrap;

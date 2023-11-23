@@ -12,7 +12,7 @@ import isMobile from "is-mobile";
 class Section3 extends Section {
   animationInertia = 0.04;
   animationInertiaBack = 0.04 * 2;
-  
+
   castShadow = ["Demons", "Candles"];
 
   receiveShadow = ["Ground", "Candles"];
@@ -66,17 +66,17 @@ class Section3 extends Section {
     // tmp?
     this.cameraWiggle = null;
 
-    this.onWhoweareScrollBusy = false;
+    // this.onWhoweareScrollBusy = false;
 
-    this.longScrollContainer.addEventListener("scroll", function () {
-      console.log(document.scrollTop);
-    });
+    // this.longScrollContainer.addEventListener("scroll", function () {
+    //   console.log(document.scrollTop);
+    // });
 
-    this.scrollTop = 0;
-    this.scrollHandler = (scrollTop) => {
-      this.scrollTop = scrollTop;
-      this.onWhoweareScroll(this);
-    };
+    // this.scrollTop = 0;
+    // this.scrollHandler = (scrollTop) => {
+    //   this.scrollTop = scrollTop;
+    //   this.onWhoweareScroll(this);
+    // };
 
     // this.whoweareObserver = new IntersectionObserver(
     //   this.onWhoweareIntersection.bind(this)
@@ -107,7 +107,9 @@ class Section3 extends Section {
       .add(props, "saturation3", -1, 1, 0.0001)
       .onChange((value) => (this.effects.hueSaturation.saturation = value));
 
-    gui.add(props, 'sectionAnimationInertia3', 0, 50, 0.000001).onChange(value => this.animationInertia = value);
+    gui
+      .add(props, "sectionAnimationInertia3", 0, 50, 0.000001)
+      .onChange((value) => (this.animationInertia = value));
     // gui.add(props, 'sectionAnimationInertiaBack3', 0, 0.1, 0.000001).onChange(value => this.animationInertiaBack = value);
   }
 
