@@ -214,10 +214,10 @@ body {
   padding-left: 100px;
   padding-right: 100px;
   position: relative;
-  max-width: calc(540px + 45px + 540px);
+  max-width: calc(500px + 40px + 500px);
 }
 .text-blocks-container .text-block {
-  width: calc((100% - 45px) / 2);
+  width: calc((100% - 40px) / 2);
 }
 .text-blocks-container .text-block.right {
   margin-left: auto;
@@ -227,8 +227,8 @@ body {
 }
 .text-blocks-container .text-block > video,
 .text-block-photo {
-  margin-bottom: 48px;
-  margin-top: 56px;
+  margin-bottom: 25px;
+  margin-top: 25px;
   max-width: 100%;
 }
 .text-block-text {
@@ -236,7 +236,6 @@ body {
   font-weight: normal;
   font-style: normal;
   line-height: 1.47;
-  padding-right: 60px;
 }
 .text-block-text > p {
   display: block;
@@ -287,13 +286,13 @@ body {
 
 .section-2 .dont-blink {
   display: block;
-  margin-top: 91px;
-  margin-bottom: 234px;
+  margin-top: 130px;
+  margin-bottom: 235px;
   max-width: 462px;
 }
 
 .section-2 .text-1 {
-  margin-bottom: 384px;
+  margin-bottom: 265px;
 }
 
 .section-2 .supress {
@@ -309,7 +308,7 @@ body {
 }
 
 .section-2 .text-2 {
-  margin-bottom: 254px;
+  margin-bottom: 295px;
 }
 
 .section-2 .mint {
@@ -326,6 +325,9 @@ body {
 }
 .section-2 .text-4 .button-wrapper > button {
   margin-top: 0;
+}
+.section-2 .bottom-button {
+  display: none;
 }
 /* X. Section #2: About */
 

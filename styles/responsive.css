@@ -189,7 +189,7 @@
   .button {
     font-size: 26px;
     height: 42px;
-    margin-top: 32px;
+    margin-top: 24px;
     padding-left: 16px;
     padding-right: 16px;
     min-width: 178px;
@@ -332,9 +332,6 @@
   .text-blocks-container .text-block {
     width: calc((100% - 36px) / 2);
   }
-  .text-block-text {
-    padding-right: 44px;
-  }
 }
 @media (max-width: 1024px) {
   .text-blocks-container {
@@ -343,9 +340,6 @@
   }
   .text-blocks-container .text-block {
     width: calc((100% - 32px) / 2);
-  }
-  .text-block-text {
-    padding-right: 40px;
   }
 }
 @media (max-width: 767.98px) {
@@ -388,14 +382,23 @@
     max-width: 44.3018867924528vw;
   }
 }
+@media (max-width: 1024px) {
+  .section-2 .bottom-button {
+    bottom: 27px;
+    display: block;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
 @media (max-width: 767.98px) {
   .section-2 .dont-blink {
-    margin-bottom: 240px;
-    margin-top: 93px;
+    margin-bottom: 238px;
+    margin-top: 92px;
     max-width: 480px;
   }
   .section-2 .text-1 {
-    margin-bottom: 365px;
+    margin-bottom: 200px;
   }
   .section-2 .supress {
     margin-bottom: 12px;
@@ -405,7 +408,7 @@
     max-width: 480px;
   }
   .section-2 .text-2 {
-    margin-bottom: 300px;
+    margin-bottom: 200px;
   }
   .section-2 .mint {
     max-width: 480px;
