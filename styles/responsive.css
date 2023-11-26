@@ -8,7 +8,6 @@
   .section-animation {
     height: 100lvh;
   }
-  .loading,
   .scroll-container.section-1,
   .scroll-container.section-1 .canvas-container,
   .scene {
@@ -93,7 +92,6 @@
   .section-animation {
     height: 100lvh;
   }
-  .loading,
   .scroll-container.section-1,
   .scroll-container.section-1 .canvas-container,
   .scene {
@@ -168,6 +166,9 @@
   }
   .lil-gui {
     opacity: 0.5;
+  }
+  .loading-label {
+    top: 270px;
   }
 }
 

@@ -51,12 +51,11 @@ body {
 .loading {
   overflow: hidden;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100lvh;
   background-color: black;
   opacity: 1;
-  z-index: 2;
-  pointer-events: none;
+  z-index: 4;
 }
 
 .hidden {
@@ -65,32 +64,50 @@ body {
   pointer-events: none;
 }
 
+.loading-progress {
+  aspect-ratio: 151 / 153.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 160px;
+}
+
+.loading-progress > svg {
+  animation: rotateBackwards 5s linear infinite;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  will-change: transform;
+}
+
+@keyframes rotateBackwards {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 .loading-text {
-  position: fixed;
-  left: 10%;
-  bottom: calc(12% + 24pt);
-  color: var(--magicmint);
-  font-size: 24pt;
+  color: var(--fuchsiapink);
+  font-size: 34px;
   font-family: "ST Kooperativ", sans-serif;
+  margin-top: 5px;
+  position: relative;
 }
 
-.loading-bar,
-.loading-bar-percent {
-  position: fixed;
-  left: 10%;
-  bottom: 10%;
-  width: 80%;
-  height: 30px;
-}
-
-.loading-bar {
-  background-color: var(--gunmetal);
-}
-
-.loading-bar-percent {
-  background-color: var(--magicmint);
-  width: 0%;
-  transition: width 150ms ease;
+.loading-label {
+  color: var(--fuchsiapink);
+  font-size: 43px;
+  font-family: "ST Kooperativ", sans-serif;
+  position: absolute;
+  top: 204px;
 }
 
 .logo {

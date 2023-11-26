@@ -128,11 +128,10 @@ class Czarverse {
 
   // ui functions
   updateLoading(url, itemsLoaded, itemsTotal) {
-    const percent = Math.round((itemsLoaded / this.totalResourcesCount) * 80); // 80% is maximum width
+    const percent = Math.round((itemsLoaded / itemsTotal) * 100); // 80% is maximum width
 
-    document.querySelector(".loading-text").textContent =
-      percent + "% LOADING...";
-    document.querySelector(".loading-bar-percent").style.width = percent + "%";
+    document.querySelector(".loading-text").textContent = percent + "%";
+    //document.querySelector(".loading-bar-percent").style.width = percent + "%";
   }
 
   hideLoadingScreen() {
