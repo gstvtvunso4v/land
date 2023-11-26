@@ -449,6 +449,9 @@
   .section-2 .back-arrow {
     display: block;
   }
+  .section-2 .back-arrow > svg > polygon {
+    fill: #5e3061;
+  }
 }
 @media (max-width: 767.98px) {
   .section-2 .dont-blink {
