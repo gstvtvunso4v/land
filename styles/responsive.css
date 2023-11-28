@@ -296,6 +296,10 @@
     animation: scene-go-down-device 0.5s ease-out;
   }
 
+  .scene.hidden {
+    opacity: 0;
+  }
+
   .section-1 > .canvas-container::before {
     background: linear-gradient(
       0deg,
@@ -377,6 +381,10 @@
   0% {
     transform: translateY(156px);
     opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
   }
 
   100% {
