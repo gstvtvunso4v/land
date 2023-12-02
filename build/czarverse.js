@@ -37489,7 +37489,10 @@ class CameraWiggle1 {
   constructor(section) {
     this.section = section;
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       this.logo = this.section.scene.getObjectByName("Title_mobile");
       this.target = this.section.scene.getObjectByName(
         "Camera_focus_center__mobile"
@@ -37508,7 +37511,10 @@ class CameraWiggle1 {
 
     // console.log(this.target);
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -37526,7 +37532,10 @@ class CameraWiggle1 {
   }
 
   update() {
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -44824,9 +44833,12 @@ class Section1 extends Section {
     this.model = this.czarverse.assets.gltfs["first"];
     this.scene.add(this.model.scene);
 
-    console.log(this.model);
+    //console.log(this.model);
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       this.camera = this.model.cameras[1];
       this.scene.getObjectByName("Title").visible = false;
     } else {
@@ -44871,7 +44883,7 @@ class Section1 extends Section {
 
     this.initDebugGui();
 
-    console.log(this);
+    //console.log(this);
   }
 
   updateCharacterAnimation() {
@@ -44969,7 +44981,10 @@ class CameraWiggle2 {
 
     this.target = this.section.scene.getObjectByName("Focus_center");
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -44987,7 +45002,10 @@ class CameraWiggle2 {
   }
 
   update() {
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -45214,7 +45232,7 @@ class Section2 extends Section {
 
     this.camera = this.model.cameras[0];
 
-    console.log(this.model.animations);
+    //console.log(this.model.animations);
 
     // останавливаем все анимации и записываем их список тех, что будут воспроизводится
     this.model.animations.forEach((animation) => {
@@ -45223,23 +45241,26 @@ class Section2 extends Section {
       this.actionsToAnimate.push(action);
     });
 
-    console.log(this);
+    //console.log(this);
   }
 
   getScrollPercent() {
     // container
     let scrollTop = this.scrollContainer.scrollTop;
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       // body scroll - window height
-      scrollTop = window.pageYOffset - window.innerHeight;
+      scrollTop = document.documentElement.scrollTop;
     }
 
     const height = this.longScrollContainer.scrollHeight;
     const heightWithoutCanvas = height - this.containerBounds.height;
 
     let percent = scrollTop / heightWithoutCanvas;
-    percent = Math.max(0, percent);
+    percent = Math.max(0, Math.min(percent, 1));
 
     return percent;
   }
@@ -46938,7 +46959,10 @@ class SceneSwitcher {
     this.lastScenesSwitchTime = this.czarverse.lastScenesSwitchTime;
     this.calmScenesSwitchDuration = this.czarverse.calmScenesSwitchDuration;
 
-    if (isMobileExports()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       this.initTouch();
     } else {
       this.container.addEventListener("wheel", this.onWheel.bind(this));
@@ -46946,9 +46970,7 @@ class SceneSwitcher {
   }
 
   update() {
-    if (!isMobileExports()) {
-      return;
-    }
+    return;
 
     const { czarverse } = this;
     const { section1, section2, section3 } = czarverse;
@@ -47210,27 +47232,33 @@ class Section3 extends Section {
 
     this.initShadows();
 
-    console.log(this);
+    //console.log(this);
   }
 
   getScrollPercent() {
     // container
     let scrollTop = this.scrollContainer.scrollTop;
 
-    if (isMobileExports()) {
-      const section1Height = window.innerHeight;
-      const section2Height =
-        this.czarverse.section2.longScrollContainer.scrollHeight;
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      // const section1Height = window.innerHeight;
+      // const section2Height =
+      //   this.czarverse.section2.longScrollContainer.scrollHeight;
 
       // body scroll - section1 height - section2 height
-      scrollTop = window.pageYOffset - section1Height - section2Height;
+      scrollTop = document.documentElement.scrollTop; //window.pageYOffset - section1Height - section2Height;
     }
 
     const height = this.longScrollContainer.scrollHeight;
     const heightWithoutCanvas = height - this.containerBounds.height;
 
-    let percent = scrollTop / this.canvasStickyContainer.scrollHeight;
-    percent = Math.max(0, percent);
+    let percent =
+      window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches
+        ? scrollTop / window.innerHeight
+        : scrollTop / this.canvasStickyContainer.scrollHeight;
+    percent = Math.max(0, Math.min(percent, 1));
 
     return percent;
   }
@@ -47290,7 +47318,7 @@ class Section3 extends Section {
     if (!this.onWhoweareScrollBusy) {
       if (this.scrollTop > gamedev.offsetTop * 0.75) {
         if (!gamedev.classList.contains("move-up")) {
-          console.log("onWhoweareScroll apply", gamedev.offsetTop);
+          //console.log("onWhoweareScroll apply", gamedev.offsetTop);
           this.onWhoweareScrollBusy = true;
           elements.forEach((el) => {
             el.classList.add("fade-in");
@@ -47302,7 +47330,7 @@ class Section3 extends Section {
         }
       } else {
         if (gamedev.classList.contains("move-up")) {
-          console.log("onWhoweareScroll destroy", gamedev.offsetTop);
+          //console.log("onWhoweareScroll destroy", gamedev.offsetTop);
           this.onWhoweareScrollBusy = true;
           elements.forEach((el) => {
             el.classList.remove("fade-in");
@@ -47450,7 +47478,7 @@ class Czarverse {
     // скроллим вниз, чтобы сразу показать модельку
     // window.scrollTo(0, this.scrollContainer.scrollHeight * 0.3);
 
-    console.log(this);
+    //console.log(this);
   }
 
   onError(error) {
@@ -47481,7 +47509,7 @@ class Czarverse {
   onMenuItemClick(sectionIndex) {
     let targetSceneIndex;
 
-    console.log(sectionIndex);
+    //console.log(sectionIndex);
 
     switch (sectionIndex) {
       case 0:
@@ -47557,7 +47585,7 @@ class Czarverse {
   }
 
   onArrowClick(instant = false) {
-    console.log("inside onArrowClick");
+    //console.log("inside onArrowClick");
     const scenesElements = document.querySelectorAll(".scene");
 
     this.sceneSwitcher.blockTopScroll = true;
@@ -47622,6 +47650,10 @@ class Czarverse {
         window.matchMedia("(pointer: coarse)").matches
       ) {
         this.switchScreensMobile(
+          section,
+          section.backgroundColor,
+          this.currentSection,
+          instant,
           this.currentSection.scrollContainer,
           section.scrollContainer
         );
@@ -47727,13 +47759,29 @@ class Czarverse {
     el.classList.add(animationClassName);
   }
 
-  switchScreensMobile(previousScene, currentScene) {
-    console.log({ previousScene, currentScene });
+  switchScreensMobile(
+    target,
+    color,
+    previousSection,
+    instant = false,
+    previousScene,
+    currentScene
+  ) {
+    //console.log({ previousScene, currentScene });
     if (
       previousScene !== undefined &&
       currentScene !== undefined &&
       previousScene !== currentScene
     ) {
+      target.isVisible = true;
+
+      previousSection.isVisible = true; // для того чтобы не выключать рендеринг до завершения анимации
+      const previousBg =
+        previousSection.scrollContainer.querySelector(".section-animation");
+
+      previousBg.style.backgroundColor = color;
+      previousBg.style.opacity = "1";
+
       document.body.style.overflow = "hidden";
 
       currentScene.scrollTo({ top: 0 });
@@ -47742,7 +47790,7 @@ class Czarverse {
       currentScene.style.zIndex = 1;
 
       function finishSwitchingScreen() {
-        console.log("transitionend");
+        //console.log("transitionend");
         previousScene.classList.remove("deviceVisible");
         this.removeEventListener("transitionend", finishSwitchingScreen);
         this.style.position = "";
@@ -47758,6 +47806,36 @@ class Czarverse {
 
       currentScene.addEventListener("transitionend", finishSwitchingScreen);
       currentScene.classList.add("deviceVisible");
+
+      setTimeout(
+        () => {
+          target.canvasContainer.scrollIntoView({ behavior: "auto" }); // instant scroll
+
+          previousSection.isVisible = false;
+          previousBg.style.opacity = "0";
+
+          const menu = document.querySelector(".menu");
+          menu.classList.remove("white");
+
+          if (target === this.section2) {
+            this.section2.scrollContainer.scrollTo({
+              top: 0,
+              behaviour: "instant",
+            }); // if we got here by menu
+          }
+
+          if (target === this.section3) {
+            this.section3.showAction.reset().play();
+            this.section3.scrollContainer.scrollTo({
+              top: 0,
+              behaviour: "instant",
+            }); // if we got here by menu
+
+            menu.classList.add("white");
+          }
+        },
+        instant ? 0 : 750
+      );
     }
   }
 }

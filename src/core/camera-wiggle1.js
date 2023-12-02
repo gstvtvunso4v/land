@@ -1,10 +1,18 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, Object3D, Quaternion, Vector2, Vector3 } from 'three';
-import lerp from '../utils/lerp.js';
-import isMobile from 'is-mobile';
+import {
+  BoxGeometry,
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
+  Quaternion,
+  Vector2,
+  Vector3,
+} from "three";
+import lerp from "../utils/lerp.js";
+import isMobile from "is-mobile";
 
-const _dummyPosition = new Vector3()
-const _dummyScale = new Vector3()
-const _dummyQuaternion = new Quaternion()
+const _dummyPosition = new Vector3();
+const _dummyScale = new Vector3();
+const _dummyQuaternion = new Quaternion();
 
 // used in Section1
 class CameraWiggle1 {
@@ -29,12 +37,17 @@ class CameraWiggle1 {
   constructor(section) {
     this.section = section;
 
-    if (isMobile()) {
-      this.logo = this.section.scene.getObjectByName('Title_mobile');
-      this.target = this.section.scene.getObjectByName('Camera_focus_center__mobile');
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
+      this.logo = this.section.scene.getObjectByName("Title_mobile");
+      this.target = this.section.scene.getObjectByName(
+        "Camera_focus_center__mobile"
+      );
     } else {
-      this.logo = this.section.scene.getObjectByName('Title');
-      this.target = this.section.scene.getObjectByName('Camera_focus_center');
+      this.logo = this.section.scene.getObjectByName("Title");
+      this.target = this.section.scene.getObjectByName("Camera_focus_center");
     }
 
     // this.target.add(
@@ -46,13 +59,16 @@ class CameraWiggle1 {
 
     // console.log(this.target);
 
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
-    window.addEventListener('pointermove', this.onPointerMove.bind(this));
-    window.addEventListener('blur', this.onWindowBlur.bind(this));
-    window.addEventListener('focus', this.onWindowFocus.bind(this));
+    window.addEventListener("pointermove", this.onPointerMove.bind(this));
+    window.addEventListener("blur", this.onWindowBlur.bind(this));
+    window.addEventListener("focus", this.onWindowFocus.bind(this));
   }
 
   onWindowBlur() {
@@ -64,7 +80,10 @@ class CameraWiggle1 {
   }
 
   update() {
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -82,8 +101,14 @@ class CameraWiggle1 {
     camera.position.x += -x;
     camera.position.y += -y;
 
-    camera.position.x = Math.min(Math.max(camera.position.x, this.boundsX.x), this.boundsX.y);
-    camera.position.y = Math.min(Math.max(camera.position.y, this.boundsY.x), this.boundsY.y);
+    camera.position.x = Math.min(
+      Math.max(camera.position.x, this.boundsX.x),
+      this.boundsX.y
+    );
+    camera.position.y = Math.min(
+      Math.max(camera.position.y, this.boundsY.x),
+      this.boundsY.y
+    );
 
     this.target.getWorldPosition(this.targetPosition);
     camera.lookAt(this.targetPosition);
@@ -129,8 +154,8 @@ class CameraWiggle1 {
 
     // console.log(movementX);
 
-    this.accelerationMouse.x = movementX / width * this.speed;
-    this.accelerationMouse.y = movementY / height * this.speed;
+    this.accelerationMouse.x = (movementX / width) * this.speed;
+    this.accelerationMouse.y = (movementY / height) * this.speed;
     this.lerpMouse.x = this.accelerationMouse.x;
     this.lerpMouse.y = this.accelerationMouse.y;
   }

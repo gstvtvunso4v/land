@@ -124,7 +124,10 @@ class Section3 extends Section {
     this.model = this.czarverse.assets.gltfs["third"];
     this.scene.add(this.model.scene);
 
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       this.camera = this.model.cameras[1];
     } else {
       this.camera = this.model.cameras[0];
@@ -162,7 +165,10 @@ class Section3 extends Section {
     // container
     let scrollTop = this.scrollContainer.scrollTop;
 
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       const section1Height = window.innerHeight;
       const section2Height =
         this.czarverse.section2.longScrollContainer.scrollHeight;

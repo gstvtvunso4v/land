@@ -1,6 +1,14 @@
-import { BoxGeometry, Mesh, MeshBasicMaterial, Object3D, Quaternion, Vector2, Vector3 } from 'three';
-import lerp from '../utils/lerp.js';
-import isMobile from 'is-mobile';
+import {
+  BoxGeometry,
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
+  Quaternion,
+  Vector2,
+  Vector3,
+} from "three";
+import lerp from "../utils/lerp.js";
+import isMobile from "is-mobile";
 
 // used in Section2
 class CameraWiggle2 {
@@ -24,15 +32,18 @@ class CameraWiggle2 {
   constructor(section) {
     this.section = section;
 
-    this.target = this.section.scene.getObjectByName('Focus_center');
+    this.target = this.section.scene.getObjectByName("Focus_center");
 
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
-    window.addEventListener('pointermove', this.onPointerMove.bind(this));
-    window.addEventListener('blur', this.onWindowBlur.bind(this));
-    window.addEventListener('focus', this.onWindowFocus.bind(this));
+    window.addEventListener("pointermove", this.onPointerMove.bind(this));
+    window.addEventListener("blur", this.onWindowBlur.bind(this));
+    window.addEventListener("focus", this.onWindowFocus.bind(this));
   }
 
   onWindowBlur() {
@@ -44,7 +55,10 @@ class CameraWiggle2 {
   }
 
   update() {
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       return;
     }
 
@@ -92,8 +106,8 @@ class CameraWiggle2 {
 
     // console.log(movementX);
 
-    this.accelerationMouse.x = movementX / width * this.speed;
-    this.accelerationMouse.y = movementY / height * this.speed;
+    this.accelerationMouse.x = (movementX / width) * this.speed;
+    this.accelerationMouse.y = (movementY / height) * this.speed;
     this.lerpMouse.x = this.accelerationMouse.x;
     this.lerpMouse.y = this.accelerationMouse.y;
   }

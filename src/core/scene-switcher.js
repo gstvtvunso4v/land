@@ -11,7 +11,10 @@ class SceneSwitcher {
     this.lastScenesSwitchTime = this.czarverse.lastScenesSwitchTime;
     this.calmScenesSwitchDuration = this.czarverse.calmScenesSwitchDuration;
 
-    if (isMobile()) {
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia("(pointer: coarse)").matches
+    ) {
       this.initTouch();
     } else {
       this.container.addEventListener("wheel", this.onWheel.bind(this));
@@ -19,9 +22,7 @@ class SceneSwitcher {
   }
 
   update() {
-    if (!isMobile()) {
-      return;
-    }
+    return;
 
     const { czarverse } = this;
     const { section1, section2, section3 } = czarverse;

@@ -290,6 +290,10 @@ class Czarverse {
         window.matchMedia("(pointer: coarse)").matches
       ) {
         this.switchScreensMobile(
+          section,
+          section.backgroundColor,
+          this.currentSection,
+          instant,
           this.currentSection.scrollContainer,
           section.scrollContainer
         );
@@ -395,9 +399,31 @@ class Czarverse {
     el.classList.add(animationClassName);
   }
 
-  switchScreensMobile(previousScene, currentScene) {
-    console.log({ previousScene, currentScene });
-    if (previousScene !== undefined && currentScene !== undefined) {
+  switchScreensMobile(
+    target,
+    color,
+    previousSection,
+    instant = false,
+    previousScene,
+    currentScene
+  ) {
+    //console.log({ previousScene, currentScene });
+    if (
+      previousScene !== undefined &&
+      currentScene !== undefined &&
+      previousScene !== currentScene
+    ) {
+      console.log(target);
+      target.isVisible = true;
+      console.log(czarverse.section2.isVisible);
+
+      previousSection.isVisible = true; // для того чтобы не выключать рендеринг до завершения анимации
+      const previousBg =
+        previousSection.scrollContainer.querySelector(".section-animation");
+
+      previousBg.style.backgroundColor = color;
+      previousBg.style.opacity = "1";
+
       document.body.style.overflow = "hidden";
 
       currentScene.scrollTo({ top: 0 });
@@ -406,7 +432,7 @@ class Czarverse {
       currentScene.style.zIndex = 1;
 
       function finishSwitchingScreen() {
-        console.log("transitionend");
+        //console.log("transitionend");
         previousScene.classList.remove("deviceVisible");
         this.removeEventListener("transitionend", finishSwitchingScreen);
         this.style.position = "";
@@ -415,12 +441,44 @@ class Czarverse {
         if (this.classList.contains("section-1")) {
           document.body.style.overflow = "";
         } else {
+          window.scrollTo({ top: 0 });
           document.body.style.overflow = "unset";
         }
       }
 
       currentScene.addEventListener("transitionend", finishSwitchingScreen);
       currentScene.classList.add("deviceVisible");
+
+      setTimeout(
+        () => {
+          target.canvasContainer.scrollIntoView({ behavior: "auto" }); // instant scroll
+
+          console.log("isVisible false 6", previousSection);
+          previousSection.isVisible = false;
+          previousBg.style.opacity = "0";
+
+          const menu = document.querySelector(".menu");
+          menu.classList.remove("white");
+
+          if (target === this.section2) {
+            this.section2.scrollContainer.scrollTo({
+              top: 0,
+              behaviour: "instant",
+            }); // if we got here by menu
+          }
+
+          if (target === this.section3) {
+            this.section3.showAction.reset().play();
+            this.section3.scrollContainer.scrollTo({
+              top: 0,
+              behaviour: "instant",
+            }); // if we got here by menu
+
+            menu.classList.add("white");
+          }
+        },
+        instant ? 0 : 750
+      );
     }
   }
 }
