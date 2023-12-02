@@ -119,7 +119,7 @@ class Section1 extends Section {
 
     this.initShadows();
 
-    this.initDebugGui();
+    // this.initDebugGui();
 
     console.log(this);
   }

@@ -10,7 +10,7 @@ import {
 import isMobile from "is-mobile";
 
 class Section3 extends Section {
-  animationInertia = 0.04;
+  animationInertia = 50;
   animationInertiaBack = 0.04 * 2;
 
   castShadow = ["Demons", "Candles"];
@@ -94,7 +94,7 @@ class Section3 extends Section {
     // );
     // this.section4Observer.observe(document.querySelector(".section-4"));
 
-    this.initDebugGui();
+    // this.initDebugGui();
   }
 
   initDebugGui() {
